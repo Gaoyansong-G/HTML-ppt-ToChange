@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment variables (NEVER commit secrets)
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+dist-standalone/
+build/
+*.tsbuildinfo
+
+# Logs
+*.log
+dev.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime / upload / generated data
+uploads/
+generated/
+result.json
+tmp-*
+*.tmp
+
+# Debug screenshots / artifacts
+debug-*.png
+debug-*.jpg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+
+# Test artifacts
+test-*.md
+coverage/
+
+# Turbo / cache
+.turbo/
+.cache/
+
+# Misc
+*.local

@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch({ headless: true });
+const context = await browser.newContext({ viewport: { width: 1400, height: 900 } });
+const page = await context.newPage();
+const htmlPath = 'C:/Users/LX/AppData/Local/Temp/playwright-artifacts-jnvSHw/681849c5-91a9-4d6c-9747-9f1ba130a555';
+await page.goto(`file://${htmlPath}`);
+await page.waitForTimeout(2000);
+const buttons = await page.locator('button').allInnerTexts();
+console.log('Buttons:', buttons);
+const titles = await page.locator('button').evaluateAll(els => els.map(e => e.getAttribute('title')));
+console.log('Titles:', titles);
+await browser.close();

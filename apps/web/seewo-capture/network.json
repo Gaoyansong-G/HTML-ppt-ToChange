@@ -1,0 +1,1771 @@
+[
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+    "method": "GET",
+    "headers": {
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\""
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://fe-monitor.seewo.com/monitor/v2",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DU1E7OZs.css",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-ig-NSJ4E.css",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloudCourseware-DKd2Voog.css",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloudCourseware-B3Cv1FA6.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/init-DpE6bSMo.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/editing-modes-BXIUzxNY.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-D384Beyw.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-BqhmucwN.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/react-router-dom-CaYh3mbl.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/browserify-aes-modes-C9zvDThx.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/react-router-lfAL_kiy.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/main-modes-CfFsSwDg.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-B_JtbXd-.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/inheritsLoose-CuW3zdk4.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/objectWithoutPropertiesLoose-CdAMNmSK.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-modes-TwtfAywn.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://friday.cvte.com/agent/sdk/js/v2/fa.js?_appId=e4894f0837a26c1dfae5e5ace1554822",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+    "status": 200,
+    "bodyPreview": "<!DOCTYPE html>\n<html lang=\"zh-cn\">\n  <head>\n    <title>\n       \n    </title>\n    <meta name=\"keywords\" content=\"希沃白板网页版，希沃白板mac，希沃白板5, 希沃白板5 mac，在线课件，云课件\" />\n    <meta\n      name=\"description\"\n      content=\"\t希沃白板网页版作为新一代在线互动课件工具，融合了希沃白板5的功能，支持在网页中编辑互动课件，使用课件库资源，云端实时同步，导入本地PPT。支持Mac、UOS等多种系统使用，可随时随地备课与授课。\"\n    />\n    <meta name=\"format-detection\" content=\"address=no,email=no,telephone=no\" />\n    <meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n    <meta name=\"apple-mobile-web-app-stat"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloudCourseware-B3Cv1FA6.js",
+    "status": 200,
+    "bodyPreview": "const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[\"./index-f3PhsVEV.js\",\"./cloud-courseware-modes-D384Beyw.js\",\"./browserify-aes-modes-C9zvDThx.js\",\"./cloud-courseware-modes-ig-NSJ4E.css\",\"./init-DpE6bSMo.js\",\"./main-modes-CfFsSwDg.js\",\"./login-modes-TwtfAywn.js\",\"./index-B_JtbXd-.js\",\"./objectWithoutPropertiesLoose-CdAMNmSK.js\",\"./editing-modes-BXIUzxNY.js\",\"./menuConfig-DHLqb-NM.js\",\"./react-router-dom-CaYh3mbl.js\",\"./react-router-lfAL_kiy.js\",\"./inheritsLoose-CuW3zdk4.js\",\"./index-fC2D"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DU1E7OZs.css",
+    "status": 200,
+    "bodyPreview": ".page-loading{position:absolute;top:0;left:0;width:100%;height:100%;z-index:9999;background:#fff6;display:flex;align-items:center;justify-content:center}\n"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-ig-NSJ4E.css",
+    "status": 200,
+    "bodyPreview": ".enx-5-message{position:fixed;display:block;left:50%;top:45%;transform:translate(-50%,-50%);padding:9px 18px;color:#fff;font-size:12px;line-height:18px;text-align:center;pointer-events:none;opacity:0;transition:all ease .3s;z-index:9999;white-space:pre}.enx-5-message:before{content:\" \";display:block;box-sizing:border-box;position:absolute;width:100%;height:100%;left:0;top:0;opacity:.8;z-index:-1;border:1px solid rgba(255,255,255,.2);box-shadow:1px 1px 4px #0003;border-radius:3px}.enx-5-message.i"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-D384Beyw.js",
+    "status": 200,
+    "bodyPreview": "const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[\"./index-Dyn1H6E9.js\",\"./browserify-aes-modes-C9zvDThx.js\",\"./jszip.min-BpPtfzBJ.js\",\"./FileSaver.min-DYonFMAS.js\",\"./downloadProcessHelper-Ct1g5oeY.js\"])))=>i.map(i=>d[i]);\nvar Zc=Object.defineProperty;var ef=(t,e,r)=>e in t?Zc(t,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[e]=r;var l=(t,e,r)=>ef(t,typeof e!=\"symbol\"?e+\"\":e,r);import{g as St,c as vt}from\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var t=typeof window<\""
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloudCourseware-DKd2Voog.css",
+    "status": 200,
+    "bodyPreview": "html,body{width:100%;height:100%}input::-ms-clear,input::-ms-reveal{display:none}*,*:before,*:after{box-sizing:border-box}html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-ms-overflow-style:scrollbar;-webkit-tap-highlight-color:rgba(0,0,0,0)}article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}body{margin:0;color:#000000a6;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hira"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-BqhmucwN.js",
+    "status": 200,
+    "bodyPreview": "import{j as f}from\"./init-DpE6bSMo.js\";import{s as n}from\"./cloud-courseware-modes-D384Beyw.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},d=new e.Error().stack;d&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[d]=\"395d962b-72ff-43ef-808c-ffe3f683b5db\",e._sentryDebugIdIdentifier=\"sentry-dbid-395d962b-72ff-43ef-808c-ffe3f683b5db\")}catch{}})();function o(){return f.jsx(\"div\",{className:\"page"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/browserify-aes-modes-C9zvDThx.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var o=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},h=new o.Error().stack;h&&(o._sentryDebugIds=o._sentryDebugIds||{},o._sentryDebugIds[h]=\"21b4e5a9-63cf-4db4-a4a0-fd67f9385f7d\",o._sentryDebugIdIdentifier=\"sentry-dbid-21b4e5a9-63cf-4db4-a4a0-fd67f9385f7d\")}catch{}})();var Zr=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{};Zr.SENTRY_RELEASE={id:\"5.2.2.4.13983\"};var Yt=typeof globalThis<\"u\"?globalThis:typeof window<\"u\"?window:ty"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/init-DpE6bSMo.js",
+    "status": 200,
+    "bodyPreview": "import{g as vi}from\"./browserify-aes-modes-C9zvDThx.js\";import{r as C,p as gr}from\"./cloud-courseware-modes-D384Beyw.js\";import{g as Re}from\"./main-modes-CfFsSwDg.js\";(function(){try{var t=typeof window<\"u\"?window:typeof nt<\"u\"?nt:typeof self<\"u\"?self:{},e=new t.Error().stack;e&&(t._sentryDebugIds=t._sentryDebugIds||{},t._sentryDebugIds[e]=\"049296f9-f157-4bfd-855a-d83fdc278318\",t._sentryDebugIdIdentifier=\"sentry-dbid-049296f9-f157-4bfd-855a-d83fdc278318\")}catch{}})();(function(){const e=document"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/inheritsLoose-CuW3zdk4.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"8028caf4-8fd9-42df-850c-3d0d8133a43b\",e._sentryDebugIdIdentifier=\"sentry-dbid-8028caf4-8fd9-42df-850c-3d0d8133a43b\")}catch{}})();function n(e,t){return n=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(o,r){return o.__proto__=r,o},n(e,t)}function d(e,t){e.prototype=Object.create(t.prototype),e.prototype"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/react-router-lfAL_kiy.js",
+    "status": 200,
+    "bodyPreview": "import{_ as g}from\"./inheritsLoose-CuW3zdk4.js\";import{R as h,r as H}from\"./cloud-courseware-modes-D384Beyw.js\";import{g as U,i as R,_ as y,b as M,d as ot,e as it,l as at}from\"./main-modes-CfFsSwDg.js\";import{P as O}from\"./editing-modes-BXIUzxNY.js\";import{g as ut}from\"./browserify-aes-modes-C9zvDThx.js\";import{h as ct}from\"./init-DpE6bSMo.js\";import{_ as z}from\"./objectWithoutPropertiesLoose-CdAMNmSK.js\";(function(){try{var t=typeof window<\"u\"?window:typeof U<\"u\"?U:typeof self<\"u\"?self:{},e=new"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-B_JtbXd-.js",
+    "status": 200,
+    "bodyPreview": "import{R as x,r as p}from\"./cloud-courseware-modes-D384Beyw.js\";import{_ as q,o as Ce}from\"./main-modes-CfFsSwDg.js\";import{_ as V}from\"./objectWithoutPropertiesLoose-CdAMNmSK.js\";import{h as fe,r as Me}from\"./init-DpE6bSMo.js\";import{r as he}from\"./editing-modes-BXIUzxNY.js\";import\"./browserify-aes-modes-C9zvDThx.js\";import\"./login-modes-TwtfAywn.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},r=new e.Error().stack;r&&(e._sentryDebugIds=e._sen"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/react-router-dom-CaYh3mbl.js",
+    "status": 200,
+    "bodyPreview": "import{R as I,c as B,m as W}from\"./react-router-lfAL_kiy.js\";import{_ as K}from\"./inheritsLoose-CuW3zdk4.js\";import{R as c}from\"./cloud-courseware-modes-D384Beyw.js\";import{c as q,a as F,_ as m,i as T,b as G}from\"./main-modes-CfFsSwDg.js\";import{_ as E}from\"./objectWithoutPropertiesLoose-CdAMNmSK.js\";(function(){try{var r=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},e=new r.Error().stack;e&&(r._sentryDebugIds=r._sentryDebugIds||{},r._sentryDebugIds[e]=\"e33ce780-4696-"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/objectWithoutPropertiesLoose-CdAMNmSK.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"52c7c8c6-765e-4abb-a2ba-641e4d82d856\",e._sentryDebugIdIdentifier=\"sentry-dbid-52c7c8c6-765e-4abb-a2ba-641e4d82d856\")}catch{}})();function r(e,t){if(e==null)return{};var d={};for(var n in e)if({}.hasOwnProperty.call(e,n)){if(t.includes(n))continue;d[n]=e[n]}return d}export{r as _};\n//# sourceMappingURL=objectWithout"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/main-modes-CfFsSwDg.js",
+    "status": 200,
+    "bodyPreview": "const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[\"./login-modes-TwtfAywn.js\",\"./browserify-aes-modes-C9zvDThx.js\",\"./cloud-courseware-modes-D384Beyw.js\",\"./cloud-courseware-modes-ig-NSJ4E.css\"])))=>i.map(i=>d[i]);\nvar lt=Object.defineProperty;var ft=(e,t,r)=>t in e?lt(e,t,{enumerable:!0,configurable:!0,writable:!0,value:r}):e[t]=r;var u=(e,t,r)=>ft(e,typeof t!=\"symbol\"?t+\"\":t,r);import{a as dt}from\"./browserify-aes-modes-C9zvDThx.js\";import{i as ht,C as vt,f as K,a as _e,L as te,U as gt,"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-modes-TwtfAywn.js",
+    "status": 200,
+    "bodyPreview": "var Qt=Object.defineProperty;var qt=(n,e,t)=>e in n?Qt(n,e,{enumerable:!0,configurable:!0,writable:!0,value:t}):n[e]=t;var E=(n,e,t)=>qt(n,typeof e!=\"symbol\"?e+\"\":e,t);import{g as Wt}from\"./browserify-aes-modes-C9zvDThx.js\";import{p as nt,C as Zt,L as H,f as xt,a as lt,b as Xt}from\"./cloud-courseware-modes-D384Beyw.js\";(function(){try{var n=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},e=new n.Error().stack;e&&(n._sentryDebugIds=n._sentryDebugIds||{},n._sentryDebugIds"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/editing-modes-BXIUzxNY.js",
+    "status": 200,
+    "bodyPreview": "var dg=Object.defineProperty;var fg=(e,t,a)=>t in e?dg(e,t,{enumerable:!0,configurable:!0,writable:!0,value:a}):e[t]=a;var Q=(e,t,a)=>fg(e,typeof t!=\"symbol\"?t+\"\":t,a);import{g as C2,c as mg}from\"./browserify-aes-modes-C9zvDThx.js\";import{r as J,o as pg,M as b0,R as u1,p as gg,U as zg}from\"./cloud-courseware-modes-D384Beyw.js\";(function(){try{var e=typeof window<\"u\"?window:typeof L2<\"u\"?L2:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds"
+  },
+  {
+    "type": "response",
+    "url": "https://friday.cvte.com/agent/sdk/js/v2/fa.js?_appId=e4894f0837a26c1dfae5e5ace1554822",
+    "status": 200,
+    "bodyPreview": "\"use strict\";function FridayAnalyze(){var e=\"https:\"===document.location.protocol?\"https:\":\"http:\",t={event:{unload:\"onunload\"in window,pagehide:\"onpagehide\"in window,pagebeforehide:\"onpagebeforehide\"in window}},i={appId:\"e4894f0837a26c1dfae5e5ace1554822\",secret:\"7f372b7bd5eb196b\",env:{},user:{},tp:{},url:e+\"//friday.cvte.com/agent/api/web/v2/report\",ver_postfix:\"2.0\",configCookieNamePrefix:\"_fa_\",configUserId:\"\",configCookieDomain:\"friday.cvte.com\",configCookiePath:\"/agent\",configCookiesDisable"
+  },
+  {
+    "type": "request",
+    "url": "https://sentry.cvtapi.com/api/50/envelope/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "content-type": "text/plain;charset=UTF-8",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-f3PhsVEV.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/menuConfig-DHLqb-NM.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-fC2D9X5u.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-3QlvmYXU.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DrdGinjf.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/fileSizeUtil-D22FAUcN.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-BDZs-Bdl.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-BbCJwxOg.css",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-ChA9sUo4.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DszDGrue.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DrCFXNy_.css",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/ic_close-IUute4P7.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/runtime-B5G3alLs.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-CGQnt099.css",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/lodash--83Tu3qx.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DhSsTbNd.css",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/enow/dynamicConfig?mode=null",
+    "method": "GET",
+    "headers": {
+      "sentry-trace": "362c97116bb247bb940625a035ae2d6b-bbd25f3d4c28d4d2-0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/loading-M5LzYM75.gif",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://fe-monitor.seewo.com/monitor/v2",
+    "status": 200,
+    "bodyPreview": "parcelRequire=function(e,r,t,n){var i,o=\"function\"==typeof parcelRequire&&parcelRequire,u=\"function\"==typeof require&&require;function f(t,n){if(!r[t]){if(!e[t]){var i=\"function\"==typeof parcelRequire&&parcelRequire;if(!n&&i)return i(t,!0);if(o)return o(t,!0);if(u&&\"string\"==typeof t)return u(t);var c=new Error(\"Cannot find module '\"+t+\"'\");throw c.code=\"MODULE_NOT_FOUND\",c}p.resolve=function(r){return e[t][1][r]||r},p.cache={};var l=r[t]=new f.Module(t);e[t][0].call(l.exports,p,l,l.exports,this"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/menuConfig-DHLqb-NM.js",
+    "status": 200,
+    "bodyPreview": "import{D as a}from\"./cloud-courseware-modes-D384Beyw.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},o=new e.Error().stack;o&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[o]=\"34d8f643-a75c-4a5a-ba7e-e1e87562556b\",e._sentryDebugIdIdentifier=\"sentry-dbid-34d8f643-a75c-4a5a-ba7e-e1e87562556b\")}catch{}})();const c=\"\"+new URL(\"cloudCourseware-lkGuY1Dj.png\",import.meta.url).href,t=\"\"+new URL(\"e"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-f3PhsVEV.js",
+    "status": 200,
+    "bodyPreview": "const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[\"./index-DHDF-X5M.js\",\"./init-DpE6bSMo.js\",\"./browserify-aes-modes-C9zvDThx.js\",\"./cloud-courseware-modes-D384Beyw.js\",\"./cloud-courseware-modes-ig-NSJ4E.css\",\"./main-modes-CfFsSwDg.js\",\"./login-modes-TwtfAywn.js\",\"./common-C9Z6aYAC.js\",\"./index-DyA3ibZH.js\",\"./index-Brgah1KW.js\",\"./index-DszDGrue.js\",\"./index-DrCFXNy_.css\",\"./index-DWsU4y0C.js\",\"./runtime-B5G3alLs.js\",\"./index-Dg-UeXn3.css\",\"./index-DUaHgzbQ.js\",\"./index-IJAxbRPc.js\",\"./e"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-BbCJwxOg.css",
+    "status": 200,
+    "bodyPreview": ".tabs-container{height:100%;flex:1;display:flex;flex-direction:row;padding:16px 24px}.tab-pane{width:32px;height:100%;font-size:16px;position:relative;display:flex;justify-content:center;align-items:center;cursor:pointer;margin-right:24px}.tab-pane .tab-text{position:absolute;z-index:1;word-break:keep-all}.tab-pane.active{font-weight:700;color:#191d26}.tab-pane.active:after{content:\"\";display:block;position:absolute;width:18px;height:13px;background-image:url(./rectangle-DyLr5N7M.png);background"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-fC2D9X5u.js",
+    "status": 200,
+    "bodyPreview": "import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},r=new e.Error().stack;r&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[r]=\"ccb258b8-a6e8-40ad-9c70-e5e511416179\",e._sentryDebugIdIdentifier=\"sentry-dbid-ccb258b8-a6e8-40ad-9c70-e5e511416179\")}catch{}})();const n=\"\"+new URL(\"ic_cloud_courseware-C9JB6wX5.png\",import.meta.url).href,t=\"\"+new URL(\"ic_camera-CUBijfRy.png\",import.meta.url).href,c=\"\"+new"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-CGQnt099.css",
+    "status": 200,
+    "bodyPreview": "#loading-container{position:fixed;top:0;left:0;right:0;bottom:0;background-color:#00000080;z-index:100000}#loading-container .loading{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-sizing:border-box;width:400px;height:220px;padding:50px;background-color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:3px;box-shadow:2px 1px #eee}#loading-container .loading img{position:relative;width:300px;height:100px;pointer-events:none}#loa"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DhSsTbNd.css",
+    "status": 200,
+    "bodyPreview": ".rank-container{display:inline-flex;flex-direction:row;align-items:center;justify-content:center;width:48px;height:14px;border-radius:8.4px}.rank-container .rank-container-img{width:14px;height:14px}.rank-container .rank-container-level{margin-left:2px;font-size:8.4px;color:#fff;line-height:16px}.header-icon-box{width:35px;height:35px;margin-right:24px;position:relative;cursor:pointer}.header-icon-box .header-img{width:32px;height:32px;border-radius:50%}.header-icon-box .rank-container-img{posit"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DrCFXNy_.css",
+    "status": 200,
+    "bodyPreview": ".svg-wrapper{position:relative;top:-1px;display:inline-block;vertical-align:middle;fill:currentColor;width:16px;height:16px}.svg-item{display:block;width:100%;height:100%;pointer-events:none;fill:inherit}\n"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-3QlvmYXU.js",
+    "status": 200,
+    "bodyPreview": "import{r as d}from\"./cloud-courseware-modes-D384Beyw.js\";import{c as x}from\"./editing-modes-BXIUzxNY.js\";import{C as _}from\"./index-DrdGinjf.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"cd1d481c-69bd-4560-9998-68b4bd9cd475\",e._sentryDebugIdIdentifier=\"sentry-dbid-cd1d481c-69bd-4560-9998-68b4bd9cd475\")}catch{}})();function s(){return s=Object.assign||funct"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/fileSizeUtil-D22FAUcN.js",
+    "status": 200,
+    "bodyPreview": "import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"ce5f2137-a336-4729-a384-6cd335cfde60\",e._sentryDebugIdIdentifier=\"sentry-dbid-ce5f2137-a336-4729-a384-6cd335cfde60\")}catch{}})();function o(e){if(e<1024)return e+\"B\";const t=Math.round(e/1024);if(t<1024)return t+\"KB\";const n=Math.round(t/1024);if(n<1024)return n+\"MB\";const"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DszDGrue.js",
+    "status": 200,
+    "bodyPreview": "var c=Object.defineProperty;var a=(t,s,e)=>s in t?c(t,s,{enumerable:!0,configurable:!0,writable:!0,value:e}):t[s]=e;var o=(t,s,e)=>a(t,typeof s!=\"symbol\"?s+\"\":s,e);import{j as r}from\"./init-DpE6bSMo.js\";import{R as f}from\"./cloud-courseware-modes-D384Beyw.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var t=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},s=new t.Error().stack;s&&(t._sentryDebugIds=t._sentryDebugIds||{},t._sentryDebugIds[s]=\"84cb25b6-d84d"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/runtime-B5G3alLs.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"b8b4b598-5aaa-4dec-9b35-04245057049b\",e._sentryDebugIdIdentifier=\"sentry-dbid-b8b4b598-5aaa-4dec-9b35-04245057049b\")}catch{}})();function i(){if(typeof window>\"u\"||typeof document>\"u\")return()=>{};const e=window._SVG_SPRITE_IDS_=window._SVG_SPRITE_IDS_||[],t=document.createElementNS(\"http://www.w3.org/2000/svg\",\"sv"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-ChA9sUo4.js",
+    "status": 200,
+    "bodyPreview": "import{j as t}from\"./init-DpE6bSMo.js\";import{R as i}from\"./editing-modes-BXIUzxNY.js\";import{S as s}from\"./index-DszDGrue.js\";import{c}from\"./ic_close-IUute4P7.js\";import{v as r}from\"./cloud-courseware-modes-D384Beyw.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},n=new e.Error().stack;n&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[n]=\"4b109a26-7b97-4117-87c3-6783174aa18a\",e._sentryDebu"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DrdGinjf.js",
+    "status": 200,
+    "bodyPreview": "import{r as g}from\"./cloud-courseware-modes-D384Beyw.js\";import{c as G,g as H}from\"./browserify-aes-modes-C9zvDThx.js\";import{p as W,k as J,L as B,c as K}from\"./editing-modes-BXIUzxNY.js\";(function(){try{var n=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},e=new n.Error().stack;e&&(n._sentryDebugIds=n._sentryDebugIds||{},n._sentryDebugIds[e]=\"18cf4be2-d702-4f73-93e2-4d139e412f2f\",n._sentryDebugIdIdentifier=\"sentry-dbid-18cf4be2-d702-4f73-93e2-4d139e412f2f\")}catch{}})()"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-BDZs-Bdl.js",
+    "status": 200,
+    "bodyPreview": "var f=Object.defineProperty;var h=(t,e,s)=>e in t?f(t,e,{enumerable:!0,configurable:!0,writable:!0,value:s}):t[e]=s;var a=(t,e,s)=>h(t,typeof e!=\"symbol\"?e+\"\":e,s);import{j as o}from\"./init-DpE6bSMo.js\";import{r as y,R as d}from\"./cloud-courseware-modes-D384Beyw.js\";import\"./browserify-aes-modes-C9zvDThx.js\";import{g as b}from\"./editing-modes-BXIUzxNY.js\";(function(){try{var t=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},e=new t.Error().stack;e&&(t._sentryDebugIds=t."
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/ic_close-IUute4P7.js",
+    "status": 200,
+    "bodyPreview": "import{a as o}from\"./runtime-B5G3alLs.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},d=new e.Error().stack;d&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[d]=\"d26a7799-1837-4d26-a356-e826b38f5dfe\",e._sentryDebugIdIdentifier=\"sentry-dbid-d26a7799-1837-4d26-a356-e826b38f5dfe\")}catch{}})();o('<symbol xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 14 14\" id=\"ic_close-535427\"><path fill=\"gray\" fill-rule=\"evenodd\" d=\"M7 5.145 11.741.4"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/lodash--83Tu3qx.js",
+    "status": 200,
+    "bodyPreview": "import{c as te,g as rp}from\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var Wn=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},ct=new Wn.Error().stack;ct&&(Wn._sentryDebugIds=Wn._sentryDebugIds||{},Wn._sentryDebugIds[ct]=\"2706173e-67b4-4897-89a5-4996f32ef683\",Wn._sentryDebugIdIdentifier=\"sentry-dbid-2706173e-67b4-4897-89a5-4996f32ef683\")}catch{}})();var Ve={exports:{}};/**\n * @license\n * Lodash <https://lodash.com/>\n * Copyright OpenJS Foundation and other contr"
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/api/analyse/course/hashCourseRecord?random=0.60183069572559",
+    "method": "GET",
+    "headers": {
+      "sentry-trace": "362c97116bb247bb940625a035ae2d6b-81916ba9e082ae36-0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/api.json?actionName=GET_USER_INFO&ts=1781672965710",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0",
+      "sentry-trace": "362c97116bb247bb940625a035ae2d6b-bd25138f201dcbab-0",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "content-type": "application/json"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/api.json?actionName=GET_USER_LEVEL&ts=1781672965710",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0",
+      "sentry-trace": "362c97116bb247bb940625a035ae2d6b-bbecad130839a622-0",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "content-type": "application/json"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/loading-M5LzYM75.gif",
+    "status": 200,
+    "bodyPreview": "GIF89ad\u0000d\u0000�-\u0000|ٛ��ׯ�ީ������ڞ����������nՐ�ᰪ���ݭ��T�|�߫��O�x_Єe҉������������˅ۢX�������bчjӍG�rH�sZπ�ᯱ�Ëݦt֔�������������X����O�y���<�j������A�n���8�g��Zρ���`цt֕�㷜�mԐ�ݦR�{wט���F�reҊ�߬]Є��ڗ����I�t������iӍ5�e�۟������乃۠�����۷��aц�ި�ݥ���^Є���B�noՑd҉�ۡ�����jԎ[ς��ޮ���߫��Ϥ�V�~��ž�͘�F�qK�vqՓyט�����������������������xח�ۡ[ρ���xט���C�oE�pjԍ]Ѓ{ؚ����fҊ�����������K�uwח�ߩ�ߪ���ܥ��E�qkԎ���=�k���xؗ@�m��ѡ�J�t������A�n��خ��/�`0�a��d҈r֓R�{c҇~ٜ�௽���������ڞ7�f���J�u�ݥ�ܢQ�z�㵸�ɤ�>�kO�y�����������ցڟ�������ީwؗ���wؘJ�uW�q֓�ݧ"
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/clearToken",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0",
+      "sentry-trace": "362c97116bb247bb940625a035ae2d6b-8643a1ca09a2ae0f-0",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "content-type": "application/json"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/",
+    "method": "GET",
+    "headers": {
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\""
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/clearToken",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0",
+      "sentry-trace": "362c97116bb247bb940625a035ae2d6b-802326dcbff9ec7b-0",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "content-type": "application/json"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/",
+    "method": "GET",
+    "headers": {
+      "referer": "https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\""
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/api/analyse/course/hashCourseRecord?random=0.60183069572559",
+    "status": 200,
+    "bodyPreview": "{\"code\":403,\"data\":null,\"errorMsg\":\"Auth token miss...\"}"
+  },
+  {
+    "type": "request",
+    "url": "https://sentry.cvtapi.com/api/50/envelope/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "content-type": "text/plain;charset=UTF-8",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://sentry.cvtapi.com/api/50/store/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "content-type": "text/plain;charset=UTF-8",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://friday.cvte.com/agent/api/web/v2/report?X-Friday-Appid=e4894f0837a26c1dfae5e5ace1554822&X-Friday-Ver=ev_2.0&X-Friday-Time=1781672967564&body=%7B%22%24cp%22%3A%7B%22app_version%22%3A%225.2.2.4.13983%22%2C%22%24tid%22%3A%22364892092%22%7D%2C%22%24sp%22%3A%5B%7B%22browser%22%3A%22Chrome%22%2C%22device_name%22%3A%22Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20HeadlessChrome%2F148.0.7778.96%20Safari%2F537.36%22%2C%22res%22%3A%221440%20x%20900%22%2C%22device_platform%22%3A%22Windows%2010%2064-bit%22%2C%22ver_browser%22%3A%22148.0.7778.96%22%2C%22channel%22%3A%22web%22%2C%22isiwb%22%3A0%2C%22%24code%22%3A%22home_view%22%7D%5D%2C%22%24tp%22%3A%7B%7D%7D&sign=-723589955",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "cache-control": "max-age=0",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://fe-monitor.seewo.com/monitor/v2",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "if-none-match": "\"8d91-SBIxHRVECmvqQifQMXoSo82OaH4\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-Dg-UeXn3.css",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DrCFXNy_.css",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-ig-NSJ4E.css",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-CyJZ76KJ.css",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-po7yhTD7.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/init-DpE6bSMo.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/editing-modes-BXIUzxNY.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-B_JtbXd-.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-D384Beyw.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-modes-TwtfAywn.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/QrLoadState-D7YJuio1.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DszDGrue.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DWsU4y0C.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DAsT4V72.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/browserify-aes-modes-C9zvDThx.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-Brgah1KW.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/runtime-B5G3alLs.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/check_box_yes-DYvbE0qf.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/react-router-lfAL_kiy.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/Statistic-vSJA8DZC.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/main-modes-CfFsSwDg.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/objectWithoutPropertiesLoose-CdAMNmSK.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/inheritsLoose-CuW3zdk4.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/feMonitor-BZ8Qfbk4.js",
+    "method": "GET",
+    "headers": {
+      "origin": "https://enweb3.seewo.com",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/enow/dynamicConfig?mode=null",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/api.json?actionName=GET_USER_LEVEL&ts=1781672965710",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/api.json?actionName=GET_USER_INFO&ts=1781672965710",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://sentry.cvtapi.com/api/50/envelope/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/clearToken",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/clearToken",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://sentry.cvtapi.com/api/50/envelope/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "response",
+    "url": "https://sentry.cvtapi.com/api/50/store/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://friday.cvte.com/agent/sdk/js/v2/fa.js?_appId=e4894f0837a26c1dfae5e5ace1554822",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-ig-NSJ4E.css",
+    "status": 200,
+    "bodyPreview": ".enx-5-message{position:fixed;display:block;left:50%;top:45%;transform:translate(-50%,-50%);padding:9px 18px;color:#fff;font-size:12px;line-height:18px;text-align:center;pointer-events:none;opacity:0;transition:all ease .3s;z-index:9999;white-space:pre}.enx-5-message:before{content:\" \";display:block;box-sizing:border-box;position:absolute;width:100%;height:100%;left:0;top:0;opacity:.8;z-index:-1;border:1px solid rgba(255,255,255,.2);box-shadow:1px 1px 4px #0003;border-radius:3px}.enx-5-message.i"
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/",
+    "status": 200,
+    "bodyPreview": "<!DOCTYPE html>\n<html lang=\"zh-cn\">\n  <head>\n    <title>\n       \n    </title>\n    <meta name=\"keywords\" content=\"希沃白板网页版，希沃白板mac，希沃白板5, 希沃白板5 mac，在线课件，云课件\" />\n    <meta\n      name=\"description\"\n      content=\"\t希沃白板网页版作为新一代在线互动课件工具，融合了希沃白板5的功能，支持在网页中编辑互动课件，使用课件库资源，云端实时同步，导入本地PPT。支持Mac、UOS等多种系统使用，可随时随地备课与授课。\"\n    />\n    <meta name=\"format-detection\" content=\"address=no,email=no,telephone=no\" />\n    <meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n    <meta name=\"apple-mobile-web-app-stat"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/init-DpE6bSMo.js",
+    "status": 200,
+    "bodyPreview": "import{g as vi}from\"./browserify-aes-modes-C9zvDThx.js\";import{r as C,p as gr}from\"./cloud-courseware-modes-D384Beyw.js\";import{g as Re}from\"./main-modes-CfFsSwDg.js\";(function(){try{var t=typeof window<\"u\"?window:typeof nt<\"u\"?nt:typeof self<\"u\"?self:{},e=new t.Error().stack;e&&(t._sentryDebugIds=t._sentryDebugIds||{},t._sentryDebugIds[e]=\"049296f9-f157-4bfd-855a-d83fdc278318\",t._sentryDebugIdIdentifier=\"sentry-dbid-049296f9-f157-4bfd-855a-d83fdc278318\")}catch{}})();(function(){const e=document"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/editing-modes-BXIUzxNY.js",
+    "status": 200,
+    "bodyPreview": "var dg=Object.defineProperty;var fg=(e,t,a)=>t in e?dg(e,t,{enumerable:!0,configurable:!0,writable:!0,value:a}):e[t]=a;var Q=(e,t,a)=>fg(e,typeof t!=\"symbol\"?t+\"\":t,a);import{g as C2,c as mg}from\"./browserify-aes-modes-C9zvDThx.js\";import{r as J,o as pg,M as b0,R as u1,p as gg,U as zg}from\"./cloud-courseware-modes-D384Beyw.js\";(function(){try{var e=typeof window<\"u\"?window:typeof L2<\"u\"?L2:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-B_JtbXd-.js",
+    "status": 200,
+    "bodyPreview": "import{R as x,r as p}from\"./cloud-courseware-modes-D384Beyw.js\";import{_ as q,o as Ce}from\"./main-modes-CfFsSwDg.js\";import{_ as V}from\"./objectWithoutPropertiesLoose-CdAMNmSK.js\";import{h as fe,r as Me}from\"./init-DpE6bSMo.js\";import{r as he}from\"./editing-modes-BXIUzxNY.js\";import\"./browserify-aes-modes-C9zvDThx.js\";import\"./login-modes-TwtfAywn.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},r=new e.Error().stack;r&&(e._sentryDebugIds=e._sen"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/cloud-courseware-modes-D384Beyw.js",
+    "status": 200,
+    "bodyPreview": "const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[\"./index-Dyn1H6E9.js\",\"./browserify-aes-modes-C9zvDThx.js\",\"./jszip.min-BpPtfzBJ.js\",\"./FileSaver.min-DYonFMAS.js\",\"./downloadProcessHelper-Ct1g5oeY.js\"])))=>i.map(i=>d[i]);\nvar Zc=Object.defineProperty;var ef=(t,e,r)=>e in t?Zc(t,e,{enumerable:!0,configurable:!0,writable:!0,value:r}):t[e]=r;var l=(t,e,r)=>ef(t,typeof e!=\"symbol\"?e+\"\":e,r);import{g as St,c as vt}from\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var t=typeof window<\""
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-modes-TwtfAywn.js",
+    "status": 200,
+    "bodyPreview": "var Qt=Object.defineProperty;var qt=(n,e,t)=>e in n?Qt(n,e,{enumerable:!0,configurable:!0,writable:!0,value:t}):n[e]=t;var E=(n,e,t)=>qt(n,typeof e!=\"symbol\"?e+\"\":e,t);import{g as Wt}from\"./browserify-aes-modes-C9zvDThx.js\";import{p as nt,C as Zt,L as H,f as xt,a as lt,b as Xt}from\"./cloud-courseware-modes-D384Beyw.js\";(function(){try{var n=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},e=new n.Error().stack;e&&(n._sentryDebugIds=n._sentryDebugIds||{},n._sentryDebugIds"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DszDGrue.js",
+    "status": 200,
+    "bodyPreview": "var c=Object.defineProperty;var a=(t,s,e)=>s in t?c(t,s,{enumerable:!0,configurable:!0,writable:!0,value:e}):t[s]=e;var o=(t,s,e)=>a(t,typeof s!=\"symbol\"?s+\"\":s,e);import{j as r}from\"./init-DpE6bSMo.js\";import{R as f}from\"./cloud-courseware-modes-D384Beyw.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var t=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},s=new t.Error().stack;s&&(t._sentryDebugIds=t._sentryDebugIds||{},t._sentryDebugIds[s]=\"84cb25b6-d84d"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/browserify-aes-modes-C9zvDThx.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var o=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},h=new o.Error().stack;h&&(o._sentryDebugIds=o._sentryDebugIds||{},o._sentryDebugIds[h]=\"21b4e5a9-63cf-4db4-a4a0-fd67f9385f7d\",o._sentryDebugIdIdentifier=\"sentry-dbid-21b4e5a9-63cf-4db4-a4a0-fd67f9385f7d\")}catch{}})();var Zr=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{};Zr.SENTRY_RELEASE={id:\"5.2.2.4.13983\"};var Yt=typeof globalThis<\"u\"?globalThis:typeof window<\"u\"?window:ty"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/runtime-B5G3alLs.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"b8b4b598-5aaa-4dec-9b35-04245057049b\",e._sentryDebugIdIdentifier=\"sentry-dbid-b8b4b598-5aaa-4dec-9b35-04245057049b\")}catch{}})();function i(){if(typeof window>\"u\"||typeof document>\"u\")return()=>{};const e=window._SVG_SPRITE_IDS_=window._SVG_SPRITE_IDS_||[],t=document.createElementNS(\"http://www.w3.org/2000/svg\",\"sv"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/react-router-lfAL_kiy.js",
+    "status": 200,
+    "bodyPreview": "import{_ as g}from\"./inheritsLoose-CuW3zdk4.js\";import{R as h,r as H}from\"./cloud-courseware-modes-D384Beyw.js\";import{g as U,i as R,_ as y,b as M,d as ot,e as it,l as at}from\"./main-modes-CfFsSwDg.js\";import{P as O}from\"./editing-modes-BXIUzxNY.js\";import{g as ut}from\"./browserify-aes-modes-C9zvDThx.js\";import{h as ct}from\"./init-DpE6bSMo.js\";import{_ as z}from\"./objectWithoutPropertiesLoose-CdAMNmSK.js\";(function(){try{var t=typeof window<\"u\"?window:typeof U<\"u\"?U:typeof self<\"u\"?self:{},e=new"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/main-modes-CfFsSwDg.js",
+    "status": 200,
+    "bodyPreview": "const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[\"./login-modes-TwtfAywn.js\",\"./browserify-aes-modes-C9zvDThx.js\",\"./cloud-courseware-modes-D384Beyw.js\",\"./cloud-courseware-modes-ig-NSJ4E.css\"])))=>i.map(i=>d[i]);\nvar lt=Object.defineProperty;var ft=(e,t,r)=>t in e?lt(e,t,{enumerable:!0,configurable:!0,writable:!0,value:r}):e[t]=r;var u=(e,t,r)=>ft(e,typeof t!=\"symbol\"?t+\"\":t,r);import{a as dt}from\"./browserify-aes-modes-C9zvDThx.js\";import{i as ht,C as vt,f as K,a as _e,L as te,U as gt,"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/objectWithoutPropertiesLoose-CdAMNmSK.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"52c7c8c6-765e-4abb-a2ba-641e4d82d856\",e._sentryDebugIdIdentifier=\"sentry-dbid-52c7c8c6-765e-4abb-a2ba-641e4d82d856\")}catch{}})();function r(e,t){if(e==null)return{};var d={};for(var n in e)if({}.hasOwnProperty.call(e,n)){if(t.includes(n))continue;d[n]=e[n]}return d}export{r as _};\n//# sourceMappingURL=objectWithout"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/inheritsLoose-CuW3zdk4.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]=\"8028caf4-8fd9-42df-850c-3d0d8133a43b\",e._sentryDebugIdIdentifier=\"sentry-dbid-8028caf4-8fd9-42df-850c-3d0d8133a43b\")}catch{}})();function n(e,t){return n=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(o,r){return o.__proto__=r,o},n(e,t)}function d(e,t){e.prototype=Object.create(t.prototype),e.prototype"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DrCFXNy_.css",
+    "status": 200,
+    "bodyPreview": ".svg-wrapper{position:relative;top:-1px;display:inline-block;vertical-align:middle;fill:currentColor;width:16px;height:16px}.svg-item{display:block;width:100%;height:100%;pointer-events:none;fill:inherit}\n"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-Dg-UeXn3.css",
+    "status": 200,
+    "bodyPreview": ".input{display:flex;align-items:center;width:300px;background:#fff}.input-focus{border-color:#30c361;outline:none}.input:hover{border-color:#30c361}.input.error{border:1px solid #D94C4C}.input-prefix,.input-surfix{height:100%;display:flex;justify-content:center;align-items:center}.input-content{flex:1;max-width:207px;padding:5px;font-size:16px;line-height:38px;outline:none;color:#464646;background:#fff;border:none;border:1px solid #dddddd;border-radius:3px}.input-content::placeholder,.input-cont"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-CyJZ76KJ.css",
+    "status": 200,
+    "bodyPreview": ".operation-content{background:#f8faf7;border-top-right-radius:4px;border-bottom-right-radius:4px;-webkit-user-select:none;-moz-user-select:none;user-select:none}.operation-content-header{display:flex;justify-content:flex-end;height:64px}.operation-content-header-container{width:64px;height:64px;text-align:center;line-height:64px;cursor:pointer}.operation-content-header-container-icon{width:15px;height:15px}.operation-content .ant-checkbox-wrapper{width:100%;text-align:center;font-size:12px;posit"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/QrLoadState-D7YJuio1.js",
+    "status": 200,
+    "bodyPreview": "import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var n=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},e=new n.Error().stack;e&&(n._sentryDebugIds=n._sentryDebugIds||{},n._sentryDebugIds[e]=\"cb0706b6-0621-4f0a-a162-464471783f7e\",n._sentryDebugIdIdentifier=\"sentry-dbid-cb0706b6-0621-4f0a-a162-464471783f7e\")}catch{}})();var I=(n=>(n[n.LOADING=0]=\"LOADING\",n[n.FAIL=1]=\"FAIL\",n[n.WAITING=2]=\"WAITING\",n[n.SUCCESS=3]=\"SUCCESS\",n[n.TIMEOUT=4]=\"TIMEOUT\",n))(I||{});exp"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DAsT4V72.js",
+    "status": 200,
+    "bodyPreview": "import{j as f}from\"./init-DpE6bSMo.js\";import{R as i}from\"./cloud-courseware-modes-D384Beyw.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},r=new e.Error().stack;r&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[r]=\"0f84897b-f228-4a5a-9a12-f8841a24518d\",e._sentryDebugIdIdentifier=\"sentry-dbid-0f84897b-f228-4a5a-9a12-f8841a24518d\")}catch{}})();function b(e,r=()=>!0){return function(o){const "
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/Statistic-vSJA8DZC.js",
+    "status": 200,
+    "bodyPreview": "var n=Object.defineProperty;var c=(i,t,e)=>t in i?n(i,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):i[t]=e;var s=(i,t,e)=>c(i,typeof t!=\"symbol\"?t+\"\":t,e);import{f as o}from\"./feMonitor-BZ8Qfbk4.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var i=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},t=new i.Error().stack;t&&(i._sentryDebugIds=i._sentryDebugIds||{},i._sentryDebugIds[t]=\"5cf6b682-810d-4777-994b-12155c2b236e\",i._sentryDebugIdIdentifier="
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-Brgah1KW.js",
+    "status": 200,
+    "bodyPreview": "var C=Object.defineProperty;var S=(n,o,e)=>o in n?C(n,o,{enumerable:!0,configurable:!0,writable:!0,value:e}):n[o]=e;var t=(n,o,e)=>S(n,typeof o!=\"symbol\"?o+\"\":o,e);import{j as i}from\"./init-DpE6bSMo.js\";import{r as x,z as K}from\"./cloud-courseware-modes-D384Beyw.js\";import{S as D}from\"./index-DszDGrue.js\";import{s as _}from\"./index-DWsU4y0C.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var n=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},o=new n.Error("
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/feMonitor-BZ8Qfbk4.js",
+    "status": 200,
+    "bodyPreview": "var c=Object.defineProperty;var d=(o,e,t)=>e in o?c(o,e,{enumerable:!0,configurable:!0,writable:!0,value:t}):o[e]=t;var r=(o,e,t)=>d(o,typeof e!=\"symbol\"?e+\"\":e,t);import\"./browserify-aes-modes-C9zvDThx.js\";import{g as f,m as a}from\"./cloud-courseware-modes-D384Beyw.js\";(function(){try{var o=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},e=new o.Error().stack;e&&(o._sentryDebugIds=o._sentryDebugIds||{},o._sentryDebugIds[e]=\"6914c3bf-97c4-48a7-9e15-a2c22ca9f128\",o._sent"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/check_box_yes-DYvbE0qf.js",
+    "status": 200,
+    "bodyPreview": "(function(){try{var e=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},n=new e.Error().stack;n&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[n]=\"a22ef13c-4b80-4d3e-816d-1a8bf9fbc2b9\",e._sentryDebugIdIdentifier=\"sentry-dbid-a22ef13c-4b80-4d3e-816d-1a8bf9fbc2b9\")}catch{}})();const o=\"\"+new URL(\"check_box_no-BQt28G_e.png\",import.meta.url).href,c=\"\"+new URL(\"check_box_yes-DtZ2-3YW.png\",import.meta.url).href;export{o as a,c};\n//# sourceMappingURL=check_box_yes-D"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/index-DWsU4y0C.js",
+    "status": 200,
+    "bodyPreview": "import{a as l}from\"./runtime-B5G3alLs.js\";import\"./browserify-aes-modes-C9zvDThx.js\";(function(){try{var i=typeof window<\"u\"?window:typeof global<\"u\"?global:typeof self<\"u\"?self:{},a=new i.Error().stack;a&&(i._sentryDebugIds=i._sentryDebugIds||{},i._sentryDebugIds[a]=\"db17e70d-9e42-467f-841a-b0335cc08ac8\",i._sentryDebugIdIdentifier=\"sentry-dbid-db17e70d-9e42-467f-841a-b0335cc08ac8\")}catch{}})();l('<symbol xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" id=\"ic_login_menu-b82101\"><path fill"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-po7yhTD7.js",
+    "status": 200,
+    "bodyPreview": "var Mt=Object.defineProperty;var Dt=(r,t,e)=>t in r?Mt(r,t,{enumerable:!0,configurable:!0,writable:!0,value:e}):r[t]=e;var h=(r,t,e)=>Dt(r,typeof t!=\"symbol\"?t+\"\":t,e);import{j as c,b as Ot,i as Bt}from\"./init-DpE6bSMo.js\";import{r as ct}from\"./editing-modes-BXIUzxNY.js\";import{connect as At,Provider as Rt}from\"./index-B_JtbXd-.js\";import{R as jt,r as D,B as Nt,d as Xt,P as Yt,t as be,Z as S,g as Ft,m as Ht,c as Wt,af as qt,$ as zt,a0 as Gt,f as Ut,S as Vt}from\"./cloud-courseware-modes-D384Beyw."
+  },
+  {
+    "type": "response",
+    "url": "https://fe-monitor.seewo.com/monitor/v2",
+    "status": 304,
+    "bodyPreview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://sentry.cvtapi.com/api/50/envelope/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "content-type": "text/plain;charset=UTF-8",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/enow/dynamicConfig?mode=null",
+    "method": "GET",
+    "headers": {
+      "sentry-trace": "c61b45c5254d473980a31d0376206dd6-a7f9167494c49ba4-0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/account-login@2x-BCLRxidr.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-CyJZ76KJ.css",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page1-DJ7NWMZu.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page2-CX90DNZq.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page3-DfiCCIlT.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page4-dvX0ptRz.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/dot-active@2x-byfBZx_P.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/dot-normal@2x-BZtDB5tS.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-top-left-bg-BGX_yUl9.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-bottom-right-bg-CnnKjH-_.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/scan/qrcode?oriSys=EasiNote5&type=text&random=0.6165861200543812",
+    "method": "GET",
+    "headers": {
+      "sentry-trace": "c61b45c5254d473980a31d0376206dd6-ace5ab11092d8a85-0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://friday.cvte.com/agent/sdk/js/v2/fa.js?_appId=e4894f0837a26c1dfae5e5ace1554822",
+    "status": 200,
+    "bodyPreview": "\"use strict\";function FridayAnalyze(){var e=\"https:\"===document.location.protocol?\"https:\":\"http:\",t={event:{unload:\"onunload\"in window,pagehide:\"onpagehide\"in window,pagebeforehide:\"onpagebeforehide\"in window}},i={appId:\"e4894f0837a26c1dfae5e5ace1554822\",secret:\"7f372b7bd5eb196b\",env:{},user:{},tp:{},url:e+\"//friday.cvte.com/agent/api/web/v2/report\",ver_postfix:\"2.0\",configCookieNamePrefix:\"_fa_\",configUserId:\"\",configCookieDomain:\"friday.cvte.com\",configCookiePath:\"/agent\",configCookiesDisable"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/account-login@2x-BCLRxidr.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000�\b\u0006\u0000\u0000\u0000�>a�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u00126IDATx\u0001�]M�eG\u0015>�vwb�����\fN\u0014�E� �2����@�,�\u0012\u0004W� Y�=�te��0f#�\"L@PT�g�\u0004�HPD�\u0019\u0019u2\tqf2�$����=UuN�S��Lw����}�������&t}u��\n�:�����N  �x�g�Ö\b0=��(�$����=����Ϳ�vϸ\rȱ�\u000f\\���纮z�m��\u0003�8s�/^�ɋܯ����v$hֹC��:Y�\u0014�s�\u0016&��:>2��w�c\u001d�R\u000b\u0002צr`N@x�m�otD8w�f\tJ\u0002��8�m\u0007\u0011屬��N�\u0016�|\u000f���o�T�\u0016�\u0019�D�*\u0011�^|�S\u0007\u0014�\u0001w1�я�D�6���F ���*Xu$\u0015\"��T}@�<�����ӤAc/���D�\u0006\n/\u0010\u0002\u0011X�c�\u000e�\u001e�V\u0018$Ed�e\u0013�7\u0018كQ`��(�c�]����\u0015�����@\\��cg��g�`u���:����\u001d�u#6\u001b�YB�>!y\r�ʐv���\b�\ts�4I��:��YO"
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/enow/dynamicConfig?mode=null",
+    "status": 200,
+    "bodyPreview": "[{\"uiConfig\":{\"showSchoolResourceBtn\":false},\"businessConfig\":{\"enableHeartbeat\":false,\"checkActivationMinVersion\":\"5.2.2.4.13670\",\"checkActivationBlackList\":[]},\"courseroomConfig\":{},\"remoteCMPS\":[{\"name\":\"ActivityShadow\",\"url\":\"https://qn-store-pub-tx.seewo.com/seewo-school/23e1cc7c-c5e4-87ed-8b2e-28df907b31ba\",\"type\":\"component\",\"priority\":65,\"parent\":\"top\"}],\"rrwebDeviceList\":[\"M1 Pro\",\"M1 Max\",\"M2\",\"M3\",\"M3 Pro\",\"M3 Max\"]}]"
+  },
+  {
+    "type": "response",
+    "url": "https://sentry.cvtapi.com/api/50/envelope/?sentry_key=b7b9aecc92b04162a685081c35525c60&sentry_version=7",
+    "status": 200,
+    "bodyPreview": "{}"
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/scan/pcCheckQrcode?type=long&t=1781672968698&system=en5web&withCredentials=true&random=0.5383556592172198",
+    "method": "GET",
+    "headers": {
+      "sentry-trace": "c61b45c5254d473980a31d0376206dd6-adff69f21b8d587f-0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/scan/qrcode?oriSys=EasiNote5&type=text&random=0.6165861200543812",
+    "status": 200,
+    "bodyPreview": "{\"data\":\"https://id.seewo.com/scan/middle?uid=barcode_8C9BB988-AA5F-4428-BF84-685EE8833ADB&oriSys=EasiNote5\",\"qrkey\":\"barcode_8C9BB988-AA5F-4428-BF84-685EE8833ADB\"}"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page1-DJ7NWMZu.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0003p\u0000\u0000\u0002&\b\u0006\u0000\u0000\u0000\u0012Jh�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0001�nIDATx\u0001��I�dI��}���X2�\\\"�*;#+3��˳�+\u000bޘ\u0011\u0019\u001e*�\u0019!z(��@\u0006�#�\u0003.\u0004�\u0003.\"$�-�\u0000�\u0018\u0011Rp�p=\u00012\u0002?A�:\u0003�\u001cfdz�����Ȫ�Ȭʪ���cs\u000fw7��\u0014�����g�\u001ef\u001e\u0011f��_���={���O��mD\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page3-DfiCCIlT.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0003p\u0000\u0000\u0002&\b\u0006\u0000\u0000\u0000\u0012Jh�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0001͖IDATx\u0001��]�\\I�߉\u001d�\u0011�\u0011�\u0005 �*\u001bU�5�U��\"\u0007�\u001drX��-�D`dZ3ʌf��Z�z�q�|��-�K\u0000V�K�ie+�����I\u0006Ɍ4͓l�D�\u001aR�]\f��\u001aCV�����]�AU\u0003����̈{֏�9�~oDfF�\u0012U@��\u0003\"#�~�����~��C\u0004\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page4-dvX0ptRz.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0003p\u0000\u0000\u0002&\b\u0006\u0000\u0000\u0000\u0012Jh�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0001�xIDATx\u0001��]�%I�߇�s�z�1S���`��\u0010��EqP k�\r`��-{\u0000��\u0010�h`C�\u0000�<P\"\u0017&���d�\u001e$���Sz�\tFI����d�Hi!M.IPja�\u00159̦�k�.��l����*̇��0%�\u0006�Z�tWg\u001cF��/�\u001bq��̬�����oݛ�����\u0011q�~��\u0013\u0001\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/slide-page2-CX90DNZq.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0003p\u0000\u0000\u0002&\b\u0006\u0000\u0000\u0000\u0012Jh�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0001�:IDATx\u0001��\u000b�^�Y\u001f�>�~��&}�%�r,Ǳ��\t�\u0014H���K\u0013ѓ���\u0012�����\u0012h�s(m\u0019hO�9S��*��\u001f=�\u0000әN�\u0004\u001a\u0018`����RNKh\u0014\u0006\u0006(1\t$RH�$��رeY�O�w{��̺<���O��$�e=���~{���Zk��������\u0005\u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ \u0010\b\u0004\u0002�@ "
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-bottom-right-bg-CnnKjH-_.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0002�\u0000\u0000\u0002�\b\u0006\u0000\u0000\u0000��Ok\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0001�\rIDATx\u0001��A�+ǲ-�\u001a����\u0007�j�^\u0001\u0012.�V65\u0001N��s:���\u0004���\u0011.$�z��\u0004<��D� Â�+��{��L2�\u0016\u0010\n\u000fws�`��;W.-7�H\"�H$\u0012��a��f3ȭ�<6_��\u001b�y�[�8wޏ~�~m۾(���y\f8f׀9㪘��7}�e\u001a׷���{þG\u0003�U儹�[HN��]|d�6\u001b�r���\u000b�5��5���k�+q\u0017l$�H$\u0012�kq/�����\f�?���5\r9F\u0012W�fF��\fZ\u0002l�Jx�/��\u0010�i\u000e#��|��%֖P3�;��p\u0002��\u001e���Y\u001bÈ{\u000f�Ah�_>$��\u0003!\tt\"�H$�\u0006zU��\u001c�\u000eBV�Υ�\n�Z{�b컭���\u0006D\u0014ɡG`��/Y�S��ϷJ��<�$�Ero%��//\u0002_/Ir����$\u0012�D\"q\rzU�{��8J�H{\r֨��{�/v&v�\u0016\u0011�}VMfqc�^의bmTi\u001c�l\u0010d�`�_;�\u0014�X��\u0018�k�a����Q��?�҇��~�"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/dot-normal@2x-BZtDB5tS.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\f\u0000\u0000\u0000\f\b\u0006\u0000\u0000\u0000Vu\\�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000eIDATx\u0001��1\r�@\f���z�\u0010&$�\u0001'\u0005KH�\u0001�j\u0001\t�\u0004J�!������T⅙\r\u0007ZM)e�gR�\u0018�;W>�+u\u0013\u001c\nr$�\u0001*>4.�E\u00141�H��\n�J�A�M��KY��O�7�R\u0017�\u00026-�\u0000\u0000\u0000\u0000IEND�B`�"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/dot-active@2x-byfBZx_P.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\f\u0000\u0000\u0000\f\b\u0006\u0000\u0000\u0000Vu\\�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000gIDATx\u0001�A\r�@\u0010\u0003�\u0006\u0001H�\u0001'\u0005\tH�\u0002\u0012p�#, �\u000f�Y�B\u0002�\u000b9��g7��\u0012\u0019�a���\u0001\u0014(�8�xnlϼ���$�5\u0011���xh�x\u000b�;���K\u0010>�\u0007\nXe`*R�\r�x\u0002�r\u0013�i�_f\u0000\u0000\u0000\u0000IEND�B`�"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-top-left-bg-BGX_yUl9.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0005x\u0000\u0000\u0002�\b\u0006\u0000\u0000\u0000*�\u0018:\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0005��IDATx\u0001��ݮ$ɑ�ZdfD���bs�\u000f����`�\u0000��s�\u0007P]�W \u000e \b\u001b�^���D�݆\b\b�z��\u000f�K򦁑 Q�g���ݬ��\u0011�\u0019\nsss777��ȵ�3�BV|y�{|d��_��o������\u0003�\u0001`\u001c��ŵ\u001b��<�O��e�HE`��\u001fv]w���e7u~\u0015W�Ưb9װ���:M\u001d\u000e�u\u000e�\\G�\u000bn}\u001e��FWnw\u001df��\u001d`>�a��2܁���\u0006��-�GU�J\\��\u001b�^��y�e�!.n�h\u001f��ũ\u0011��`�lub�m>�>�a��0��s�]����kw�zWnJ��1��?̱�]7��}e���El\u001e�#n�l�n^�{8��F���\u0018�����|>\u001f�r�>�}���_��/�/��Ƈe|��=��wI\u0016=��C\u001bt]�)���a��\u0003���<ϗ�\u001c��?����|?\u001f��y\u0019\u001e�!�S�\u0004i����3�\u0004��\u001e��W8��^��vp��p�t\u000eð�?.g�����ۚ�]"
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/account-login-active@2x-DnWOU5hV.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-CyJZ76KJ.css",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/check_box_no-BQt28G_e.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/qrcode-login-active@2x-BGJuErMt.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-CyJZ76KJ.css",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/account-login-active@2x-DnWOU5hV.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000�\b\u0006\u0000\u0000\u0000�>a�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0013)IDATx\u0001�]ϫ$W����1���$&JL&A���wb\u0014\u0005E���\u000b\u0015\u0005q�.5�q!n���\u001f �� .ԝ���\u000b]h�\u0010Ed\u001c4\u001a\u0014�Qt~\b�dƈI��Z��{�9���̼����꾟�����R�������7��k�\u0001�\u0005BF@\u0017�\u0005t����Y����|��|����7�}ȿ�����5���\u0006T\u001c\u001c\u0017A�L��<ݿ\u001eǍx\u0014�߾x=?��\u001eI@=\td5\b�\u0000e��B\t\u0001����f�$B��>.r\u0017\u0017~\u0016�i�P~��TI�$�o��\u001d�e��ծ*��\r=\t�I\u0010�/\n�,��f^��,r0��EB�\\�\u0017>��d�\u001cX\u0016�#8�\u0013a\u0017�@�\u0003K\u0002�$H�Gq����\"��}g$DW>w�>��LTJ��\u001d�HS�\u0014��!<8O\u001a4��/_���������\u0010��&^��g��hһ���G|��%�����uS�\f�\u000f�#���m����~����d���\t~�������\u000e�U�\u000ej�%�"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/check_box_no-BQt28G_e.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\u0010\u0000\u0000\u0000\u0010\b\u0006\u0000\u0000\u0000\u001f��a\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000zIDAT8\u0011c`�\u00100��?x����߿3�LY\"�{��Ĕ����\u0003���ݻ��~���X\u0000R\u000b�\u0003��\u0004�Q���\u000b�$LAՂ]\u000b3��.\u001c*F\r@�\u0002� \",<�\u0002��o�\b{\u0018�\u0002��1��\u0002\"����_�xArf\u0002�\u0018\u0000\u0000\u0013�L�r\u000fz�\u0000\u0000\u0000\u0000IEND�B`�"
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/qrcode-login-active@2x-BGJuErMt.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000�\b\u0006\u0000\u0000\u0000�>a�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0016�IDATx\u0001�]}�\\�u��7�?\u0000;���.��4�\u0010��h�R[lE*��\u001a�/�p�OԄ�\u0018)�\u001f���U�V�\"aD\u0001�?���Q���\u0005E�C�\n-�\u001b�i\u0013\u0015�6`l���\u0006b\u001bϻ���{�=�Λݝ�y�3��7z��7w�Ǟs��9O�v�I\r5\u0001\u0005\u000f�R�\u0001��a��6��ٞ������_k�ßk�=�9�6G[~N�j4X:f���sN��9�Ó���م|ђ�2�2L��P�\f\u0010\b�\t�\f\u0010�kε=�03�זȥ%|���`��=�L\r\u0013�\u0004���i��˓3s�\n��V�\u0004���~�\u0010E!\u0010+�f\"h)��\u0005St�\u0010\u0010k<�ur\u001e�Y\u001a\u001e�\u000bz/�\u001aF�\"\u0011�|C�\u0000�\t\u001c��%�$~$b��/��(����N�+�(%��%�0M�Z`ԃ�U%\r\n�楛�2i\u0016N��\u000f�\u001d�Rh��.,�\u0019�\u0016�{e\u001f�9�+�V)~\r�=���{��(�Lߧ�\u0005��r�澋\u0006�`��q���'w�\u001fT�ɝ:�D�"
+  },
+  {
+    "type": "request",
+    "url": "https://myou.cvte.com/grail/api/report/raw",
+    "method": "POST",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "x-data-id": "cloud_en_mac_fijfbhcbicikogeg",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "content-type": "application/json",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://myou.cvte.com/grail/api/report/raw",
+    "status": 200,
+    "bodyPreview": ""
+  },
+  {
+    "type": "request",
+    "url": "https://friday.cvte.com/agent/api/web/v2/report?X-Friday-Appid=e4894f0837a26c1dfae5e5ace1554822&X-Friday-Ver=ev_2.0&X-Friday-Time=1781672973172&body=%7B%22%24cp%22%3A%7B%22app_version%22%3A%225.2.2.4.13983%22%2C%22browser%22%3A%22Chrome%22%2C%22device_name%22%3A%22Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64)%20AppleWebKit%2F537.36%20(KHTML%2C%20like%20Gecko)%20HeadlessChrome%2F148.0.7778.96%20Safari%2F537.36%22%2C%22res%22%3A%221440%20x%20900%22%2C%22device_platform%22%3A%22Windows%2010%2064-bit%22%2C%22ver_browser%22%3A%22148.0.7778.96%22%2C%22channel%22%3A%22web%22%2C%22%24tid%22%3A%22364892092%22%2C%22isiwb%22%3A0%7D%2C%22%24sp%22%3A%5B%7B%22%24code%22%3A%22enter_login_page%22%7D%2C%7B%22%24code%22%3A%22enter_login_account%22%7D%5D%2C%22%24tp%22%3A%7B%7D%7D&sign=-1548486503",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "request",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/qrcode-login@2x-CzZKG-Gg.png",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/login-CyJZ76KJ.css",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://s0.seewo.com/cloud-static/seewo-resources/enweb/statics/qrcode-login@2x-CzZKG-Gg.png",
+    "status": 200,
+    "bodyPreview": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000�\b\u0006\u0000\u0000\u0000�>a�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0016%\u0000\u0000\u0016%\u0001IR$�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0015�IDATx\u0001�]]�]�U^���o��ֱ\u0013��f\u0010���\u0004\u0013D�xhk�#@\u0011��\u0001� ��� ��\u0019����k[\t\u0001*�I�\u0010j�HV\t\u0002$�\u0018D\u0010T��@��v�6���vlό3�9�{����k�{Ν�w�����{������k��o��\u000f~�\u0017�!�\"����ƽ3'K\"@��)ג(��C��K����9�m@�-��-�U^5]u�,�\u0006ظxq�㷶r!�+|��\u0010\u0014�ܡ�H]'˖�qn\\B����w\u0012��͍\u0019!�-\b�6�\f\f\b\bϕ��%#\bW�7�\bB�;�F�� �8��>��ӥ��!̯��6\\�ڴh\u001e%�g�\tB�F@��)c\u000eȚ\u0003�bt�\u001f�����Z�\n@\u0018��T���&D��j>�� �����*mP�ϟ��sD�\u0012�\\ XA`\u0015��:�c�Z��\u0014N\u0002�4��\u0002���S\u0018�-���?7|R&�-\u001a��^�\u0011w�t��_��8�\t6\u0007�w\u0016�w�v�\u0018e2b�c\u00185\u0004�3$�aj2�]"
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/scan/pcCheckQrcode?type=long&t=1781672997259&system=en5web&withCredentials=true&random=0.3687636722707289",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/scan/pcCheckQrcode?type=long&t=1781672968698&system=en5web&withCredentials=true&random=0.5383556592172198",
+    "status": 200,
+    "bodyPreview": "{\"data\":{\"statusCode\":200,\"message\":\"二维码仍有效\"}}"
+  },
+  {
+    "type": "request",
+    "url": "https://enweb3.seewo.com/scan/pcCheckQrcode?type=long&t=1781673025812&system=en5web&withCredentials=true&random=0.42888473387786363",
+    "method": "GET",
+    "headers": {
+      "sec-ch-ua-platform": "\"Windows\"",
+      "referer": "https://enweb3.seewo.com/",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "accept": "application/json, text/plain, */*",
+      "sec-ch-ua": "\"Chromium\";v=\"148\", \"HeadlessChrome\";v=\"148\", \"Not/A)Brand\";v=\"99\"",
+      "sec-ch-ua-mobile": "?0"
+    }
+  },
+  {
+    "type": "response",
+    "url": "https://enweb3.seewo.com/scan/pcCheckQrcode?type=long&t=1781672997259&system=en5web&withCredentials=true&random=0.3687636722707289",
+    "status": 200,
+    "bodyPreview": "{\"data\":{\"statusCode\":200,\"message\":\"二维码仍有效\"}}"
+  }
+]

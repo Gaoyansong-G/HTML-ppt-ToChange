@@ -1,0 +1,454 @@
+[2026-06-17T04:33:52.151Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:33:56.757Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:33:56.779Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:33:57.015Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:33:57.266Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:33:57.269Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:33:57.928Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:33:59.296Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:33:59.317Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:33:59.369Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:33:59.372Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:33:59.397Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:33:59.793Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:33:59.794Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:34:02.792Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:34:06.208Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:34:09.625Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:34:13.041Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:34:16.441Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:34:19.858Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:34:23.256Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:34:26.672Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:34:29.856Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:34:30.089Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:34:33.506Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:34:36.922Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:34:40.323Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:34:43.742Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:34:47.173Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:34:50.605Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:36:25.042Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:36:28.751Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:36:28.766Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:36:29.230Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:36:29.239Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:36:29.334Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:36:29.391Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:36:31.482Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:36:31.506Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:36:31.547Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:36:31.550Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:36:31.975Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:36:31.976Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:36:32.604Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:36:32.791Z] No standard phone/password login form found on initial page. Checking for other login entry.
+[2026-06-17T04:36:32.808Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T04:36:33.566Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T04:39:26.365Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:39:30.431Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:39:33.464Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:39:33.487Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:39:34.035Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:39:34.037Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:39:34.359Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:39:35.885Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:39:35.906Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:39:35.950Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:39:35.953Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:39:36.454Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:39:36.455Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:39:39.364Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:39:42.329Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:39:42.467Z] Switching to account login via [class*="account"]
+[2026-06-17T04:39:42.525Z] CONSOLE log: will change  account
+[2026-06-17T04:39:42.779Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:39:44.701Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T04:39:44.953Z] Clicking submit: button:has-text("登录")
+[2026-06-17T04:39:44.992Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T04:39:46.180Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:39:49.577Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:39:52.979Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:39:56.378Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:39:59.779Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:40:03.178Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:40:06.557Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:40:06.579Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:40:09.977Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:40:13.377Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:40:16.796Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:40:20.193Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:40:23.594Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:40:26.994Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:40:30.394Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:40:33.794Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:40:35.108Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:40:37.193Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:40:40.592Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:40:43.992Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:40:47.393Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:40:50.060Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T04:40:50.793Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:40:53.935Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T04:43:03.389Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:43:07.266Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:43:09.346Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:43:09.369Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:43:09.880Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:43:09.882Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:43:10.269Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:43:11.274Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:43:11.298Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:43:11.339Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:43:11.342Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:43:11.810Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:43:11.812Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:43:12.569Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:43:14.594Z] Switching to account login via [class*="account"]
+[2026-06-17T04:43:14.652Z] CONSOLE log: will change  account
+[2026-06-17T04:43:14.754Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:43:16.835Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T04:43:17.074Z] Clicking submit: button:has-text("登录")
+[2026-06-17T04:43:17.116Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T04:43:18.152Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:43:21.570Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:43:24.987Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:43:28.386Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:43:31.801Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:43:35.202Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:43:38.603Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:43:41.316Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:43:42.004Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:43:45.418Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:43:48.835Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:43:52.236Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:43:55.634Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:43:59.052Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:44:02.452Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:44:05.867Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:44:09.284Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:44:09.833Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:44:12.701Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:44:16.100Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:44:19.500Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:44:22.181Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T04:44:22.902Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:44:26.042Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T04:45:36.390Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:45:41.471Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:45:41.484Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:45:42.012Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:45:42.015Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:45:42.347Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:45:42.685Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:45:43.535Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:45:43.565Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:45:43.616Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:45:43.619Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:45:43.927Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:45:44.093Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:45:44.095Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:45:46.714Z] Switching to account login via [class*="account"]
+[2026-06-17T04:45:46.777Z] CONSOLE log: will change  account
+[2026-06-17T04:45:47.014Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:45:48.950Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T04:45:49.197Z] Clicking submit: button:has-text("登录")
+[2026-06-17T04:45:49.331Z] Clicked agreement text
+[2026-06-17T04:45:49.871Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T04:45:50.413Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:45:53.814Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:45:57.212Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:46:00.629Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:46:04.030Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:46:07.428Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:46:10.829Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:46:14.146Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:46:14.230Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:46:17.628Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:46:21.029Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:46:24.429Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:46:27.845Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:46:31.246Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:46:34.662Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:46:38.078Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:46:41.477Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:46:43.708Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:46:44.879Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:46:48.293Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:46:51.693Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:46:54.978Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T04:46:55.094Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:46:58.825Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T04:48:12.507Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:48:18.332Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:48:18.352Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:48:18.886Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:48:19.454Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:48:19.457Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:48:19.479Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:48:20.496Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:48:20.523Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:48:20.570Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:48:20.573Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:48:20.604Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:48:20.980Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:48:20.981Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:48:23.580Z] Switching to account login via [class*="account"]
+[2026-06-17T04:48:23.641Z] CONSOLE log: will change  account
+[2026-06-17T04:48:23.992Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:48:25.832Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T04:48:26.608Z] Clicking submit: button:has-text("登录")
+[2026-06-17T04:48:26.725Z] Clicked agreement text
+[2026-06-17T04:48:27.287Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T04:48:27.407Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:48:30.808Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:48:34.207Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:48:37.607Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:48:41.006Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:48:44.425Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:48:47.823Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:48:49.524Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:48:51.223Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:48:54.622Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:48:58.022Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:49:01.422Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:49:04.822Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:49:08.222Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:49:11.623Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:49:15.022Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:49:17.997Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:49:18.424Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:49:21.820Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:49:25.222Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:49:28.621Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:49:32.021Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:49:32.360Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T04:49:35.445Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:49:36.269Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T04:51:51.643Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:51:58.870Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:51:59.764Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:51:59.782Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:52:00.322Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:52:00.324Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:52:01.523Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:52:03.037Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:52:03.061Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:52:03.104Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:52:03.107Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:52:03.279Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:52:03.602Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:52:03.604Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:52:05.002Z] Switching to account login via [class*="account"]
+[2026-06-17T04:52:05.048Z] CONSOLE log: will change  account
+[2026-06-17T04:52:06.532Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:52:07.243Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T04:52:08.012Z] Clicking submit: button:has-text("登录")
+[2026-06-17T04:52:08.022Z] Clicked agreement via JS
+[2026-06-17T04:52:08.861Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T04:52:09.948Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:52:13.364Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:52:16.764Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:52:20.164Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:52:23.581Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:52:26.981Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:52:30.381Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:52:32.212Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:52:33.814Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:52:37.230Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:52:40.646Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:52:44.063Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:52:47.464Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:52:50.879Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:52:54.278Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:52:57.680Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:53:00.763Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:53:01.080Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:53:04.479Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:53:07.877Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:53:11.296Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:53:13.930Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T04:53:14.696Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:53:17.779Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T04:54:44.236Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T04:54:48.105Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T04:54:48.122Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:54:48.768Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:54:48.857Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:54:48.860Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:54:48.879Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T04:54:49.820Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T04:54:50.033Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T04:54:50.053Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T04:54:50.096Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:54:50.101Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T04:54:50.540Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T04:54:50.542Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T04:54:53.360Z] Switching to account login via [class*="account"]
+[2026-06-17T04:54:53.423Z] CONSOLE log: will change  account
+[2026-06-17T04:54:53.527Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:54:55.595Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T04:54:56.379Z] Clicking submit: button:has-text("登录")
+[2026-06-17T04:54:56.395Z] Checked agreement checkbox via JS
+[2026-06-17T04:54:56.927Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:54:57.237Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T04:55:00.343Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:55:03.742Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:55:07.142Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:55:10.542Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:55:13.942Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:55:17.342Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:55:19.092Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:55:20.743Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:55:24.140Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:55:27.557Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:55:30.973Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:55:34.373Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:55:37.772Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:55:41.173Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:55:44.573Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:55:47.973Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:55:48.483Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T04:55:51.389Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:55:54.791Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T04:55:58.207Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T04:56:01.605Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T04:56:02.310Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T04:56:05.005Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T04:56:06.135Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T05:01:05.907Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T05:01:10.455Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T05:01:10.705Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T05:01:10.722Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T05:01:11.249Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T05:01:11.251Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T05:01:11.929Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T05:01:13.425Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T05:01:13.454Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T05:01:13.512Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:01:13.518Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T05:01:13.552Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T05:01:15.390Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T05:01:15.392Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T05:01:15.940Z] Switching to account login via [class*="account"]
+[2026-06-17T05:01:15.994Z] CONSOLE log: will change  account
+[2026-06-17T05:01:16.945Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:01:18.180Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T05:01:18.928Z] Clicking submit: button:has-text("登录")
+[2026-06-17T05:01:18.937Z] Agreement debug: {"tag":"HTML","class":"","html":"<html lang=\"zh-cn\"><head>\n    <title>希沃白板</title>\n    <meta name=\"keywords\" content=\"希沃白板网页版，希沃白板mac，希沃白板5, 希沃白板5 mac，在线课件，云课件\">\n    <meta name=\"description\" content=\"\t希沃白板网页版作为新一代在线互动课件工具，融合了希沃白板5的功能，支持在网页中编辑互动课件，使用课件库资源，云端实时同步，导入本地PPT。支持Mac、UOS等多种系统使用，可随时随地备课与授课。\">\n    <meta name=\"format-detection","firstChildTag":"HEAD","firstChildClass":""}
+[2026-06-17T05:01:18.943Z] Clicked agreement sibling via JS
+[2026-06-17T05:01:19.789Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T05:01:20.344Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:01:23.745Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:01:27.143Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:01:30.542Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:01:33.943Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:01:37.343Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:01:40.759Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:01:43.893Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T05:01:44.159Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:01:47.557Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:01:50.958Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:01:54.357Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:01:57.758Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:02:01.157Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:02:04.557Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:02:07.974Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:02:11.374Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:02:12.401Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T05:02:14.774Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:02:18.175Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:02:21.591Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:02:24.856Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T05:02:24.991Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:02:28.719Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T05:03:44.204Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T05:03:49.810Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T05:03:49.825Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T05:03:50.351Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T05:03:50.353Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T05:03:50.708Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T05:03:52.191Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T05:03:52.214Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T05:03:52.251Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:03:52.254Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T05:03:52.499Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T05:03:52.890Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T05:03:52.892Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T05:03:55.030Z] Switching to account login via [class*="account"]
+[2026-06-17T05:03:55.071Z] CONSOLE log: will change  account
+[2026-06-17T05:03:55.673Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:03:57.254Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T05:03:58.020Z] Clicking submit: button:has-text("登录")
+[2026-06-17T05:03:58.030Z] Agreement leaves: []
+[2026-06-17T05:03:58.034Z] Clicked agreement leaf sibling via JS
+[2026-06-17T05:03:58.897Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T05:03:59.072Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:04:02.470Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:04:05.869Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:04:09.269Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:04:12.668Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:04:16.068Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:04:19.468Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:04:21.420Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T05:04:22.870Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:04:26.272Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:04:29.686Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:04:33.087Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:04:36.485Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:04:39.884Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:04:43.300Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:04:46.700Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:04:49.958Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T05:04:50.100Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:04:53.500Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:04:56.917Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:05:00.333Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:05:03.733Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:05:03.952Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T05:05:07.893Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
+[2026-06-17T05:09:14.526Z] Navigating to https://enweb3.seewo.com/courseware/prepareCourseware/ENCourseware
+[2026-06-17T05:09:24.524Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T05:09:25.497Z] CONSOLE info: setNormalWindowSize
+[2026-06-17T05:09:25.514Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T05:09:26.629Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T05:09:26.631Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T05:09:26.647Z] PAGE ERROR: Cannot read properties of undefined (reading 'uid')
+[2026-06-17T05:09:28.067Z] CONSOLE warning: Icon #ic_login_del-86d376 was duplicately registered. It must be globally unique.
+[2026-06-17T05:09:28.100Z] CONSOLE log: 🚀 ~ getMode ~ cacheMode null
+[2026-06-17T05:09:28.133Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:09:28.135Z] CONSOLE log: getSystemInfo undefined
+[2026-06-17T05:09:28.168Z] CONSOLE log: use unload event:pagehide
+[2026-06-17T05:09:28.622Z] CONSOLE log: {data: Array(1), status: 200, statusText: , headers: Object, config: Object} result
+[2026-06-17T05:09:28.623Z] CONSOLE log: cfgUrl /enow/dynamicConfig?mode=null {data: Array(1), status: 200, statusText: , headers: Object, config: Object}
+[2026-06-17T05:09:30.712Z] Switching to account login via [class*="account"]
+[2026-06-17T05:09:30.756Z] CONSOLE log: will change  account
+[2026-06-17T05:09:31.539Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:09:32.930Z] Found login form: phone=input[placeholder*="手机号"], password=input[placeholder*="密码"]
+[2026-06-17T05:09:33.696Z] Clicking submit: button:has-text("登录")
+[2026-06-17T05:09:33.794Z] Clicked agreement checkbox at (816, 631.5)
+[2026-06-17T05:09:34.645Z] CONSOLE log: error: {message: 请同意下方协议}
+[2026-06-17T05:09:34.957Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:09:38.356Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:09:41.757Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:09:45.156Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:09:48.556Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:09:51.956Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:09:55.372Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:09:57.261Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T05:09:58.772Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:10:02.171Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:10:05.572Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:10:08.971Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:10:12.389Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:10:15.787Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:10:19.186Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:10:22.587Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:10:25.814Z] CONSOLE log: 如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训如果没有扫码授权，则继续轮训
+[2026-06-17T05:10:25.988Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:10:29.387Z] CONSOLE log: currentPageIndex 2
+[2026-06-17T05:10:32.803Z] CONSOLE log: currentPageIndex 3
+[2026-06-17T05:10:36.209Z] CONSOLE log: currentPageIndex 0
+[2026-06-17T05:10:39.604Z] CONSOLE log: currentPageIndex 1
+[2026-06-17T05:10:39.721Z] Current URL: https://enweb3.seewo.com/
+[2026-06-17T05:10:43.545Z] Done. Captured files in C:\Users\LX\OneDrive\桌面\课件生成\courseware-agent\apps\web\seewo-capture
