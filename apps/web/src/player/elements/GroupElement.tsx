@@ -4,6 +4,12 @@ import { ShapeElement } from './ShapeElement';
 import { ImageElement } from './ImageElement';
 import { QuizElement } from './QuizElement';
 import { FillBlankElement } from './FillBlankElement';
+import { FormulaElement } from './FormulaElement';
+import { DiagramElement } from './DiagramElement';
+import { AudioElement } from './AudioElement';
+import { VideoElement } from './VideoElement';
+import { BlockRenderer } from '../../components/blocks';
+import { InteractiveRenderer } from '../interactives';
 
 interface GroupElementProps {
   element: Element;
@@ -30,8 +36,50 @@ function renderChild(
       }
       return <QuizElement element={child} onInteraction={onInteraction} />;
     }
+    case 'group':
+      return <GroupElement element={child} assets={assets} onInteraction={onInteraction} />;
+    case 'formula':
+      return <FormulaElement element={child} />;
+    case 'diagram':
+      return <DiagramElement element={child} />;
+    case 'audio':
+      return <AudioElement element={child} assets={assets} onInteraction={onInteraction} />;
+    case 'video':
+      return <VideoElement element={child} assets={assets} onInteraction={onInteraction} />;
+    case 'block':
+      return (
+        <BlockRenderer
+          element={child}
+          assets={assets}
+          mode="player"
+          onInteraction={onInteraction}
+        />
+      );
+    case 'interactive':
+      return (
+        <InteractiveRenderer
+          element={child}
+          mode="player"
+          onInteraction={onInteraction}
+        />
+      );
     default:
-      return null;
+      return (
+        <div
+          id={child.id}
+          className="absolute flex items-center justify-center border-2 border-dashed border-slate-400 bg-slate-100 text-xs text-slate-500"
+          style={{
+            left: child.geometry.x,
+            top: child.geometry.y,
+            width: child.geometry.width,
+            height: child.geometry.height,
+            zIndex: child.geometry.zIndex,
+            opacity: child.style.opacity ?? 1,
+          }}
+        >
+          {child.type} 元素
+        </div>
+      );
   }
 }
 

@@ -3,7 +3,13 @@ import { immer } from 'zustand/middleware/immer';
 import type { Courseware, Element, Slide } from '@courseware/shared';
 import { DEFAULT_DESIGN_SYSTEM } from '@courseware/shared';
 import { exampleCourseware } from '../examples/example-courseware';
-import { cloneElement } from './element-factories';
+import {
+  clampElementZIndex,
+  cloneElement,
+  cloneElementSet,
+  normalizeElementZIndices,
+  remapElementTargetIds,
+} from './element-factories';
 
 export interface EditorState {
   courseware: Courseware;
@@ -56,10 +62,46 @@ export interface EditorActions {
 
 const generateId = (prefix: string) => `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
 
+function cloneAndNormalizeCourseware(courseware: Courseware): Courseware {
+  const normalized = JSON.parse(JSON.stringify(courseware)) as Courseware;
+  normalized.slides.forEach((slide) => normalizeElementZIndices(slide.elements));
+  return normalized;
+}
+
+function moveElementToStackEdge(
+  elements: Element[],
+  elementId: string,
+  edge: 'front' | 'back',
+) {
+  const ordered = elements
+    .map((element, index) => ({ element, index }))
+    .sort(
+      (a, b) =>
+        clampElementZIndex(a.element.geometry.zIndex) -
+          clampElementZIndex(b.element.geometry.zIndex) ||
+        a.index - b.index,
+    );
+  const targetIndex = ordered.findIndex(({ element }) => element.id === elementId);
+  if (targetIndex < 0) return;
+
+  const [target] = ordered.splice(targetIndex, 1);
+  if (edge === 'front') {
+    ordered.push(target);
+  } else {
+    ordered.unshift(target);
+  }
+
+  ordered.forEach(({ element }, index) => {
+    element.geometry.zIndex = clampElementZIndex(index + 1);
+  });
+}
+
+const initialCourseware = cloneAndNormalizeCourseware(exampleCourseware);
+
 export const useEditorStore = create<EditorState & EditorActions>()(
   immer((set) => ({
-    courseware: exampleCourseware,
-    currentSlideId: exampleCourseware.slides[0]?.id || null,
+    courseware: initialCourseware,
+    currentSlideId: initialCourseware.slides[0]?.id || null,
     selectedElementId: null,
     selectedElementIds: [],
     editingElementId: null,
@@ -68,16 +110,21 @@ export const useEditorStore = create<EditorState & EditorActions>()(
 
     setCourseware: (courseware) => {
       set((state) => {
-        state.courseware = courseware;
-        if (!state.currentSlideId || !courseware.slides.find((s) => s.id === state.currentSlideId)) {
-          state.currentSlideId = courseware.slides[0]?.id || null;
+        const normalizedCourseware = cloneAndNormalizeCourseware(courseware);
+        state.courseware = normalizedCourseware;
+        if (!state.currentSlideId || !normalizedCourseware.slides.find((s) => s.id === state.currentSlideId)) {
+          state.currentSlideId = normalizedCourseware.slides[0]?.id || null;
         }
       });
     },
 
     setCanvasZoom: (zoom) => {
       set((state) => {
-        state.canvasZoom = Math.max(0.25, Math.min(3, zoom));
+        // canvasZoom is relative to the fitted scale. Compact workspaces can
+        // need more than 3× to reach a true 1:1 (1280×720) stage.
+        const nextZoom = Math.max(0.25, Math.min(16, zoom));
+        if (Math.abs(state.canvasZoom - nextZoom) < 0.0001) return;
+        state.canvasZoom = nextZoom;
       });
     },
 
@@ -122,10 +169,11 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const index = state.courseware.slides.findIndex((s) => s.id === state.currentSlideId);
         const insertIndex = index >= 0 ? index : state.courseware.slides.length - 1;
         const newSlide: Slide = {
-          ...slide,
+          ...JSON.parse(JSON.stringify(slide)),
           id: generateId('slide'),
           order: insertIndex + 1,
         };
+        normalizeElementZIndices(newSlide.elements);
         state.courseware.slides.splice(insertIndex + 1, 0, newSlide);
         state.courseware.slides.forEach((s, i) => {
           s.order = i;
@@ -144,12 +192,18 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const cloned: Slide = JSON.parse(JSON.stringify(slide));
         cloned.id = generateId('slide');
         cloned.title = `${cloned.title || '未命名页面'} 副本`;
-        cloned.elements.forEach((el) => {
-          el.id = generateId('el');
-          el.animation?.entrance?.forEach((step) => {
-            step.id = generateId('anim');
-          });
-        });
+        const clonedElements = cloneElementSet(slide.elements);
+        cloned.elements = clonedElements.elements;
+        cloned.layout.constraints = cloned.layout.constraints.map((constraint) => ({
+          ...constraint,
+          target: clonedElements.idMap.get(constraint.target) ?? constraint.target,
+        }));
+        if (cloned.stateMachine) {
+          cloned.stateMachine = remapElementTargetIds(
+            cloned.stateMachine,
+            clonedElements.idMap,
+          );
+        }
 
         state.courseware.slides.splice(index + 1, 0, cloned);
         state.courseware.slides.forEach((s, i) => {
@@ -162,6 +216,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
 
     deleteSlide: (slideId) => {
       set((state) => {
+        if (state.courseware.slides.length <= 1) return;
         const index = state.courseware.slides.findIndex((s) => s.id === slideId);
         if (index === -1) return;
 
@@ -197,6 +252,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const slide = state.courseware.slides.find((s) => s.id === slideId);
         if (slide) {
           updater(slide);
+          normalizeElementZIndices(slide.elements);
         }
       });
     },
@@ -244,7 +300,9 @@ export const useEditorStore = create<EditorState & EditorActions>()(
       set((state) => {
         const slide = state.courseware.slides.find((s) => s.id === slideId);
         if (slide) {
+          normalizeElementZIndices([element]);
           slide.elements.push(element);
+          moveElementToStackEdge(slide.elements, element.id, 'front');
           state.selectedElementId = element.id;
           state.selectedElementIds = [element.id];
           state.editingElementId = null;
@@ -283,6 +341,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const element = slide?.elements.find((e) => e.id === elementId);
         if (element) {
           updater(element);
+          normalizeElementZIndices([element]);
         }
       });
     },
@@ -293,6 +352,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const element = slide?.elements.find((e) => e.id === elementId);
         if (element) {
           Object.assign(element, updates);
+          normalizeElementZIndices([element]);
         }
       });
     },
@@ -311,7 +371,9 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         cloned.geometry.x += offsetCount * 10;
         cloned.geometry.y += offsetCount * 10;
 
+        normalizeElementZIndices([cloned]);
         slide.elements.push(cloned);
+        moveElementToStackEdge(slide.elements, cloned.id, 'front');
         state.selectedElementId = cloned.id;
         state.selectedElementIds = [cloned.id];
         state.editingElementId = null;
@@ -323,14 +385,20 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const slide = state.courseware.slides.find((s) => s.id === slideId);
         if (!slide || state.selectedElementIds.length === 0) return;
 
-        const newIds: string[] = [];
-        state.selectedElementIds.forEach((id, i) => {
-          const element = slide.elements.find((e) => e.id === id);
-          if (!element) return;
-          const cloned = cloneElement(element, 20 + i * 10, 20 + i * 10);
-          slide.elements.push(cloned);
-          newIds.push(cloned.id);
-        });
+        const selected = state.selectedElementIds
+          .map((id) => slide.elements.find((element) => element.id === id))
+          .filter((element): element is Element => Boolean(element));
+        const cloned = cloneElementSet(
+          selected,
+          selected.map((_, index) => ({
+            x: 20 + index * 10,
+            y: 20 + index * 10,
+          })),
+        ).elements;
+        normalizeElementZIndices(cloned);
+        slide.elements.push(...cloned);
+        const newIds = cloned.map((element) => element.id);
+        newIds.forEach((id) => moveElementToStackEdge(slide.elements, id, 'front'));
         state.selectedElementIds = newIds;
         state.selectedElementId = newIds[newIds.length - 1] || null;
         state.editingElementId = null;
@@ -392,7 +460,9 @@ export const useEditorStore = create<EditorState & EditorActions>()(
             y: minY,
             width: maxX - minX,
             height: maxY - minY,
-            zIndex: Math.max(...selected.map((e) => e.geometry.zIndex ?? 1)) + 1,
+            zIndex: clampElementZIndex(
+              Math.max(...selected.map((e) => clampElementZIndex(e.geometry.zIndex))) + 1,
+            ),
           },
           style: {},
           content: {
@@ -408,6 +478,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
           animation: { entrance: [], exit: [] },
           interactions: [],
         };
+        normalizeElementZIndices([group]);
 
         slide.elements = slide.elements.filter((e) => !state.selectedElementIds.includes(e.id));
         slide.elements.push(group);
@@ -452,6 +523,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
             },
           };
         }) || [];
+        normalizeElementZIndices(children);
 
         slide.elements.splice(groupIndex, 1, ...children);
         state.selectedElementIds = children.map((c) => c.id);
@@ -490,8 +562,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const element = slide?.elements.find((e) => e.id === elementId);
         if (!slide || !element) return;
 
-        const maxZ = Math.max(0, ...slide.elements.map((e) => e.geometry.zIndex ?? 0));
-        element.geometry.zIndex = maxZ + 1;
+        moveElementToStackEdge(slide.elements, elementId, 'front');
       });
     },
 
@@ -501,8 +572,7 @@ export const useEditorStore = create<EditorState & EditorActions>()(
         const element = slide?.elements.find((e) => e.id === elementId);
         if (!slide || !element) return;
 
-        const minZ = Math.min(0, ...slide.elements.map((e) => e.geometry.zIndex ?? 0));
-        element.geometry.zIndex = minZ - 1;
+        moveElementToStackEdge(slide.elements, elementId, 'back');
       });
     },
 

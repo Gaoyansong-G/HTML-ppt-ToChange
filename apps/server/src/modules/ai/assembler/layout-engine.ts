@@ -906,6 +906,210 @@ export function buildFallbackDesign(outline: OutlineResult, content: ContentResu
         break;
       }
 
+      case 'table': {
+        elements.push(divider(SAFE_LEFT, SAFE_TOP + 70, SAFE_RIGHT - SAFE_LEFT, [c.primary, c.accent]));
+        elements.push(circle(SAFE_RIGHT - 60, SAFE_BOTTOM - 60, 80, c.accent, 0.08));
+        elements.push(textEl('title', title, SAFE_LEFT, SAFE_TOP, SAFE_RIGHT - SAFE_LEFT, 60, { fontSize: 40, fontWeight: 700, color: c.text }));
+
+        const tableLines = body.split('\n').filter(Boolean);
+        const headerLine = tableLines.find((l) => l.trim().startsWith('表头')) || tableLines[0] || '列1|列2|列3';
+        const headerCells = headerLine.replace(/^表头[：:]\s*/, '').split('|').map((s) => s.trim()).slice(0, 4);
+        const dataLines = tableLines.filter((l) => !l.trim().startsWith('表头')).slice(0, 4);
+        const rows = dataLines.length >= 2 ? dataLines : ['A|B|C', 'D|E|F', 'G|H|I'];
+
+        const colCount = Math.max(3, headerCells.length);
+        const rowCount = rows.length + 1;
+        const tableW = 900;
+        const tableH = 420;
+        const tableX = SAFE_LEFT + 40;
+        const tableY = SAFE_TOP + 110;
+        const cellW = tableW / colCount;
+        const cellH = tableH / rowCount;
+
+        headerCells.forEach((cell, i) => {
+          const x = tableX + i * cellW;
+          elements.push(shapeEl('option-bg', x, tableY, cellW - 4, cellH - 4, {
+            fill: c.primary,
+            opacity: 0.85,
+            borderRadius: 8,
+          }));
+          elements.push(textEl('subtitle', cell, x + 8, tableY + 10, cellW - 16, cellH - 20, {
+            fontSize: 20,
+            fontWeight: 600,
+            color: '#ffffff',
+            textAlign: 'center',
+          }));
+        });
+
+        rows.forEach((row, rowIdx) => {
+          const y = tableY + (rowIdx + 1) * cellH;
+          const cells = row.replace(/^行\d*[：:]\s*/, '').split('|').map((s) => s.trim());
+          for (let i = 0; i < colCount; i++) {
+            const x = tableX + i * cellW;
+            elements.push(cardBg(x, y, cellW - 4, cellH - 4, c.background, shadowMd));
+            elements.push(textEl('body', cells[i] || '', x + 8, y + 10, cellW - 16, cellH - 20, {
+              fontSize: 18,
+              color: c.textMuted,
+              textAlign: 'center',
+            }));
+          }
+        });
+
+        elements.push({
+          type: 'image',
+          semanticRole: 'image',
+          geometry: { x: tableX + tableW + 40, y: tableY, width: 200, height: 360, zIndex: 1 },
+          style: { borderRadius: 16, shadow: shadowMd },
+          content: { assetId: '', alt: `${title} 对比配图` },
+        });
+        break;
+      }
+
+      case 'case-study': {
+        elements.push(divider(SAFE_LEFT, SAFE_TOP + 70, SAFE_RIGHT - SAFE_LEFT, [c.primary, c.accent]));
+        elements.push(circle(SAFE_LEFT + 60, SAFE_BOTTOM - 60, 80, c.accent, 0.08));
+        elements.push(textEl('title', title, SAFE_LEFT, SAFE_TOP, SAFE_RIGHT - SAFE_LEFT, 60, { fontSize: 40, fontWeight: 700, color: c.text }));
+
+        const caseLines = body.split('\n').filter(Boolean);
+        const caseLine = caseLines.find((l) => l.trim().startsWith('案例')) || caseLines[0] || '真实情境案例';
+        const questionLine = caseLines.find((l) => l.trim().startsWith('问题')) || caseLines[1] || '思考问题';
+        const analysisLine = caseLines.find((l) => l.trim().startsWith('分析')) || caseLines.slice(2).join('\n') || '分析要点';
+        const caseText = caseLine.replace(/^案例[：:]\s*/, '');
+        const questionText = questionLine.replace(/^问题[：:]\s*/, '');
+        const analysisText = analysisLine.replace(/^分析[：:]\s*/, '');
+
+        const leftW = 640;
+        const rightW = 440;
+        const gap = 40;
+        const startX = CENTER_X - (leftW + gap + rightW) / 2;
+        const cardH = 130;
+        const cardGap = 20;
+
+        elements.push(cardBg(startX, SAFE_TOP + 100, leftW, cardH, c.background, shadowMd));
+        elements.push(textEl('subtitle', '案例', startX + 24, SAFE_TOP + 116, 100, 32, { fontSize: 22, fontWeight: 600, color: c.primary }));
+        elements.push(textEl('body', caseText, startX + 24, SAFE_TOP + 152, leftW - 48, cardH - 56, { fontSize: 20, color: c.textMuted, lineHeight: 1.6 }));
+
+        elements.push(cardBg(startX, SAFE_TOP + 100 + cardH + cardGap, leftW, cardH, c.surface, shadowMd));
+        elements.push(textEl('subtitle', '问题', startX + 24, SAFE_TOP + 116 + cardH + cardGap, 100, 32, { fontSize: 22, fontWeight: 600, color: c.primary }));
+        elements.push(textEl('body', questionText, startX + 24, SAFE_TOP + 152 + cardH + cardGap, leftW - 48, cardH - 56, { fontSize: 20, color: c.textMuted, lineHeight: 1.6 }));
+
+        elements.push(cardBg(startX, SAFE_TOP + 100 + (cardH + cardGap) * 2, leftW, cardH, c.background, shadowMd));
+        elements.push(textEl('subtitle', '分析', startX + 24, SAFE_TOP + 116 + (cardH + cardGap) * 2, 100, 32, { fontSize: 22, fontWeight: 600, color: c.primary }));
+        elements.push(textEl('body', analysisText, startX + 24, SAFE_TOP + 152 + (cardH + cardGap) * 2, leftW - 48, cardH - 56, { fontSize: 20, color: c.textMuted, lineHeight: 1.6 }));
+
+        elements.push({
+          type: 'image',
+          semanticRole: 'image',
+          geometry: { x: startX + leftW + gap, y: SAFE_TOP + 100, width: rightW, height: 430, zIndex: 1 },
+          style: { borderRadius: 16, shadow: shadowMd },
+          content: { assetId: '', alt: `${title} 情境配图` },
+        });
+        break;
+      }
+
+      case 'classification': {
+        elements.push(divider(SAFE_LEFT, SAFE_TOP + 70, SAFE_RIGHT - SAFE_LEFT, [c.primary, c.accent]));
+        elements.push(circle(SAFE_LEFT + 60, SAFE_BOTTOM - 60, 80, c.accent, 0.08));
+        elements.push(textEl('title', title, SAFE_LEFT, SAFE_TOP, SAFE_RIGHT - SAFE_LEFT, 60, { fontSize: 40, fontWeight: 700, color: c.text }));
+
+        const classLines = body.split('\n').filter(Boolean);
+        const centerLine = classLines.find((l) => l.trim().startsWith('中心概念')) || title;
+        const categoryLines = classLines.filter((l) => l.trim().startsWith('类别')).slice(0, 3);
+        const categories = categoryLines.length >= 2 ? categoryLines : ['类别一：A|B', '类别二：C|D', '类别三：E|F'];
+        const centerText = centerLine.replace(/^中心概念[：:]\s*/, '');
+
+        const centerSize = 120;
+        const centerY = SAFE_TOP + 110;
+        elements.push(shapeEl('decoration', CENTER_X - centerSize / 2, centerY, centerSize, centerSize, {
+          shapeType: 'circle',
+          fill: `linear-gradient(135deg, ${c.primary}, ${c.accent})`,
+          opacity: 1,
+          zIndex: 1,
+        }));
+        elements.push(textEl('subtitle', centerText, CENTER_X - centerSize / 2 + 8, centerY + 44, centerSize - 16, 40, {
+          fontSize: 18,
+          fontWeight: 600,
+          color: '#ffffff',
+          textAlign: 'center',
+        }));
+
+        const catCount = categories.length;
+        const catW = 280;
+        const catH = 170;
+        const catGap = 32;
+        const totalW = catCount * catW + (catCount - 1) * catGap;
+        const startX = CENTER_X - totalW / 2;
+        const catY = SAFE_TOP + 320;
+
+        categories.forEach((cat, i) => {
+          const x = startX + i * (catW + catGap);
+          const parts = cat.replace(/^类别\d*[：:]\s*/, '').split('|');
+          const catName = parts[0] || `类别${i + 1}`;
+          const items = parts.slice(1).join(' / ');
+          elements.push(cardBg(x, catY, catW, catH, c.background, shadowMd));
+          elements.push(textEl('subtitle', catName, x + 20, catY + 16, catW - 40, 32, { fontSize: 20, fontWeight: 600, color: c.primary }));
+          elements.push(textEl('body', items, x + 20, catY + 56, catW - 40, catH - 72, { fontSize: 17, color: c.textMuted, lineHeight: 1.5 }));
+
+          const lineStartX = CENTER_X;
+          const lineStartY = centerY + centerSize;
+          const lineEndX = x + catW / 2;
+          const lineEndY = catY;
+          const midY = lineStartY + (lineEndY - lineStartY) / 2;
+          elements.push(shapeEl('decoration', lineStartX, lineStartY, 3, midY - lineStartY, { fill: c.accent, opacity: 0.45, borderRadius: 2 }));
+          elements.push(shapeEl('decoration', Math.min(lineStartX, lineEndX), midY, Math.abs(lineEndX - lineStartX), 3, { fill: c.accent, opacity: 0.45, borderRadius: 2 }));
+          elements.push(shapeEl('decoration', lineEndX, midY, 3, lineEndY - midY, { fill: c.accent, opacity: 0.45, borderRadius: 2 }));
+        });
+
+        elements.push({
+          type: 'image',
+          semanticRole: 'image',
+          geometry: { x: SAFE_RIGHT - 180, y: SAFE_TOP + 100, width: 140, height: 140, zIndex: 1 },
+          style: { borderRadius: 12, shadow: shadowMd },
+          content: { assetId: '', alt: `${title} 分类配图` },
+        });
+        break;
+      }
+
+      case 'worksheet': {
+        elements.push(divider(SAFE_LEFT, SAFE_TOP + 70, SAFE_RIGHT - SAFE_LEFT, [c.primary, c.accent]));
+        elements.push(circle(SAFE_RIGHT - 60, SAFE_BOTTOM - 60, 80, c.accent, 0.08));
+        elements.push(textEl('title', title, SAFE_LEFT, SAFE_TOP, SAFE_RIGHT - SAFE_LEFT, 60, { fontSize: 40, fontWeight: 700, color: c.text }));
+
+        const sheetLines = body.split('\n').filter(Boolean);
+        const instructionLine = sheetLines.find((l) => l.trim().startsWith('练习说明')) || '练习说明：请根据所学内容完成下列练习。';
+        const questionLines = sheetLines.filter((l) => l.trim().startsWith('题')).slice(0, 4);
+        const questions = questionLines.length >= 2 ? questionLines : ['题目一|答案：示例', '题目二|答案：示例', '题目三|答案：示例'];
+        const instruction = instructionLine.replace(/^练习说明[：:]\s*/, '');
+
+        elements.push(cardBg(SAFE_LEFT + 20, SAFE_TOP + 90, SAFE_RIGHT - SAFE_LEFT - 40, 56, c.surface, shadowMd));
+        elements.push(textEl('body', instruction, SAFE_LEFT + 44, SAFE_TOP + 104, SAFE_RIGHT - SAFE_LEFT - 88, 28, { fontSize: 20, color: c.textMuted }));
+
+        const questionH = 96;
+        const questionGap = 16;
+        const startY = SAFE_TOP + 166;
+        questions.forEach((q, i) => {
+          const y = startY + i * (questionH + questionGap);
+          const parts = q.replace(/^题\d*[：:]\s*/, '').split('|');
+          const questionText = parts[0] || '题目';
+          const answer = parts[1] ? parts[1].replace(/^答案[：:]\s*/, '') : '';
+          elements.push(cardBg(SAFE_LEFT + 20, y, SAFE_RIGHT - SAFE_LEFT - 40, questionH, c.background, shadowMd));
+          elements.push(textEl('body', `${i + 1}. ${questionText}`, SAFE_LEFT + 44, y + 16, SAFE_RIGHT - SAFE_LEFT - 280, 28, { fontSize: 20, color: c.text }));
+          elements.push(shapeEl('option-bg', SAFE_LEFT + 44, y + 56, SAFE_RIGHT - SAFE_LEFT - 280, 2, { fill: c.border, opacity: 1, borderRadius: 1 }));
+          if (answer) {
+            elements.push(textEl('answer', answer, SAFE_RIGHT - 220, y + 20, 180, 56, { fontSize: 16, color: c.textMuted, textAlign: 'right' }));
+          }
+        });
+
+        elements.push({
+          type: 'image',
+          semanticRole: 'image',
+          geometry: { x: SAFE_RIGHT - 180, y: SAFE_TOP + 90, width: 140, height: 100, zIndex: 1 },
+          style: { borderRadius: 12, shadow: shadowMd },
+          content: { assetId: '', alt: `${title} 练习配图` },
+        });
+        break;
+      }
+
       case 'content':
       default: {
         elements.push(divider(SAFE_LEFT, SAFE_TOP + 70, SAFE_RIGHT - SAFE_LEFT, [c.primary, c.accent]));

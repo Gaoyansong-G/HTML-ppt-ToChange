@@ -5,6 +5,12 @@ import { ImageElement } from './ImageElement';
 import { QuizElement } from './QuizElement';
 import { FillBlankElement } from './FillBlankElement';
 import { GroupElement } from './GroupElement';
+import { FormulaElement } from './FormulaElement';
+import { DiagramElement } from './DiagramElement';
+import { AudioElement } from './AudioElement';
+import { VideoElement } from './VideoElement';
+import { BlockRenderer } from '../../components/blocks';
+import { InteractiveRenderer } from '../interactives';
 import type { Asset } from '@courseware/shared';
 
 export interface ElementRendererProps {
@@ -30,6 +36,18 @@ export function ElementRenderer({ element, assets, onInteraction }: ElementRende
     }
     case 'group':
       return <GroupElement element={element} assets={assets} onInteraction={onInteraction} />;
+    case 'formula':
+      return <FormulaElement element={element} />;
+    case 'diagram':
+      return <DiagramElement element={element} />;
+    case 'audio':
+      return <AudioElement element={element} assets={assets} onInteraction={onInteraction} />;
+    case 'video':
+      return <VideoElement element={element} assets={assets} onInteraction={onInteraction} />;
+    case 'block':
+      return <BlockRenderer element={element} assets={assets} mode="player" onInteraction={onInteraction} />;
+    case 'interactive':
+      return <InteractiveRenderer element={element} mode="player" onInteraction={onInteraction} />;
     default:
       // For unsupported types, render a placeholder
       return (

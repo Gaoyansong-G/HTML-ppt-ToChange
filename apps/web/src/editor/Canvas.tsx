@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import type { Element } from '@courseware/shared';
 import { useEditorStore } from '../stores/editor.store';
 import { useHistoryStore } from '../stores/history.store';
@@ -19,10 +20,12 @@ import {
   ListChecks,
 } from 'lucide-react';
 import {
+  clampElementZIndex,
   createTextElement,
   createShapeElement,
   createImageElement,
   createQuizElement,
+  USER_ELEMENT_Z_INDEX_MAX,
 } from '../stores/element-factories';
 
 const SLIDE_WIDTH = 1280;
@@ -31,6 +34,16 @@ const SLIDE_HEIGHT = 720;
 const MIN_SIZE = 20;
 const GRID_SIZE = 10;
 const GUIDE_THRESHOLD = 6;
+const STAGE_MARGIN = 56;
+const GUIDE_LAYER = USER_ELEMENT_Z_INDEX_MAX + 1;
+const SELECTION_LAYER = GUIDE_LAYER + 1;
+const HANDLE_LAYER = SELECTION_LAYER + 1;
+const INLINE_EDITOR_LAYER = HANDLE_LAYER + 1;
+const FLOATING_TOOLBAR_LAYER = INLINE_EDITOR_LAYER + 1;
+const HUD_LAYER = 30;
+const CONTEXT_MENU_WIDTH = 176;
+const CONTEXT_MENU_HEIGHT = 244;
+const VIEWPORT_EDGE_GAP = 8;
 
 interface ElementEdges {
   left: number;
@@ -98,6 +111,31 @@ function snap(value: number, grid = GRID_SIZE) {
   return Math.round(value / grid) * grid;
 }
 
+const ELEMENT_TYPE_LABELS: Record<Element['type'], string> = {
+  text: '文本',
+  image: '图片',
+  audio: '音频',
+  video: '视频',
+  shape: '形状',
+  quiz: '题目',
+  group: '组合',
+  'ai-chat': 'AI 助手',
+  pointer: '指针',
+  formula: '公式',
+  diagram: '图表',
+  block: '内容组件',
+  interactive: '课堂互动',
+};
+
+function getElementAccessibleName(element: Element) {
+  const content = element.content as Record<string, unknown>;
+  const detail = [content.text, content.alt, content.title, content.question].find(
+    (value): value is string => typeof value === 'string' && value.trim().length > 0,
+  );
+  const typeLabel = ELEMENT_TYPE_LABELS[element.type] || '课件';
+  return detail ? `${typeLabel}：${detail.trim().slice(0, 48)}` : `${typeLabel}元素`;
+}
+
 export function Canvas() {
   const {
     courseware,
@@ -125,38 +163,77 @@ export function Canvas() {
   const { record } = useHistoryStore();
   const currentSlide = courseware.slides.find((s) => s.id === currentSlideId);
   const containerRef = useRef<HTMLDivElement>(null);
+  const slideRef = useRef<HTMLDivElement>(null);
   const [fitScale, setFitScale] = useState(1);
+  const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
+  const [viewportBounds, setViewportBounds] = useState({
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+  });
+  const zoomModeRef = useRef<'fit' | 'actual' | 'manual'>('fit');
   const scale = fitScale * canvasZoom;
   const [dragState, setDragState] = useState<DragState | null>(null);
   const [showGrid, setShowGrid] = useState(true);
   const [smartGuidesEnabled, setSmartGuidesEnabled] = useState(true);
   const [guides, setGuides] = useState<{ v: number[]; h: number[] }>({ v: [], h: [] });
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number; slideX: number; slideY: number } | null>(null);
+  const contextMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateScale = () => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const scaleX = rect.width / SLIDE_WIDTH;
-      const scaleY = rect.height / SLIDE_HEIGHT;
-      setFitScale(Math.min(scaleX, scaleY) * 0.95);
+      const host = containerRef.current?.parentElement;
+      if (!host) return;
+      const rect = host.getBoundingClientRect();
+      const computedStyle = window.getComputedStyle(host);
+      const paddingLeft = Number.parseFloat(computedStyle.paddingLeft) || 0;
+      const paddingRight = Number.parseFloat(computedStyle.paddingRight) || 0;
+      const paddingTop = Number.parseFloat(computedStyle.paddingTop) || 0;
+      const paddingBottom = Number.parseFloat(computedStyle.paddingBottom) || 0;
+      const width = Math.max(0, host.clientWidth - paddingLeft - paddingRight);
+      const height = Math.max(0, host.clientHeight - paddingTop - paddingBottom);
+      if (width <= 0 || height <= 0) return;
+      const scaleX = Math.max(1, width - STAGE_MARGIN * 2) / SLIDE_WIDTH;
+      const scaleY = Math.max(1, height - STAGE_MARGIN * 2) / SLIDE_HEIGHT;
+      const nextFitScale =
+        Math.round(Math.min(scaleX, scaleY) * 10_000) / 10_000;
+      setFitScale(nextFitScale);
+      if (zoomModeRef.current === 'actual') {
+        setCanvasZoom(1 / nextFitScale);
+      }
+      setViewportSize({ width, height });
+      setViewportBounds({
+        left: rect.left + paddingLeft,
+        top: rect.top + paddingTop,
+        right: rect.right - paddingRight,
+        bottom: rect.bottom - paddingBottom,
+      });
     };
 
     updateScale();
+    const resizeObserver = new ResizeObserver(updateScale);
+    const host = containerRef.current?.parentElement;
+    if (host) {
+      resizeObserver.observe(host);
+    }
     window.addEventListener('resize', updateScale);
-    return () => window.removeEventListener('resize', updateScale);
+    window.addEventListener('scroll', updateScale);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateScale);
+      window.removeEventListener('scroll', updateScale);
+    };
   }, []);
 
   const getCanvasCoordinates = useCallback(
     (clientX: number, clientY: number) => {
-      const rect = containerRef.current?.getBoundingClientRect();
+      const rect = slideRef.current?.getBoundingClientRect();
       if (!rect) return { x: 0, y: 0 };
 
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
       return {
-        x: (clientX - centerX) / scale + SLIDE_WIDTH / 2,
-        y: (clientY - centerY) / scale + SLIDE_HEIGHT / 2,
+        x: (clientX - rect.left) / scale,
+        y: (clientY - rect.top) / scale,
       };
     },
     [scale],
@@ -252,6 +329,69 @@ export function Canvas() {
       }
     },
     [isPlaying, selectedElementIds, setEditingElement],
+  );
+
+  const handleElementKeyDown = useCallback(
+    (e: React.KeyboardEvent, element: Element) => {
+      if (isPlaying || editingElementId || !currentSlideId) return;
+
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        selectElement(element.id);
+        if (e.key === 'Enter' && element.type === 'text') {
+          setEditingElement(element.id);
+        }
+        return;
+      }
+
+      if (e.key === 'Delete' || e.key === 'Backspace') {
+        e.preventDefault();
+        record(courseware);
+        deleteElement(currentSlideId, element.id);
+        return;
+      }
+
+      const directions: Record<string, { x: number; y: number }> = {
+        ArrowLeft: { x: -1, y: 0 },
+        ArrowRight: { x: 1, y: 0 },
+        ArrowUp: { x: 0, y: -1 },
+        ArrowDown: { x: 0, y: 1 },
+      };
+      const direction = directions[e.key];
+      if (!direction) return;
+
+      e.preventDefault();
+      const distance = e.shiftKey ? GRID_SIZE : 1;
+      const targetIds = selectedElementIds.includes(element.id) ? selectedElementIds : [element.id];
+      record(courseware, `keyboard-move:${currentSlideId}:${targetIds.slice().sort().join(',')}`);
+      targetIds.forEach((id) => {
+        const target = currentSlide?.elements.find((item) => item.id === id);
+        if (!target) return;
+        batchUpdateElement(currentSlideId, id, {
+          geometry: {
+            ...target.geometry,
+            x: Math.max(0, Math.min(SLIDE_WIDTH - target.geometry.width, target.geometry.x + direction.x * distance)),
+            y: Math.max(0, Math.min(SLIDE_HEIGHT - target.geometry.height, target.geometry.y + direction.y * distance)),
+          },
+        });
+      });
+      if (!selectedElementIds.includes(element.id)) {
+        selectElement(element.id);
+      }
+    },
+    [
+      batchUpdateElement,
+      courseware,
+      currentSlide,
+      currentSlideId,
+      deleteElement,
+      editingElementId,
+      isPlaying,
+      record,
+      selectElement,
+      selectedElementIds,
+      setEditingElement,
+    ],
   );
 
   const handleHandleMouseDown = useCallback(
@@ -479,14 +619,22 @@ export function Canvas() {
       ],
       rotate: { left: x + width / 2 - 6, top: y - 40 },
     };
-  }, [currentSlide, selectedElementId, isPlaying, editingElementId]);
+  }, [currentSlide, selectedElementId, selectedElementIds.length, isPlaying, editingElementId]);
 
   const handleCanvasContextMenu = useCallback(
     (e: React.MouseEvent) => {
       if (isPlaying || editingElementId) return;
       e.preventDefault();
       const { x, y } = getCanvasCoordinates(e.clientX, e.clientY);
-      setContextMenu({ x: e.clientX, y: e.clientY, slideX: x, slideY: y });
+      const menuX = Math.max(
+        VIEWPORT_EDGE_GAP,
+        Math.min(e.clientX, window.innerWidth - CONTEXT_MENU_WIDTH - VIEWPORT_EDGE_GAP),
+      );
+      const menuY = Math.max(
+        VIEWPORT_EDGE_GAP,
+        Math.min(e.clientY, window.innerHeight - CONTEXT_MENU_HEIGHT - VIEWPORT_EDGE_GAP),
+      );
+      setContextMenu({ x: menuX, y: menuY, slideX: x, slideY: y });
     },
     [isPlaying, editingElementId, getCanvasCoordinates],
   );
@@ -505,8 +653,23 @@ export function Canvas() {
   useEffect(() => {
     if (!contextMenu) return;
     const close = () => setContextMenu(null);
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') close();
+    };
+    const focusTimer = window.requestAnimationFrame(() => {
+      contextMenuRef.current?.querySelector<HTMLButtonElement>('[role="menuitem"]')?.focus();
+    });
     window.addEventListener('click', close);
-    return () => window.removeEventListener('click', close);
+    window.addEventListener('keydown', closeOnEscape);
+    window.addEventListener('resize', close);
+    window.addEventListener('scroll', close, true);
+    return () => {
+      window.cancelAnimationFrame(focusTimer);
+      window.removeEventListener('click', close);
+      window.removeEventListener('keydown', closeOnEscape);
+      window.removeEventListener('resize', close);
+      window.removeEventListener('scroll', close, true);
+    };
   }, [contextMenu]);
 
   const handleWheel = useCallback(
@@ -514,16 +677,34 @@ export function Canvas() {
       if (e.ctrlKey || e.metaKey) {
         e.preventDefault();
         const delta = e.deltaY > 0 ? -0.1 : 0.1;
+        zoomModeRef.current = 'manual';
         setCanvasZoom(canvasZoom + delta);
       }
     },
     [canvasZoom, setCanvasZoom],
   );
 
-  const handleZoomIn = useCallback(() => setCanvasZoom(canvasZoom + 0.1), [canvasZoom, setCanvasZoom]);
-  const handleZoomOut = useCallback(() => setCanvasZoom(canvasZoom - 0.1), [canvasZoom, setCanvasZoom]);
-  const handleFit = useCallback(() => setCanvasZoom(1), [setCanvasZoom]);
-  const handleActualSize = useCallback(() => setCanvasZoom(1 / fitScale), [fitScale, setCanvasZoom]);
+  const handleZoomIn = useCallback(() => {
+    zoomModeRef.current = 'manual';
+    setCanvasZoom(canvasZoom + 0.1);
+  }, [canvasZoom, setCanvasZoom]);
+  const handleZoomOut = useCallback(() => {
+    zoomModeRef.current = 'manual';
+    setCanvasZoom(canvasZoom - 0.1);
+  }, [canvasZoom, setCanvasZoom]);
+  const handleFit = useCallback(() => {
+    zoomModeRef.current = 'fit';
+    setCanvasZoom(1);
+  }, [setCanvasZoom]);
+  const handleActualSize = useCallback(() => {
+    zoomModeRef.current = 'actual';
+    setCanvasZoom(1 / fitScale);
+  }, [fitScale, setCanvasZoom]);
+  const scaledSlideWidth = SLIDE_WIDTH * scale;
+  const scaledSlideHeight = SLIDE_HEIGHT * scale;
+  const stageLeft = Math.max(STAGE_MARGIN, (viewportSize.width - scaledSlideWidth) / 2);
+  const stageTop = Math.max(STAGE_MARGIN, (viewportSize.height - scaledSlideHeight) / 2);
+  const hudVisible = viewportBounds.right > viewportBounds.left && viewportBounds.bottom > viewportBounds.top;
 
   if (!currentSlide) {
     return (
@@ -549,7 +730,8 @@ export function Canvas() {
   return (
     <div
       ref={containerRef}
-      className="relative flex h-full w-full items-center justify-center overflow-auto"
+      aria-label={`课件画布：${currentSlide.title}`}
+      className="relative h-full w-full shrink-0 overflow-visible"
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
@@ -557,22 +739,33 @@ export function Canvas() {
       onWheel={handleWheel}
     >
       <div
-        className="relative rounded-xl bg-white shadow-2xl ring-1 ring-slate-900/5"
-        onContextMenu={handleCanvasContextMenu}
+        className="absolute shrink-0"
         style={{
-          width: SLIDE_WIDTH,
-          height: SLIDE_HEIGHT,
-          transform: `scale(${scale})`,
-          transformOrigin: 'center center',
-          backgroundColor: currentSlide.background.color || '#ffffff',
-          backgroundImage: currentSlide.background.gradient,
+          left: stageLeft,
+          top: stageTop,
+          width: scaledSlideWidth + STAGE_MARGIN,
+          height: scaledSlideHeight + STAGE_MARGIN,
         }}
       >
+          <div
+            ref={slideRef}
+            className="relative rounded-xl bg-white shadow-2xl ring-1 ring-slate-900/5"
+            onContextMenu={handleCanvasContextMenu}
+            style={{
+              width: SLIDE_WIDTH,
+              height: SLIDE_HEIGHT,
+              transform: `scale(${scale})`,
+              transformOrigin: 'top left',
+              backgroundColor: currentSlide.background.color || '#ffffff',
+              backgroundImage: currentSlide.background.gradient,
+            }}
+          >
         {/* Grid overlay */}
         {showGrid && !isPlaying && (
           <div
             className="pointer-events-none absolute inset-0 opacity-30"
             style={{
+              zIndex: 0,
               backgroundImage:
                 'radial-gradient(circle, #94a3b8 1px, transparent 1px)',
               backgroundSize: `${GRID_SIZE * 2}px ${GRID_SIZE * 2}px`,
@@ -582,7 +775,10 @@ export function Canvas() {
 
         {/* Smart guides */}
         {smartGuidesEnabled && !isPlaying && (
-          <div className="pointer-events-none absolute inset-0">
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{ zIndex: GUIDE_LAYER }}
+          >
             {guides.v.map((x, i) => (
               <div
                 key={`v-${i}`}
@@ -610,49 +806,99 @@ export function Canvas() {
           </div>
         )}
 
-        {currentSlide.elements.map((element) => (
-          <div key={element.id} data-element-id={element.id}>
-            {/* Render the element exactly as in the player, positioned by the slide coordinate system */}
-            <ElementRenderer element={element} assets={courseware.assets} />
+        {currentSlide.elements.map((element) => {
+          const safeZIndex = clampElementZIndex(element.geometry.zIndex);
+          const renderElement = safeZIndex === element.geometry.zIndex
+            ? element
+            : {
+                ...element,
+                geometry: { ...element.geometry, zIndex: safeZIndex },
+              };
+          const editorElement = editingElementId === element.id
+            ? {
+                ...renderElement,
+                geometry: {
+                  ...renderElement.geometry,
+                  zIndex: INLINE_EDITOR_LAYER,
+                },
+              }
+            : renderElement;
 
-            {/* Interaction/selection overlay aligned with the element */}
-            <div
-              data-testid="element-overlay"
-              onMouseDown={(e) => handleMouseDown(e, element)}
-              onClick={(e) => e.stopPropagation()}
-              onDoubleClick={(e) => handleDoubleClick(e, element)}
-              className={`absolute ${
-                selectedElementIds.includes(element.id) && !isPlaying && !editingElementId
-                  ? 'cursor-move'
-                  : isPlaying || editingElementId === element.id
-                    ? 'pointer-events-none'
-                    : 'cursor-pointer'
-              }`}
-              style={{
-                left: element.geometry.x,
-                top: element.geometry.y,
-                width: element.geometry.width,
-                height: element.geometry.height,
-                zIndex: element.geometry.zIndex,
-              }}
-            >
+          return (
+            <div key={element.id} data-element-id={element.id}>
+              {/* Render the element exactly as in the player, positioned by the slide coordinate system */}
+              <ElementRenderer element={renderElement} assets={courseware.assets} />
+
+              {/* Pointer/keyboard hit area follows the user's element stacking order. */}
               <div
-                className={`h-full w-full ${
-                  selectedElementIds.includes(element.id) && !isPlaying
-                    ? 'ring-2 ring-blue-500/90 ring-offset-1 shadow-sm'
-                    : ''
-                }`}
+                data-testid="element-overlay"
+                role="button"
+                tabIndex={isPlaying || editingElementId ? -1 : 0}
+                aria-label={getElementAccessibleName(element)}
+                aria-pressed={selectedElementIds.includes(element.id)}
+                onMouseDown={(e) => handleMouseDown(e, element)}
+                onClick={(e) => e.stopPropagation()}
+                onDoubleClick={(e) => handleDoubleClick(e, element)}
+                onKeyDown={(e) => handleElementKeyDown(e, element)}
+                className={`absolute ${
+                  selectedElementIds.includes(element.id) && !isPlaying && !editingElementId
+                    ? 'cursor-move'
+                    : isPlaying || editingElementId === element.id
+                      ? 'pointer-events-none'
+                      : 'cursor-pointer'
+                } focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/60 focus-visible:ring-offset-2`}
+                style={{
+                  left: element.geometry.x,
+                  top: element.geometry.y,
+                  width: element.geometry.width,
+                  height: element.geometry.height,
+                  zIndex: safeZIndex,
+                  transform: element.geometry.rotation
+                    ? `rotate(${element.geometry.rotation}deg)`
+                    : undefined,
+                  transformOrigin: 'center center',
+                }}
               />
-            </div>
 
-            {editingElementId === element.id && element.type === 'text' && selectedElementIds.length <= 1 && (
-              <InlineTextEditor element={element} slideId={currentSlide.id} />
-            )}
+              {editingElementId === element.id && element.type === 'text' && selectedElementIds.length <= 1 && (
+                <InlineTextEditor element={editorElement} slideId={currentSlide.id} />
+              )}
+            </div>
+          );
+        })}
+
+        {/* Selection outlines live above every user element, independent of user z-index. */}
+        {!isPlaying && !editingElementId && selectedElementIds.length > 0 && (
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{ zIndex: SELECTION_LAYER }}
+          >
+            {currentSlide.elements
+              .filter((element) => selectedElementIds.includes(element.id))
+              .map((element) => (
+                <div
+                  key={element.id}
+                  className="absolute ring-2 ring-blue-500/90 ring-offset-1 shadow-sm"
+                  style={{
+                    left: element.geometry.x,
+                    top: element.geometry.y,
+                    width: element.geometry.width,
+                    height: element.geometry.height,
+                    transform: element.geometry.rotation
+                      ? `rotate(${element.geometry.rotation}deg)`
+                      : undefined,
+                    transformOrigin: 'center center',
+                  }}
+                />
+              ))}
           </div>
-        ))}
+        )}
 
         {handlePositions && (
-          <div className="pointer-events-none absolute inset-0">
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{ zIndex: HANDLE_LAYER }}
+          >
             {handlePositions.handles.map((h) => (
               <div
                 key={h.type}
@@ -662,7 +908,6 @@ export function Canvas() {
                   left: h.left,
                   top: h.top,
                   cursor: `${h.type}-resize`,
-                  zIndex: 9999,
                 }}
               />
             ))}
@@ -673,7 +918,6 @@ export function Canvas() {
                 left: handlePositions.rotate.left,
                 top: handlePositions.rotate.top,
                 cursor: 'grab',
-                zIndex: 9999,
               }}
             />
             <div
@@ -683,66 +927,84 @@ export function Canvas() {
                 top: handlePositions.rotate.top + 6,
                 height: 34,
                 transform: 'translateX(-50%)',
-                zIndex: 9998,
               }}
             />
           </div>
         )}
 
-        {selectedElementId && selectedElementIds.length === 1 && !isPlaying && !editingElementId && currentSlide && (
-          <FloatingToolbar
-            element={currentSlide.elements.find((e) => e.id === selectedElementId)!}
-            onDuplicate={() => handleDuplicate(selectedElementId)}
-            onDelete={() => handleDelete(selectedElementId)}
-            onBringToFront={() => handleBringToFront(selectedElementId)}
-            onSendToBack={() => handleSendToBack(selectedElementId)}
-          />
-        )}
+            {selectedElementId && selectedElementIds.length === 1 && !isPlaying && !editingElementId && currentSlide && (
+              <FloatingToolbar
+                element={currentSlide.elements.find((e) => e.id === selectedElementId)!}
+                layer={FLOATING_TOOLBAR_LAYER}
+                onDuplicate={() => handleDuplicate(selectedElementId)}
+                onDelete={() => handleDelete(selectedElementId)}
+                onBringToFront={() => handleBringToFront(selectedElementId)}
+                onSendToBack={() => handleSendToBack(selectedElementId)}
+              />
+            )}
+          </div>
       </div>
 
       {/* Canvas context menu */}
-      {contextMenu && (
+      {contextMenu && createPortal(
         <div
-          className="fixed z-50 w-44 rounded-lg border border-slate-200 bg-white py-1 shadow-lg"
+          ref={contextMenuRef}
+          role="menu"
+          aria-label="插入元素"
+          className="fixed z-[60] w-44 rounded-lg border border-slate-200 bg-white py-1 shadow-lg"
           style={{ left: contextMenu.x, top: contextMenu.y }}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="px-3 py-1.5 text-xs font-semibold text-slate-400">插入元素</div>
           <button
+            role="menuitem"
             onClick={() => handleInsertAtContextMenu(({ x, y }) => createTextElement('双击编辑文本', { x, y }))}
             className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-50"
           >
             <Type size={14} /> 文本
           </button>
           <button
+            role="menuitem"
             onClick={() => handleInsertAtContextMenu(({ x, y }) => createShapeElement('rectangle', { x, y }))}
             className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-50"
           >
             <Square size={14} /> 矩形
           </button>
           <button
+            role="menuitem"
             onClick={() => handleInsertAtContextMenu(({ x, y }) => createShapeElement('circle', { x, y }))}
             className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-50"
           >
             <Circle size={14} /> 圆形
           </button>
           <button
+            role="menuitem"
             onClick={() => handleInsertAtContextMenu(({ x, y }) => createImageElement('', { x, y }))}
             className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-50"
           >
             <ImageIcon size={14} /> 图片
           </button>
           <button
+            role="menuitem"
             onClick={() => handleInsertAtContextMenu(({ x, y }) => createQuizElement('single-choice', { x, y }))}
             className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-slate-700 transition hover:bg-slate-50"
           >
             <ListChecks size={14} /> 单选题
           </button>
-        </div>
+        </div>,
+        document.body,
       )}
 
       {/* Zoom controls */}
-      <div className="absolute bottom-3 left-3 flex items-center gap-1 rounded-xl border border-slate-200/80 bg-white/90 p-1 shadow-sm backdrop-blur-sm">
+      <div
+        className="fixed flex items-center gap-1 rounded-xl border border-slate-200/80 bg-white/90 p-1 shadow-sm backdrop-blur-sm"
+        style={{
+          left: viewportBounds.left + 12,
+          top: viewportBounds.bottom - 44,
+          zIndex: HUD_LAYER,
+          visibility: hudVisible ? 'visible' : 'hidden',
+        }}
+      >
         <button
           onClick={handleZoomOut}
           title="缩小 (Ctrl+滚轮向下)"
@@ -781,11 +1043,19 @@ export function Canvas() {
       <button
         onClick={() => setSmartGuidesEnabled((v) => !v)}
         title={smartGuidesEnabled ? '隐藏智能参考线' : '显示智能参考线'}
-        className={`absolute right-14 top-3 flex h-8 w-8 items-center justify-center rounded-full border shadow-sm transition hover:scale-105 ${
+        aria-label={smartGuidesEnabled ? '隐藏智能参考线' : '显示智能参考线'}
+        aria-pressed={smartGuidesEnabled}
+        className={`fixed flex h-8 w-8 items-center justify-center rounded-full border shadow-sm transition hover:scale-105 ${
           smartGuidesEnabled
             ? 'border-blue-300 bg-blue-50 text-blue-600'
             : 'border-slate-200 bg-white text-slate-500'
         }`}
+        style={{
+          left: viewportBounds.right - 84,
+          top: viewportBounds.top + 12,
+          zIndex: HUD_LAYER,
+          visibility: hudVisible ? 'visible' : 'hidden',
+        }}
       >
         <Ruler size={16} />
       </button>
@@ -794,9 +1064,17 @@ export function Canvas() {
       <button
         onClick={() => setShowGrid((v) => !v)}
         title={showGrid ? '隐藏网格' : '显示网格'}
-        className={`absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border shadow-sm transition hover:scale-105 ${
+        aria-label={showGrid ? '隐藏网格' : '显示网格'}
+        aria-pressed={showGrid}
+        className={`fixed flex h-8 w-8 items-center justify-center rounded-full border shadow-sm transition hover:scale-105 ${
           showGrid ? 'border-blue-300 bg-blue-50 text-blue-600' : 'border-slate-200 bg-white text-slate-500'
         }`}
+        style={{
+          left: viewportBounds.right - 44,
+          top: viewportBounds.top + 12,
+          zIndex: HUD_LAYER,
+          visibility: hudVisible ? 'visible' : 'hidden',
+        }}
       >
         <Grid3X3 size={16} />
       </button>

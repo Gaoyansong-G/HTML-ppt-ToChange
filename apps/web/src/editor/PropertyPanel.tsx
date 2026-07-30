@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Slide, Element } from '@courseware/shared';
 import { useEditorStore } from '../stores/editor.store';
 import { useHistoryStore } from '../stores/history.store';
@@ -9,6 +10,25 @@ import { TextStyleControls } from './property/TextStyleControls';
 import { LayerActions } from './property/LayerActions';
 import { SlideProperties } from './property/SlideProperties';
 import { CollapsibleSection } from './property/CollapsibleSection';
+import { BlockPropertyPanel } from './property/BlockPropertyPanel';
+import { InteractivePropertyPanel } from './property/InteractivePropertyPanel';
+import { InteractionBehaviorEditor } from './property/InteractionBehaviorEditor';
+import { AssetLibrary } from './assets/AssetLibrary';
+import { assetTypeLabel, formatFileSize } from './assets/asset-utils';
+import { useCoursewareAssets } from './assets/useCoursewareAssets';
+
+function findNestedElement(element: Element, elementId: string): Element | undefined {
+  if (element.id === elementId) return element;
+  if (element.type !== 'group') return undefined;
+
+  const children = (element.content as { children?: unknown }).children;
+  if (!Array.isArray(children)) return undefined;
+  for (const child of children as Element[]) {
+    const match = findNestedElement(child, elementId);
+    if (match) return match;
+  }
+  return undefined;
+}
 
 export function PropertyPanel() {
   const {
@@ -35,7 +55,10 @@ export function PropertyPanel() {
 
   const handleSlideChange = (updates: Partial<Slide>) => {
     if (!currentSlide) return;
-    record(courseware);
+    record(
+      courseware,
+      `slide:${currentSlide.id}:${Object.keys(updates).sort().join(',')}`,
+    );
     updateSlide(currentSlide.id, (slide) => {
       Object.assign(slide, updates);
     });
@@ -43,7 +66,7 @@ export function PropertyPanel() {
 
   const handleElementGeometryChange = (updates: Partial<Element['geometry']>) => {
     if (!currentSlide || !selectedElement) return;
-    record(courseware);
+    record(courseware, `geometry:${currentSlide.id}:${selectedElement.id}:${Object.keys(updates).sort().join(',')}`);
     updateElement(currentSlide.id, selectedElement.id, (el) => {
       Object.assign(el.geometry, updates);
     });
@@ -51,7 +74,7 @@ export function PropertyPanel() {
 
   const handleElementStyleChange = (updates: Partial<Element['style']>) => {
     if (!currentSlide || !selectedElement) return;
-    record(courseware);
+    record(courseware, `style:${currentSlide.id}:${selectedElement.id}:${Object.keys(updates).sort().join(',')}`);
     updateElement(currentSlide.id, selectedElement.id, (el) => {
       Object.assign(el.style, updates);
     });
@@ -59,7 +82,7 @@ export function PropertyPanel() {
 
   const handleElementContentChange = (field: string, value: unknown) => {
     if (!currentSlide || !selectedElement) return;
-    record(courseware);
+    record(courseware, `content:${currentSlide.id}:${selectedElement.id}:${field}`);
     updateElement(currentSlide.id, selectedElement.id, (el) => {
       (el.content as Record<string, unknown>)[field] = value;
     });
@@ -76,9 +99,37 @@ export function PropertyPanel() {
     placeholder?: string;
   }>) => {
     if (!currentSlide || !selectedElement) return;
-    record(courseware);
+    record(courseware, `quiz:${currentSlide.id}:${selectedElement.id}:${Object.keys(updates).sort().join(',')}`);
     updateElement(currentSlide.id, selectedElement.id, (el) => {
       el.content = { ...el.content, ...updates };
+    });
+  };
+
+  const handleInteractionsChange = (
+    interactions: Element['interactions'],
+    coalesceKey?: string,
+  ) => {
+    if (!currentSlide || !selectedElement) return;
+    record(
+      courseware,
+      coalesceKey
+        ? `${currentSlide.id}:${selectedElement.id}:${coalesceKey}`
+        : undefined,
+    );
+    updateElement(currentSlide.id, selectedElement.id, (el) => {
+      el.interactions = interactions;
+    });
+  };
+
+  const handleSetInitiallyHidden = (elementId: string, hidden: boolean) => {
+    if (!currentSlide) return;
+    const owner = currentSlide.elements.find((element) => findNestedElement(element, elementId));
+    const target = owner ? findNestedElement(owner, elementId) : undefined;
+    if (!owner || !target || target.initiallyHidden === hidden) return;
+    record(courseware);
+    updateElement(currentSlide.id, owner.id, (element) => {
+      const nestedTarget = findNestedElement(element, elementId);
+      if (nestedTarget) nestedTarget.initiallyHidden = hidden;
     });
   };
 
@@ -247,6 +298,111 @@ export function PropertyPanel() {
   ];
 
   const isText = selectedElement.type === 'text';
+  const isBlock = selectedElement.type === 'block';
+  const isInteractive = selectedElement.type === 'interactive';
+
+  // Block 元素：版式属性面板置于通用外观属性之上，替代 Tab 布局
+  if (isBlock) {
+    return (
+      <div className="flex h-full flex-col overflow-hidden">
+        <div className="flex items-center justify-between border-b border-slate-200/80 bg-white/80 px-4 py-3 backdrop-blur-sm">
+          <div className="flex items-center gap-2">
+            <Square size={16} className="text-slate-600" />
+            <span className="font-semibold text-slate-800">
+              {selectedElement.name || '版式组件'}
+            </span>
+          </div>
+          <LayerActions
+            onDuplicate={handleDuplicate}
+            onDelete={handleDelete}
+            onBringToFront={handleBringToFront}
+            onSendToBack={handleSendToBack}
+          />
+        </div>
+
+        <div className="flex-1 space-y-3 overflow-y-auto bg-slate-50/30 p-4">
+          <BlockPropertyPanel element={selectedElement} slideId={currentSlide.id} />
+
+          <CollapsibleSection title="元素行为" defaultOpen={false}>
+            <InteractionBehaviorEditor
+              element={selectedElement}
+              slideElements={currentSlide.elements}
+              slides={courseware.slides}
+              onChange={handleInteractionsChange}
+              onSetInitiallyHidden={handleSetInitiallyHidden}
+            />
+          </CollapsibleSection>
+
+          <CollapsibleSection title="位置与尺寸" defaultOpen={false}>
+            <GeometrySection
+              geometry={selectedElement.geometry}
+              onChange={handleElementGeometryChange}
+              onDistribute={handleDistribute}
+            />
+          </CollapsibleSection>
+
+          <CollapsibleSection title="样式" defaultOpen={false}>
+            <StyleSection
+              style={selectedElement.style}
+              onChange={handleElementStyleChange}
+              showTextControls={false}
+            />
+          </CollapsibleSection>
+        </div>
+      </div>
+    );
+  }
+
+  if (isInteractive) {
+    return (
+      <div className="flex h-full flex-col overflow-hidden">
+        <div className="flex items-center justify-between border-b border-slate-200/80 bg-white/80 px-4 py-3 backdrop-blur-sm">
+          <div className="flex items-center gap-2">
+            <Square size={16} className="text-slate-600" />
+            <span className="font-semibold text-slate-800">
+              {selectedElement.name || '课堂互动'}
+            </span>
+          </div>
+          <LayerActions
+            onDuplicate={handleDuplicate}
+            onDelete={handleDelete}
+            onBringToFront={handleBringToFront}
+            onSendToBack={handleSendToBack}
+          />
+        </div>
+
+        <div className="flex-1 space-y-3 overflow-y-auto bg-slate-50/30 p-4">
+          <InteractivePropertyPanel element={selectedElement} slideId={currentSlide.id} />
+
+          <CollapsibleSection title="完成后的联动" defaultOpen={false}>
+            <InteractionBehaviorEditor
+              element={selectedElement}
+              slideElements={currentSlide.elements}
+              slides={courseware.slides}
+              onChange={handleInteractionsChange}
+              onSetInitiallyHidden={handleSetInitiallyHidden}
+            />
+          </CollapsibleSection>
+
+          <CollapsibleSection title="位置与尺寸" defaultOpen={false}>
+            <GeometrySection
+              geometry={selectedElement.geometry}
+              onChange={handleElementGeometryChange}
+              onDistribute={handleDistribute}
+            />
+          </CollapsibleSection>
+
+          <CollapsibleSection title="样式" defaultOpen={false}>
+            <StyleSection
+              style={selectedElement.style}
+              onChange={handleElementStyleChange}
+              showTextControls={false}
+            />
+          </CollapsibleSection>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
@@ -302,6 +458,25 @@ export function PropertyPanel() {
                     )}
                   </StyleSection>
                 </CollapsibleSection>
+
+                <CollapsibleSection title="播放初始状态" defaultOpen={false}>
+                  <label className="flex items-start gap-2 rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700">
+                    <input
+                      type="checkbox"
+                      checked={selectedElement.initiallyHidden === true}
+                      onChange={(event) =>
+                        handleSetInitiallyHidden(selectedElement.id, event.target.checked)
+                      }
+                      className="mt-0.5 h-4 w-4 accent-blue-600"
+                    />
+                    <span>
+                      播放开始时隐藏
+                      <span className="mt-1 block text-xs leading-relaxed text-slate-500">
+                        适合答案、提示等内容；可再为其他元素设置“显示元素”行为。
+                      </span>
+                    </span>
+                  </label>
+                </CollapsibleSection>
               </div>
             );
           }
@@ -327,6 +502,17 @@ export function PropertyPanel() {
                       content={selectedElement.content as { assetId?: string; alt?: string; objectFit?: string }}
                       onChange={handleElementContentChange}
                     />
+                  ) : selectedElement.type === 'audio' || selectedElement.type === 'video' ? (
+                    <MediaContentEditor
+                      mediaType={selectedElement.type}
+                      content={selectedElement.content as {
+                        assetId?: string;
+                        autoPlay?: boolean;
+                        loop?: boolean;
+                        controls?: boolean;
+                      }}
+                      onChange={handleElementContentChange}
+                    />
                   ) : selectedElement.type === 'quiz' ? (
                     <QuizContentEditor
                       content={selectedElement.content as {
@@ -341,6 +527,16 @@ export function PropertyPanel() {
                       }}
                       onChange={handleQuizContentChange}
                     />
+                  ) : selectedElement.type === 'formula' ? (
+                    <FormulaContentEditor
+                      content={selectedElement.content as { latex?: string; displayMode?: boolean }}
+                      onChange={handleElementContentChange}
+                    />
+                  ) : selectedElement.type === 'diagram' ? (
+                    <DiagramContentEditor
+                      content={selectedElement.content as { type?: string; definition?: string }}
+                      onChange={handleElementContentChange}
+                    />
                   ) : (
                     <p className="text-sm text-slate-500">该元素类型暂无内容编辑</p>
                   )}
@@ -351,15 +547,12 @@ export function PropertyPanel() {
 
           return (
             <CollapsibleSection title="交互" defaultOpen>
-              <InteractionEditor
+              <InteractionBehaviorEditor
                 element={selectedElement}
                 slideElements={currentSlide.elements}
-                onChange={(interactions) => {
-                  record(courseware);
-                  updateElement(currentSlide.id, selectedElement.id, (el) => {
-                    el.interactions = interactions;
-                  });
-                }}
+                slides={courseware.slides}
+                onChange={handleInteractionsChange}
+                onSetInitiallyHidden={handleSetInitiallyHidden}
               />
             </CollapsibleSection>
           );
@@ -428,6 +621,75 @@ function ShapeContentEditor({
   );
 }
 
+function FormulaContentEditor({
+  content,
+  onChange,
+}: {
+  content: { latex?: string; displayMode?: boolean };
+  onChange: (field: string, value: unknown) => void;
+}) {
+  return (
+    <div className="space-y-3">
+      <label className="block">
+        <span className="mb-1 block text-xs font-medium text-slate-500">LaTeX 公式</span>
+        <textarea
+          value={content.latex || ''}
+          onChange={(event) => onChange('latex', event.target.value)}
+          placeholder={'例如：\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}'}
+          spellCheck={false}
+          className="min-h-[120px] w-full rounded-lg border border-slate-200 bg-white p-2.5 font-mono text-sm shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+        />
+      </label>
+      <label className="flex items-center gap-2 text-sm text-slate-700">
+        <input
+          type="checkbox"
+          checked={content.displayMode ?? true}
+          onChange={(event) => onChange('displayMode', event.target.checked)}
+          className="h-4 w-4 accent-blue-600"
+        />
+        使用独立公式布局
+      </label>
+      <p className="text-xs leading-relaxed text-slate-400">修改后画布会立即重新渲染，可在预览中确认最终字号与换行。</p>
+    </div>
+  );
+}
+
+function DiagramContentEditor({
+  content,
+  onChange,
+}: {
+  content: { type?: string; definition?: string };
+  onChange: (field: string, value: unknown) => void;
+}) {
+  return (
+    <div className="space-y-3">
+      <label className="block">
+        <span className="mb-1 block text-xs font-medium text-slate-500">图表格式</span>
+        <select
+          value={content.type || 'mermaid'}
+          onChange={(event) => onChange('type', event.target.value)}
+          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-sm"
+        >
+          <option value="mermaid">Mermaid</option>
+          <option value="custom">自定义定义</option>
+          <option value="excalidraw">Excalidraw 数据</option>
+        </select>
+      </label>
+      <label className="block">
+        <span className="mb-1 block text-xs font-medium text-slate-500">图表定义</span>
+        <textarea
+          value={content.definition || ''}
+          onChange={(event) => onChange('definition', event.target.value)}
+          placeholder={'flowchart LR\n  A[开始] --> B[讲解]\n  B --> C[练习]'}
+          spellCheck={false}
+          className="min-h-[180px] w-full rounded-lg border border-slate-200 bg-slate-950 p-2.5 font-mono text-xs leading-relaxed text-slate-100 shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+        />
+      </label>
+      <p className="text-xs leading-relaxed text-slate-400">Mermaid 输入有语法错误时会显示错误提示，不会影响其他页面。</p>
+    </div>
+  );
+}
+
 function ImageContentEditor({
   content,
   onChange,
@@ -435,42 +697,233 @@ function ImageContentEditor({
   content: { assetId?: string; alt?: string; objectFit?: string };
   onChange: (field: string, value: unknown) => void;
 }) {
+  const { assets, addAssets, removeAsset, getUsages } = useCoursewareAssets();
+  const [libraryOpen, setLibraryOpen] = useState(false);
+  const currentAsset = assets.find((asset) => asset.id === content.assetId);
+
+  const selectAsset = (asset: (typeof assets)[number]) => {
+    onChange('assetId', asset.id);
+    if (!content.alt?.trim()) {
+      onChange('alt', asset.description || asset.filename.replace(/\.[^.]+$/, ''));
+    }
+    setLibraryOpen(false);
+  };
+
   return (
     <div className="space-y-3">
-      <div className="flex flex-col gap-1">
-        <label className="text-xs text-slate-500">资源 ID</label>
-        <input
-          type="text"
-          value={content.assetId || ''}
-          onChange={(e) => onChange('assetId', e.target.value)}
-          placeholder="输入图片资源 ID"
-          className="w-full rounded border border-slate-300 px-2 py-1 text-sm"
-        />
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+        <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-white p-2">
+          {currentAsset ? (
+            <img
+              src={currentAsset.url}
+              alt={content.alt || currentAsset.filename}
+              className="h-full w-full"
+              style={{ objectFit: (content.objectFit || 'contain') as React.CSSProperties['objectFit'] }}
+            />
+          ) : (
+            <div className="px-4 text-center text-xs leading-5 text-slate-400">
+              {content.assetId ? '原图片素材已丢失，请重新选择' : '尚未选择图片'}
+            </div>
+          )}
+        </div>
+        <div className="border-t border-slate-200 px-3 py-2">
+          {currentAsset ? (
+            <>
+              <div className="truncate text-xs font-semibold text-slate-700" title={currentAsset.filename}>
+                {currentAsset.filename}
+              </div>
+              <div className="mt-1 text-[11px] text-slate-400">
+                {formatFileSize(currentAsset.size)}
+                {currentAsset.width && currentAsset.height
+                  ? ` · ${currentAsset.width} × ${currentAsset.height}`
+                  : ''}
+              </div>
+            </>
+          ) : (
+            <span className="text-xs text-amber-600">选择或上传图片后即可显示</span>
+          )}
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => setLibraryOpen(true)}
+          className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
+        >
+          {currentAsset ? '替换图片' : '选择图片'}
+        </button>
+        <button
+          type="button"
+          onClick={() => onChange('assetId', '')}
+          disabled={!content.assetId}
+          className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          移除图片
+        </button>
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="text-xs text-slate-500">Alt 文本</label>
+        <label className="text-xs font-medium text-slate-600">图片替代文本</label>
         <input
           type="text"
           value={content.alt || ''}
           onChange={(e) => onChange('alt', e.target.value)}
-          placeholder="描述图片内容"
-          className="w-full rounded border border-slate-300 px-2 py-1 text-sm"
+          placeholder="例如：长江两岸的山水风景"
+          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-sm shadow-sm transition focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-500/20"
         />
+        <p className="text-[11px] leading-4 text-slate-400">用于无障碍阅读，也会在图片加载失败时显示。</p>
       </div>
 
       <div className="flex flex-col gap-1">
-        <label className="text-xs text-slate-500">填充方式</label>
+        <label className="text-xs font-medium text-slate-600">图片显示方式</label>
         <select
           value={content.objectFit || 'contain'}
           onChange={(e) => onChange('objectFit', e.target.value)}
-          className="w-full rounded border border-slate-300 px-2 py-1 text-sm"
+          className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-sm shadow-sm transition focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-500/20"
         >
-          <option value="contain">适应</option>
-          <option value="cover">填充</option>
-          <option value="fill">拉伸</option>
+          <option value="contain">完整显示（可能留白）</option>
+          <option value="cover">铺满区域（可能裁切）</option>
+          <option value="fill">拉伸填满</option>
         </select>
       </div>
+
+      <AssetLibrary
+        open={libraryOpen}
+        assets={assets}
+        filter="image"
+        title="选择图片"
+        selectedAssetId={content.assetId}
+        selectionMode
+        onClose={() => setLibraryOpen(false)}
+        onAssetsAdded={addAssets}
+        onSelect={selectAsset}
+        onDelete={removeAsset}
+        getUsageCount={(assetId) => getUsages(assetId).length}
+      />
+    </div>
+  );
+}
+
+function MediaContentEditor({
+  mediaType,
+  content,
+  onChange,
+}: {
+  mediaType: 'audio' | 'video';
+  content: { assetId?: string; autoPlay?: boolean; loop?: boolean; controls?: boolean };
+  onChange: (field: string, value: unknown) => void;
+}) {
+  const { assets, addAssets, removeAsset, getUsages } = useCoursewareAssets();
+  const [libraryOpen, setLibraryOpen] = useState(false);
+  const currentAsset = assets.find(
+    (asset) => asset.id === content.assetId && asset.type === mediaType,
+  );
+  const label = assetTypeLabel(mediaType);
+
+  return (
+    <div className="space-y-3">
+      <div className="overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+        <div className="flex min-h-[112px] items-center justify-center bg-white p-3">
+          {currentAsset ? (
+            mediaType === 'audio' ? (
+              <audio src={currentAsset.url} controls preload="metadata" className="w-full" />
+            ) : (
+              <video
+                src={currentAsset.url}
+                controls
+                preload="metadata"
+                className="max-h-44 max-w-full rounded-lg"
+              />
+            )
+          ) : (
+            <div className="text-center text-xs leading-5 text-slate-400">
+              {content.assetId ? `原${label}素材已丢失，请重新选择` : `尚未选择${label}`}
+            </div>
+          )}
+        </div>
+        {currentAsset && (
+          <div className="border-t border-slate-200 px-3 py-2">
+            <div className="truncate text-xs font-semibold text-slate-700" title={currentAsset.filename}>
+              {currentAsset.filename}
+            </div>
+            <div className="mt-1 text-[11px] text-slate-400">{formatFileSize(currentAsset.size)}</div>
+          </div>
+        )}
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => setLibraryOpen(true)}
+          className="rounded-lg bg-slate-900 px-3 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
+        >
+          {currentAsset ? `替换${label}` : `选择${label}`}
+        </button>
+        <button
+          type="button"
+          onClick={() => onChange('assetId', '')}
+          disabled={!content.assetId}
+          className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          移除{label}
+        </button>
+      </div>
+
+      <div className="space-y-2 rounded-lg border border-slate-200 bg-white p-3">
+        <label className="flex items-center justify-between gap-3 text-sm text-slate-700">
+          <span>进入页面时自动播放</span>
+          <input
+            type="checkbox"
+            checked={content.autoPlay ?? false}
+            onChange={(event) => onChange('autoPlay', event.target.checked)}
+            className="h-4 w-4 accent-slate-700"
+          />
+        </label>
+        <label className="flex items-center justify-between gap-3 text-sm text-slate-700">
+          <span>循环播放</span>
+          <input
+            type="checkbox"
+            checked={content.loop ?? false}
+            onChange={(event) => onChange('loop', event.target.checked)}
+            className="h-4 w-4 accent-slate-700"
+          />
+        </label>
+        {mediaType === 'video' && (
+          <label className="flex items-center justify-between gap-3 text-sm text-slate-700">
+            <span>显示播放控件</span>
+            <input
+              type="checkbox"
+              checked={content.controls ?? true}
+              onChange={(event) => onChange('controls', event.target.checked)}
+              className="h-4 w-4 accent-slate-700"
+            />
+          </label>
+        )}
+      </div>
+
+      {content.autoPlay && (
+        <p className="rounded-lg bg-amber-50 px-3 py-2 text-[11px] leading-4 text-amber-700">
+          浏览器可能会阻止带声音的自动播放；课堂使用前建议先预览一次。
+        </p>
+      )}
+
+      <AssetLibrary
+        open={libraryOpen}
+        assets={assets}
+        filter={mediaType}
+        title={`选择${label}`}
+        selectedAssetId={content.assetId}
+        selectionMode
+        onClose={() => setLibraryOpen(false)}
+        onAssetsAdded={addAssets}
+        onSelect={(asset) => {
+          onChange('assetId', asset.id);
+          setLibraryOpen(false);
+        }}
+        onDelete={removeAsset}
+        getUsageCount={(assetId) => getUsages(assetId).length}
+      />
     </div>
   );
 }
@@ -574,6 +1027,7 @@ function QuizContentEditor({
       <div className="flex flex-col gap-1">
         <label className="text-xs text-slate-500">题型</label>
         <select
+          aria-label="题型"
           value={quizType}
           onChange={(e) => handleTypeChange(e.target.value)}
           className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm shadow-sm transition focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-500/20"
@@ -588,6 +1042,7 @@ function QuizContentEditor({
       <div className="flex flex-col gap-1">
         <label className="text-xs text-slate-500">题目</label>
         <textarea
+          aria-label="题目"
           data-testid="quiz-question-input"
           value={content.question || ''}
           onChange={(e) => onChange({ question: e.target.value })}
@@ -610,12 +1065,14 @@ function QuizContentEditor({
           {options.map((option, index) => (
             <div key={option.id} className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white p-2 shadow-sm">
               <input
+                aria-label={`将“${option.text || `选项 ${index + 1}`}”设为正确答案`}
                 type={quizType === 'multiple-choice' ? 'checkbox' : 'radio'}
                 checked={!!option.isCorrect}
                 onChange={(e) => updateOption(index, { isCorrect: e.target.checked })}
                 className="h-4 w-4 accent-slate-600"
               />
               <input
+                aria-label={`选项 ${index + 1}`}
                 type="text"
                 data-testid="quiz-option-text"
                 value={option.text}
@@ -623,6 +1080,7 @@ function QuizContentEditor({
                 className="min-w-0 flex-1 rounded border border-slate-200 px-2 py-1 text-sm"
               />
               <button
+                aria-label={`删除选项 ${index + 1}`}
                 onClick={() => deleteOption(index)}
                 className="text-xs text-red-600 hover:underline"
               >
@@ -640,6 +1098,7 @@ function QuizContentEditor({
         <div className="flex flex-col gap-1">
           <label className="text-xs text-slate-500">{isFillBlank ? '正确答案' : '揭示内容'}</label>
           <input
+            aria-label={isFillBlank ? '正确答案' : '揭示内容'}
             type="text"
             value={correctAnswerText}
             onChange={(e) =>
@@ -656,6 +1115,7 @@ function QuizContentEditor({
         <div className="flex flex-col gap-1">
           <label className="text-xs text-slate-500">占位提示</label>
           <input
+            aria-label="占位提示"
             type="text"
             value={content.placeholder || ''}
             onChange={(e) => onChange({ placeholder: e.target.value })}
@@ -667,6 +1127,7 @@ function QuizContentEditor({
       <div className="flex flex-col gap-1">
         <label className="text-xs text-slate-500">提示</label>
         <input
+          aria-label="提示"
           type="text"
           value={content.hint || ''}
           onChange={(e) => onChange({ hint: e.target.value })}
@@ -677,6 +1138,7 @@ function QuizContentEditor({
       <div className="flex flex-col gap-1">
         <label className="text-xs text-slate-500">解析</label>
         <textarea
+          aria-label="解析"
           value={content.explanation || ''}
           onChange={(e) => onChange({ explanation: e.target.value })}
           className="min-h-[80px] w-full rounded-lg border border-slate-200 bg-white p-2.5 text-sm shadow-sm transition focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-500/20"
@@ -692,160 +1154,6 @@ function QuizContentEditor({
         />
         允许重试
       </label>
-    </div>
-  );
-}
-
-function InteractionEditor({
-  element,
-  slideElements,
-  onChange,
-}: {
-  element: Element;
-  slideElements: Element[];
-  onChange: (interactions: Element['interactions']) => void;
-}) {
-  const addInteraction = () => {
-    const newInteraction: Element['interactions'][0] = {
-      id: `int-${Date.now()}`,
-      trigger: 'click',
-      actions: [
-        {
-          id: `act-${Date.now()}`,
-          type: 'show',
-          targetId: slideElements.find((e) => e.id !== element.id)?.id || '',
-        },
-      ],
-    };
-    onChange([...element.interactions, newInteraction]);
-  };
-
-  const updateInteraction = (index: number, updater: (interaction: Element['interactions'][0]) => void) => {
-    const updated = [...element.interactions];
-    updater(updated[index]);
-    onChange(updated);
-  };
-
-  const deleteInteraction = (index: number) => {
-    const updated = element.interactions.filter((_, i) => i !== index);
-    onChange(updated);
-  };
-
-  const addAction = (interactionIndex: number) => {
-    updateInteraction(interactionIndex, (interaction) => {
-      interaction.actions.push({
-        id: `act-${Date.now()}`,
-        type: 'show',
-        targetId: slideElements.find((e) => e.id !== element.id)?.id || '',
-      });
-    });
-  };
-
-  const updateAction = (
-    interactionIndex: number,
-    actionIndex: number,
-    updates: Partial<Element['interactions'][0]['actions'][0]>,
-  ) => {
-    updateInteraction(interactionIndex, (interaction) => {
-      Object.assign(interaction.actions[actionIndex], updates);
-    });
-  };
-
-  const deleteAction = (interactionIndex: number, actionIndex: number) => {
-    updateInteraction(interactionIndex, (interaction) => {
-      interaction.actions.splice(actionIndex, 1);
-    });
-  };
-
-  return (
-    <div className="space-y-3">
-      {element.interactions.length === 0 && (
-        <p className="text-sm text-slate-500">暂无交互，点击下方按钮添加</p>
-      )}
-
-      {element.interactions.map((interaction, interactionIndex) => (
-        <div key={interaction.id} className="rounded border border-slate-200 p-2">
-          <div className="mb-2 flex items-center justify-between">
-            <select
-              value={interaction.trigger}
-              onChange={(e) =>
-                updateInteraction(interactionIndex, (int) => {
-                  int.trigger = e.target.value as Element['interactions'][0]['trigger'];
-                })
-              }
-              className="rounded border border-slate-300 px-2 py-1 text-xs"
-            >
-              <option value="click">点击</option>
-              <option value="hover">悬停</option>
-              <option value="auto">自动</option>
-            </select>
-            <button
-              onClick={() => deleteInteraction(interactionIndex)}
-              className="text-xs text-red-600 hover:underline"
-            >
-              删除
-            </button>
-          </div>
-
-          <div className="space-y-2">
-            {interaction.actions.map((action, actionIndex) => (
-              <div key={action.id} className="flex items-center gap-2">
-                <select
-                  value={action.type}
-                  onChange={(e) =>
-                    updateAction(interactionIndex, actionIndex, {
-                      type: e.target.value as Element['interactions'][0]['actions'][0]['type'],
-                    })
-                  }
-                  className="rounded border border-slate-300 px-1 py-1 text-xs"
-                >
-                  <option value="show">显示</option>
-                  <option value="hide">隐藏</option>
-                  <option value="toggle">切换</option>
-                  <option value="animate">动画</option>
-                  <option value="navigate">导航</option>
-                </select>
-                <select
-                  value={action.targetId || ''}
-                  onChange={(e) =>
-                    updateAction(interactionIndex, actionIndex, { targetId: e.target.value })
-                  }
-                  className="flex-1 rounded border border-slate-300 px-1 py-1 text-xs"
-                >
-                  <option value="">选择目标</option>
-                  {slideElements
-                    .filter((e) => e.id !== element.id)
-                    .map((e) => (
-                      <option key={e.id} value={e.id}>
-                        {e.name || e.id} ({e.type})
-                      </option>
-                    ))}
-                </select>
-                <button
-                  onClick={() => deleteAction(interactionIndex, actionIndex)}
-                  className="text-xs text-red-600 hover:underline"
-                >
-                  ×
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <button
-            onClick={() => addAction(interactionIndex)}
-            className="mt-2 text-xs text-slate-600 hover:underline"
-          >
-            + 添加动作
-          </button>
-        </div>
-      ))}
-
-      <button
-        onClick={addInteraction}
-        className="w-full rounded border border-dashed border-slate-300 py-2 text-sm text-slate-600 hover:bg-slate-50"
-      >
-        + 添加交互
-      </button>
     </div>
   );
 }

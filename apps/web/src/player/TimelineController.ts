@@ -1,20 +1,21 @@
 import { gsap } from '../lib/gsap';
-import type { AnimationStep, Slide } from '@courseware/shared';
+import type { AnimationStep, Element, Slide } from '@courseware/shared';
 
 export interface TimelineControllerOptions {
   slide: Slide;
+  elements?: Element[];
   elementRefs: Map<string, HTMLElement>;
   onComplete?: () => void;
 }
 
 export class TimelineController {
   private timeline: gsap.core.Timeline;
-  private slide: Slide;
+  private elements: Element[];
   private elementRefs: Map<string, HTMLElement>;
   private clickTriggeredAnimations: Map<string, gsap.core.Timeline> = new Map();
 
   constructor(options: TimelineControllerOptions) {
-    this.slide = options.slide;
+    this.elements = options.elements ?? options.slide.elements;
     this.elementRefs = options.elementRefs;
     this.timeline = gsap.timeline({
       paused: true,
@@ -25,12 +26,14 @@ export class TimelineController {
   }
 
   private buildTimeline() {
-    const { elements } = this.slide;
+    const elements = this.elements;
 
     // Build entrance animations sequentially based on trigger
     let lastAutoIndex = -1;
 
     elements.forEach((el, index) => {
+      // Click-to-reveal targets remain hidden until an interaction shows them.
+      if (el.initiallyHidden) return;
       const { entrance } = el.animation;
       if (!entrance || entrance.length === 0) return;
 

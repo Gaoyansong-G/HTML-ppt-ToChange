@@ -8,8 +8,8 @@ import {
   PdfParser,
   ImageParser,
   type DocumentParser,
-  type ParseResult,
 } from './parsers';
+import { DatabaseService, type DocumentRow } from '../persistence/database.service';
 
 export interface UploadedDocument {
   id: string;
@@ -24,7 +24,7 @@ export interface UploadedDocument {
 
 @Injectable()
 export class DocumentsService {
-  private documents = new Map<string, UploadedDocument>();
+  constructor(private readonly databaseService: DatabaseService) {}
 
   async processFile(
     buffer: Buffer,
@@ -47,16 +47,53 @@ export class DocumentsService {
       path,
     };
 
-    this.documents.set(document.id, document);
+    this.databaseService.insertDocument({
+      id: document.id,
+      filename: document.filename,
+      mimeType: document.mimeType,
+      size: document.size,
+      extractedText: document.extractedText,
+      structure: JSON.stringify(document.structure),
+      path: document.path,
+      createdAt: new Date().toISOString(),
+    });
+
     return document;
   }
 
   findById(id: string): UploadedDocument | undefined {
-    return this.documents.get(id);
+    const row = this.databaseService.getDocument(id);
+    return row ? this.toUploadedDocument(row) : undefined;
   }
 
   getDocumentStructure(id: string): DocumentNode[] {
-    return this.documents.get(id)?.structure || [];
+    const row = this.databaseService.getDocument(id);
+    if (!row) return [];
+    try {
+      return row.structure ? (JSON.parse(row.structure) as DocumentNode[]) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  private toUploadedDocument(row: DocumentRow): UploadedDocument {
+    let structure: DocumentNode[] = [];
+    try {
+      structure = row.structure ? (JSON.parse(row.structure) as DocumentNode[]) : [];
+    } catch {
+      structure = [];
+    }
+    const filename = row.filename ?? '';
+    return {
+      id: row.id,
+      filename,
+      originalName: filename,
+      mimeType: row.mime_type ?? '',
+      size: row.size ?? 0,
+      structure,
+      extractedText: row.extracted_text ?? '',
+      path: row.path ?? '',
+    };
   }
 
   private getParser(mimeType: string, filename: string): DocumentParser {

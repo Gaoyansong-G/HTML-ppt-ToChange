@@ -33,6 +33,10 @@ export const OUTLINE_PROMPT = `你是一位资深的教学设计专家。请根�
    - 推导演算页（"derivation"）：适合数学/物理，包含已知条件、推导步骤、结论
    - 思维导图页（"mindmap"）：适合总结/复习，包含中心主题与 4 个分支
    - 课堂测验页（"quiz"）：巩固与互动
+   - 表格对比页（"table"）：适合对 3 个及以上知识点进行系统横向/纵向比较
+   - 案例分析页（"case-study"）：适合给出真实情境、提出问题并引导分析
+   - 分类归纳页（"classification"）：适合对概念按层级或属性进行归类梳理
+   - 课堂练习页（"worksheet"）：适合书写型填空、简答或计算练习（非交互测验）
 4. 如果用户要求包含测验或文档适合做练习，最后一页建议设置为测验页（"quiz"）。
 5. 页数必须根据材料密度与教学目标合理安排，同时兼顾 AI 生成效率：
    - **若用户在生成选项中指定了 pageCount，必须严格等于该页数，不得以任何理由减少或合并。若材料不足，可通过“导入页、整体感知页、逐句/逐段品读页、小结页、拓展页、测验页”等方式补足到指定页数。**
@@ -71,6 +75,10 @@ export const OUTLINE_PROMPT = `你是一位资深的教学设计专家。请根�
 - derivation：推导演算页
 - mindmap：思维导图页
 - quiz：课堂测验/互动页
+- table：表格对比页
+- case-study：案例分析页
+- classification：分类归纳页
+- worksheet：课堂练习页
 
 输出 JSON 格式：
 {
@@ -80,7 +88,7 @@ export const OUTLINE_PROMPT = `你是一位资深的教学设计专家。请根�
       "order": 0,
       "title": "页面标题",
       "learningObjective": "学生能够……",
-      "layoutTemplateId": "title | content | two-column | image | comparison | timeline | cards | section | toc | steps | quote | reading | experiment | grammar | formula | dialogue | poetry | data-chart | map | source-material | vocabulary | derivation | mindmap | quiz",
+      "layoutTemplateId": "title | content | two-column | image | comparison | timeline | cards | section | toc | steps | quote | reading | experiment | grammar | formula | dialogue | poetry | data-chart | map | source-material | vocabulary | derivation | mindmap | quiz | table | case-study | classification | worksheet",
       "keyPoints": ["要点1", "要点2"]
     }
   ]

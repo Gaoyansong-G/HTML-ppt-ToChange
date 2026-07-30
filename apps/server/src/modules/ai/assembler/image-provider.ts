@@ -134,22 +134,48 @@ export async function createImageAsset(
   height = 480,
   context?: ImageContext,
   decision?: ImageAgentDecision,
+  providerOverride?: ImageProvider,
 ): Promise<Asset> {
   const envProvider = getProvider();
   const safeAlt = sanitizeAlt(alt);
   const decisionPrompt = decision?.prompt?.trim();
   const decisionProvider = decision?.provider;
-  const effectiveProvider = decisionProvider || envProvider;
+  const decisionType = decision?.type;
+  // Respect explicit per-request override, then ImageAgent decision, then env default.
+  let effectiveProvider: ImageProvider = providerOverride || envProvider;
+  if (decisionType === 'svg') {
+    effectiveProvider = 'svg';
+  } else if (decisionProvider) {
+    effectiveProvider = decisionProvider;
+  }
   const w = clampSize(width);
   const h = clampSize(height);
   const id = `asset-img-${hashString(safeAlt).toString(36)}`;
 
-  logger.log(`Creating image asset [${effectiveProvider}] ${safeAlt.slice(0, 80)} (${w}x${h})`);
+  logger.log(
+    `Creating image asset [${effectiveProvider}] ${safeAlt.slice(0, 80)} (${w}x${h})`,
+    decision ? { decisionType, decisionProvider, providerOverride } : { providerOverride, reason: 'no-decision' },
+  );
 
   const imageContext: ImageContext = {
     ...context,
     subject: context?.subject,
   };
+
+  if (decision?.type === 'svg' && decision.svg) {
+    logger.log(`Using ImageAgent-provided SVG for ${safeAlt.slice(0, 60)}`);
+    const svgDataUrl = `data:image/svg+xml;utf8,${encodeURIComponent(decision.svg.replace(/\n\s*/g, ''))}`;
+    return {
+      id,
+      type: 'image',
+      filename: `${hashString(safeAlt).toString(36)}.svg`,
+      mimeType: 'image/svg+xml',
+      url: svgDataUrl,
+      width: w,
+      height: h,
+      description: safeAlt,
+    };
+  }
 
   if (effectiveProvider === 'pollinations') {
     let dataUrl: string | null = null;
@@ -210,5 +236,8 @@ export async function createImageAsset(
     }
   }
 
-  return createPlaceholderAsset(safeAlt, designSystem);
+  return createPlaceholderAsset(safeAlt, designSystem, {
+    title: imageContext.slideTitle,
+    bodyExcerpt: imageContext.bodyExcerpt,
+  });
 }

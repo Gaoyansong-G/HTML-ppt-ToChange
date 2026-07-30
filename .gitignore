@@ -26,6 +26,11 @@ lerna-debug.log*
 # Runtime / upload / generated data
 uploads/
 generated/
+data/
+# Keep the canonical SQLite snapshot versioned; runtime WAL/SHM and backups stay ignored.
+!apps/server/data/
+apps/server/data/*
+!apps/server/data/courseware.db
 result.json
 tmp-*
 *.tmp

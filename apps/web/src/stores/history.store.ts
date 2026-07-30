@@ -11,10 +11,12 @@ interface HistorySnapshot {
 interface HistoryState {
   past: HistorySnapshot[];
   future: HistorySnapshot[];
+  lastCoalesceKey: string | null;
+  lastRecordedAt: number;
 }
 
 interface HistoryActions {
-  record: (courseware: Courseware) => void;
+  record: (courseware: Courseware, coalesceKey?: string) => void;
   undo: (current: Courseware) => HistorySnapshot | null;
   redo: () => HistorySnapshot | null;
   canUndo: () => boolean;
@@ -23,6 +25,7 @@ interface HistoryActions {
 }
 
 const MAX_HISTORY = 50;
+const COALESCE_WINDOW_MS = 1000;
 
 function cloneCourseware(courseware: Courseware): Courseware {
   return JSON.parse(JSON.stringify(courseware));
@@ -39,15 +42,46 @@ export const useHistoryStore = create<HistoryState & HistoryActions>()(
   immer((set, get) => ({
     past: [],
     future: [],
+    lastCoalesceKey: null,
+    lastRecordedAt: 0,
 
-    record: (courseware) => {
+    record: (courseware, coalesceKey) => {
       const snapshot = makeSnapshot(courseware);
+      const now = Date.now();
+      const scopedCoalesceKey = coalesceKey ? `${courseware.id}:${coalesceKey}` : null;
+
       set((state) => {
+        if (
+          scopedCoalesceKey &&
+          state.lastCoalesceKey === scopedCoalesceKey &&
+          now - state.lastRecordedAt <= COALESCE_WINDOW_MS
+        ) {
+          // Keep the first snapshot of a continuous field edit so one undo
+          // restores the value from before the user started typing.
+          state.lastRecordedAt = now;
+          state.future = [];
+          return;
+        }
+
+        const latest = state.past[state.past.length - 1];
+        if (
+          latest &&
+          latest.currentSlideId === snapshot.currentSlideId &&
+          JSON.stringify(latest.courseware) === JSON.stringify(snapshot.courseware)
+        ) {
+          state.lastCoalesceKey = scopedCoalesceKey;
+          state.lastRecordedAt = now;
+          state.future = [];
+          return;
+        }
+
         state.past.push(snapshot);
         if (state.past.length > MAX_HISTORY) {
           state.past.shift();
         }
         state.future = [];
+        state.lastCoalesceKey = scopedCoalesceKey;
+        state.lastRecordedAt = now;
       });
     },
 
@@ -61,6 +95,8 @@ export const useHistoryStore = create<HistoryState & HistoryActions>()(
       set((s) => {
         s.past.pop();
         s.future.push(currentSnapshot);
+        s.lastCoalesceKey = null;
+        s.lastRecordedAt = 0;
       });
 
       return previous;
@@ -77,6 +113,8 @@ export const useHistoryStore = create<HistoryState & HistoryActions>()(
           courseware: cloneCourseware(next.courseware),
           currentSlideId: next.currentSlideId,
         });
+        s.lastCoalesceKey = null;
+        s.lastRecordedAt = 0;
       });
 
       return next;
@@ -89,6 +127,8 @@ export const useHistoryStore = create<HistoryState & HistoryActions>()(
       set((state) => {
         state.past = [];
         state.future = [];
+        state.lastCoalesceKey = null;
+        state.lastRecordedAt = 0;
       });
     },
   })),

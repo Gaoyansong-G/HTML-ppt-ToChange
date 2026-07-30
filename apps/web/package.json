@@ -5,15 +5,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:standalone": "tsc --noEmit && vite build --config vite.standalone.config.ts",
+    "build": "tsc && vite build && pnpm run build:standalone:bundle",
+    "build:standalone": "tsc --noEmit && pnpm run build:standalone:bundle",
+    "build:standalone:bundle": "vite build --config vite.standalone.config.ts && node scripts/sync-standalone.mjs",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "clean": "rm -rf dist",
     "test:math": "node scripts/verify-math-pages.mjs",
     "test:english": "node scripts/verify-english-pages.mjs",
-    "test:science": "node scripts/verify-science-pages.mjs"
+    "test:science": "node scripts/verify-science-pages.mjs",
+    "test:templates": "node scripts/verify-templates.mjs",
+    "test:image-fallback": "node scripts/verify-image-fallback.mjs",
+    "test:interactions": "node scripts/verify-interaction-runtime.mjs",
+    "test:interactions:ui": "node scripts/verify-interaction-ui.mjs"
   },
   "dependencies": {
     "@courseware/shared": "workspace:*",
@@ -22,7 +27,9 @@
     "gsap": "^3.12.5",
     "immer": "^10.0.4",
     "jszip": "^3.10.1",
+    "katex": "^0.18.0",
     "lucide-react": "^0.363.0",
+    "mermaid": "^11.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
@@ -30,6 +37,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
+    "@types/katex": "^0.16.8",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",

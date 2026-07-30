@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import type { Courseware, Slide } from '@courseware/shared';
+import { API_BASE } from '../lib/api';
 
-const API_BASE = 'http://localhost:3001/api';
+
 
 interface AIAssistantLayerProps {
   courseware: Courseware;
@@ -12,6 +13,29 @@ interface AIAssistantLayerProps {
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+}
+
+/** 字符二元组集合（中英文混排的轻量相似度） */
+function bigrams(text: string): Set<string> {
+  const t = text.replace(/\s+/g, '');
+  const set = new Set<string>();
+  for (let i = 0; i < t.length - 1; i++) set.add(t.slice(i, i + 2));
+  return set;
+}
+
+/** 预置问答本地匹配（离线兜底）：Jaccard 相似度 ≥ 0.25 视为命中 */
+function matchPresetQA(question: string, presetQA?: { question: string; answer: string }[]): string | null {
+  if (!presetQA || !presetQA.length) return null;
+  const q = bigrams(question);
+  let best: { score: number; answer: string } | null = null;
+  for (const item of presetQA) {
+    const p = bigrams(item.question);
+    let inter = 0;
+    q.forEach((g) => { if (p.has(g)) inter++; });
+    const score = inter / (q.size + p.size - inter || 1);
+    if (!best || score > best.score) best = { score, answer: item.answer };
+  }
+  return best && best.score >= 0.25 ? best.answer : null;
 }
 
 export function AIAssistantLayer({ courseware, slide }: AIAssistantLayerProps) {
@@ -66,20 +90,27 @@ export function AIAssistantLayer({ courseware, slide }: AIAssistantLayerProps) {
 
       setMessages((prev) => [...prev, { role: 'assistant', content: assistantContent }]);
     } catch {
+      // 离线兜底：优先匹配课件内嵌的预置问答
+      const presetAnswer = matchPresetQA(userMessage, courseware.presetQA);
       setMessages((prev) => [
         ...prev,
-        { role: 'assistant', content: '抱歉，当前无法连接到 AI 服务。请检查后端是否正常运行。' },
+        {
+          role: 'assistant',
+          content: presetAnswer
+            ? `${presetAnswer}\n\n（离线模式 · 来自本课预置问答）`
+            : '当前无法连接到 AI 服务（可能处于离线环境）。你可以试试问这些：\n' +
+              (courseware.presetQA || []).slice(0, 3).map((q) => `· ${q.question}`).join('\n'),
+        },
       ]);
     } finally {
       setLoading(false);
     }
   };
 
-  const suggestedQuestions = slide.aiAssistant?.suggestedQuestions || [
-    '这一页讲了什么？',
-    '重点是什么？',
-    '能给我举个例子吗？',
-  ];
+  const suggestedQuestions = slide.aiAssistant?.suggestedQuestions ||
+    (courseware.presetQA || []).slice(0, 3).map((q) => q.question).filter(Boolean).length
+      ? (slide.aiAssistant?.suggestedQuestions || (courseware.presetQA || []).slice(0, 3).map((q) => q.question))
+      : ['这一页讲了什么？', '重点是什么？', '能给我举个例子吗？'];
 
   return (
     <div className="absolute bottom-4 right-4 z-50">

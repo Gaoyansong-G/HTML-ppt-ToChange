@@ -6,13 +6,20 @@ import {
   Delete,
   Body,
   Param,
+  Headers,
   NotFoundException,
-  BadRequestException,
   Res,
 } from '@nestjs/common';
 import { CoursewareService } from './courseware.service';
 import type { Courseware } from '@courseware/shared';
 import { Response } from 'express';
+
+function encodeContentDispositionFilename(filename: string): string {
+  return encodeURIComponent(filename).replace(
+    /['()*]/g,
+    (character) => `%${character.charCodeAt(0).toString(16).toUpperCase()}`,
+  );
+}
 
 @Controller('courseware')
 export class CoursewareController {
@@ -33,6 +40,11 @@ export class CoursewareController {
     return this.coursewareService.findAll();
   }
 
+  @Get('summaries')
+  findSummaries() {
+    return this.coursewareService.findSummaries();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     const courseware = this.coursewareService.findById(id);
@@ -43,17 +55,27 @@ export class CoursewareController {
   }
 
   @Post()
-  create(@Body() body: Courseware) {
-    const result = this.coursewareService.validate(body);
-    if (!result.success) {
-      throw new BadRequestException(`Invalid courseware: ${result.error.message}`);
-    }
+  create(
+    @Body()
+    body: Omit<Courseware, 'id' | 'createdAt' | 'updatedAt'> & {
+      id?: string;
+      createdAt?: string;
+      updatedAt?: string;
+    },
+  ) {
     return this.coursewareService.create(body);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: Partial<Courseware>) {
-    return this.coursewareService.update(id, body);
+  update(
+    @Param('id') id: string,
+    @Body() body: Partial<Courseware>,
+    @Headers('if-match') ifMatch?: string,
+  ) {
+    const rawRevision = ifMatch?.replace(/^W\//, '').replaceAll('"', '').trim();
+    const expectedRevision =
+      rawRevision && /^\d+$/.test(rawRevision) ? Number(rawRevision) : undefined;
+    return this.coursewareService.update(id, body, expectedRevision);
   }
 
   @Delete(':id')
@@ -66,7 +88,9 @@ export class CoursewareController {
     const { filename, buffer } = await this.coursewareService.exportPackage(id);
     res.set({
       'Content-Type': 'application/zip',
-      'Content-Disposition': `attachment; filename="${filename}"`,
+      // `filename` must remain ASCII-safe for Node's response-header rules.
+      // RFC 5987's filename* carries the original Chinese/user-facing title.
+      'Content-Disposition': `attachment; filename="courseware.zip"; filename*=UTF-8''${encodeContentDispositionFilename(filename)}`,
     });
     res.send(buffer);
   }

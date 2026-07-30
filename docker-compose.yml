@@ -1,0 +1,46 @@
+# Courseware Agent 一键编排
+# server：NestJS API（端口 3001），SQLite 持久化
+# web：nginx 托管 apps/web 构建产物（端口 8080 -> 容器 80），/api 反代到 server
+#
+# 用法：
+#   cp apps/server/.env.example apps/server/.env  # 如有，配置 ARK_API_KEY 等
+#   docker compose up -d --build
+#   访问 http://localhost:8080 ；用量统计 http://localhost:8080/api/admin/usage
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile          # 根 Dockerfile：构建 shared + server，运行 node dist/main
+    container_name: courseware-server
+    ports:
+      - "3001:3001"
+    environment:
+      SERVER_PORT: 3001
+      # AI 密钥通过宿主机环境变量或 .env 文件注入（compose 自动读取根目录 .env）
+      ARK_API_KEY: ${ARK_API_KEY:-}
+      ARK_API_BASE: ${ARK_API_BASE:-}
+    volumes:
+      # SQLite 持久化：better-sqlite3 数据库文件位于容器内 /app/apps/server/data/
+      # （courseware.db 及其 WAL/SHM），务必挂载 volume，否则容器重建即丢数据
+      - courseware-data:/app/apps/server/data
+      # 生成的课件素材与上传的原始文档同样落盘，按需保留
+      - courseware-generated:/app/apps/server/generated
+      - courseware-uploads:/app/apps/server/uploads
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile # 多阶段：vite build -> nginx 托管 dist
+    container_name: courseware-web
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+volumes:
+  courseware-data:
+  courseware-generated:
+  courseware-uploads:

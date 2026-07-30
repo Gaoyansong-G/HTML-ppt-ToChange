@@ -4,12 +4,41 @@ import { useGSAP } from '@gsap/react';
 import { gsap } from '../lib/gsap';
 import { SlideView } from './SlideView';
 import { AIAssistantLayer } from './AIAssistantLayer';
-import { ChevronLeft, ChevronRight, RotateCcw, Maximize, Minimize } from 'lucide-react';
+import { ThemeProvider } from '../lib/theme-context';
+import { AnnotationLayer } from './tools/AnnotationLayer';
+import type { AnnotationLayerHandle, AnnotationPenSize, AnnotationToolMode } from './tools/AnnotationLayer';
+import { PointerToolLayer } from './tools/PointerToolLayer';
+import { stopSpeak } from './tools/speech';
+import {
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Maximize,
+  Minimize,
+  PenLine,
+  Target,
+  Flashlight,
+  Search,
+  Trash2,
+  Undo2,
+  Eraser,
+  X,
+} from 'lucide-react';
 
 interface PlayerProps {
   courseware: Courseware;
   controls?: boolean;
 }
+
+/** Active teaching tool. Pointer tools are mutually exclusive by construction,
+ * and annotation mode is exclusive with all pointer tools. */
+type PlayerTool = 'none' | 'annotate' | 'laser' | 'spotlight' | 'magnifier';
+
+const ANNOTATION_COLORS: Array<{ name: string; value: string }> = [
+  { name: '红色', value: '#ef4444' },
+  { name: '黄色', value: '#facc15' },
+  { name: '蓝色', value: '#3b82f6' },
+];
 
 function mapEasing(easing?: string): string {
   if (!easing) return 'power2.inOut';
@@ -137,13 +166,18 @@ export function Player({ courseware, controls = true }: PlayerProps) {
   const [targetIndex, setTargetIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [activeTool, setActiveTool] = useState<PlayerTool>('none');
+  const [penColor, setPenColor] = useState(ANNOTATION_COLORS[0]?.value ?? '#ef4444');
+  const [penSize, setPenSize] = useState<AnnotationPenSize>('thin');
+  const [annotationMode, setAnnotationMode] = useState<AnnotationToolMode>('pen');
+  const annotationRef = useRef<AnnotationLayerHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const slideARef = useRef<HTMLDivElement>(null);
   const slideBRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLDivElement>(null);
 
-  const currentSlide = slides[displayIndex];
+  const currentSlide = slides[displayIndex] ?? slides[0];
   const targetSlide = slides[targetIndex];
 
   const goToSlide = useCallback(
@@ -198,6 +232,14 @@ export function Player({ courseware, controls = true }: PlayerProps) {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // 输入框/文本域/可编辑区域中不劫持按键（AI 助手输入等）
+      const target = e.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)
+      ) {
+        return;
+      }
       if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         goNext();
@@ -210,6 +252,44 @@ export function Player({ courseware, controls = true }: PlayerProps) {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [goNext, goPrev]);
+
+  // Teaching-tool shortcuts: B = annotate, L = laser, S = spotlight, Esc = exit tool.
+  useEffect(() => {
+    const isTypingTarget = (target: EventTarget | null): boolean => {
+      if (!(target instanceof HTMLElement)) return false;
+      return (
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable
+      );
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isTypingTarget(e.target)) return;
+      const key = e.key.toLowerCase();
+      if (key === 'b') {
+        setActiveTool((t) => (t === 'annotate' ? 'none' : 'annotate'));
+      } else if (key === 'l') {
+        setActiveTool((t) => (t === 'laser' ? 'none' : 'laser'));
+      } else if (key === 's') {
+        setActiveTool((t) => (t === 'spotlight' ? 'none' : 'spotlight'));
+      } else if (e.key === 'Escape') {
+        setActiveTool('none');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Stop any in-flight speech when the player unmounts.
+  useEffect(() => {
+    return () => stopSpeak();
+  }, []);
+
+  const toggleTool = useCallback((tool: PlayerTool) => {
+    setActiveTool((current) => (current === tool ? 'none' : tool));
+  }, []);
 
   const handleRestart = () => {
     setIsTransitioning(false);
@@ -245,37 +325,72 @@ export function Player({ courseware, controls = true }: PlayerProps) {
     if (!stage || !canvas) return;
 
     const updateScale = () => {
-      if (!isFullscreen) {
-        stage.style.transform = 'none';
-        return;
-      }
-      // Measure the actual canvas area (fullscreen viewport) so the stage
-      // scales to fill without relying on window.innerWidth.
-      const rect = canvas.getBoundingClientRect();
-      const scale = Math.min(rect.width / 1280, rect.height / 720);
+      const styles = window.getComputedStyle(canvas);
+      const horizontalPadding =
+        Number.parseFloat(styles.paddingLeft) + Number.parseFloat(styles.paddingRight);
+      const verticalPadding =
+        Number.parseFloat(styles.paddingTop) + Number.parseFloat(styles.paddingBottom);
+      const availableWidth = Math.max(1, canvas.clientWidth - horizontalPadding);
+      const availableHeight = Math.max(1, canvas.clientHeight - verticalPadding);
+      const scale = Math.min(availableWidth / 1280, availableHeight / 720);
       stage.style.transform = `scale(${scale})`;
       stage.style.transformOrigin = 'center center';
     };
 
     updateScale();
+    const resizeObserver = new ResizeObserver(updateScale);
+    resizeObserver.observe(canvas);
     window.addEventListener('resize', updateScale);
-    return () => window.removeEventListener('resize', updateScale);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateScale);
+    };
   }, [isFullscreen]);
 
+  if (!currentSlide) {
+    return (
+      <ThemeProvider
+        themeId={courseware.designSystem?.id}
+        gradeLevel={courseware.gradeLevel || 'unknown'}
+        tokensOverride={courseware.designSystem?.tokens}
+      >
+        <div className="flex h-full min-h-0 w-full flex-col bg-slate-900 text-white">
+          {controls && (
+            <div className="flex shrink-0 items-center justify-between gap-3 bg-slate-800 px-4 py-3">
+              <h1 className="min-w-0 truncate text-lg font-semibold" title={courseware.title}>
+                {courseware.title}
+              </h1>
+              <div className="shrink-0 text-sm text-slate-400">0 / 0</div>
+            </div>
+          )}
+          <div className="flex min-h-0 flex-1 items-center justify-center p-6 text-center">
+            <div className="rounded-2xl border border-slate-700 bg-slate-800/80 px-8 py-7 shadow-xl">
+              <p className="text-lg font-semibold">课件暂无可播放页面</p>
+              <p className="mt-2 text-sm text-slate-400">请返回编辑器添加页面后再播放。</p>
+            </div>
+          </div>
+        </div>
+      </ThemeProvider>
+    );
+  }
+
   return (
-    <div ref={containerRef} className="flex h-screen flex-col bg-slate-900">
+    <ThemeProvider themeId={courseware.designSystem?.id} gradeLevel={courseware.gradeLevel || 'unknown'} tokensOverride={courseware.designSystem?.tokens}>
+    <div ref={containerRef} className="flex h-full min-h-0 w-full flex-col bg-slate-900">
       {controls && (
-        <div className="flex items-center justify-between bg-slate-800 px-4 py-3 text-white">
-          <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center justify-between gap-3 bg-slate-800 px-4 py-3 text-white">
+          <div className="flex min-w-0 flex-1 items-center gap-3">
             <button
               onClick={() => (window.location.href = '/')}
-              className="rounded-lg bg-slate-700 px-3 py-1.5 text-sm hover:bg-slate-600"
+              className="shrink-0 rounded-lg bg-slate-700 px-3 py-1.5 text-sm hover:bg-slate-600"
             >
               ← 返回首页
             </button>
-            <h1 className="text-lg font-semibold">{courseware.title}</h1>
+            <h1 className="min-w-0 truncate text-lg font-semibold" title={courseware.title}>
+              {courseware.title}
+            </h1>
           </div>
-          <div className="text-sm text-slate-400">
+          <div className="shrink-0 text-sm text-slate-400">
             {displayIndex + 1} / {slides.length}
           </div>
         </div>
@@ -284,16 +399,22 @@ export function Player({ courseware, controls = true }: PlayerProps) {
       {/* Slide canvas area */}
       <div
         ref={canvasRef}
-        className="player-canvas relative flex flex-1 items-center justify-center overflow-hidden p-4"
+        className="player-canvas relative flex min-h-0 flex-1 items-center justify-center overflow-hidden p-4"
+        style={{
+          cursor:
+            activeTool === 'annotate'
+              ? 'crosshair'
+              : activeTool !== 'none'
+                ? 'none'
+                : 'default',
+        }}
       >
         <div
           ref={stageRef}
-          className="relative bg-slate-900"
+          className="relative shrink-0 bg-slate-900"
           style={{
             width: 1280,
             height: 720,
-            maxWidth: isFullscreen ? 'none' : '100%',
-            maxHeight: isFullscreen ? 'none' : '100%',
             aspectRatio: '16 / 9',
           }}
         >
@@ -345,47 +466,198 @@ export function Player({ courseware, controls = true }: PlayerProps) {
             </div>
           )}
 
+          {/* Teaching-tool overlays: above slide content, below the AI assistant (z-50). */}
+          <AnnotationLayer
+            ref={annotationRef}
+            slideId={currentSlide.id}
+            active={activeTool === 'annotate'}
+            tool={annotationMode}
+            color={penColor}
+            size={penSize}
+          />
+          {(activeTool === 'laser' || activeTool === 'spotlight' || activeTool === 'magnifier') && (
+            <PointerToolLayer
+              mode={activeTool}
+              slideId={currentSlide.id}
+              contentRef={slideARef}
+            />
+          )}
+
           <AIAssistantLayer courseware={courseware} slide={currentSlide} />
         </div>
+
+        {/* Annotation options bar (colors / size / eraser / undo / clear). */}
+        {activeTool === 'annotate' && (
+          <div className="absolute left-1/2 top-3 z-40 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-slate-800/95 px-3 py-2 shadow-lg">
+            {ANNOTATION_COLORS.map((c) => (
+              <button
+                key={c.value}
+                title={c.name}
+                onClick={() => {
+                  setPenColor(c.value);
+                  setAnnotationMode('pen');
+                }}
+                className={`h-6 w-6 rounded-full border-2 ${
+                  annotationMode === 'pen' && penColor === c.value
+                    ? 'border-white'
+                    : 'border-transparent'
+                }`}
+                style={{ backgroundColor: c.value }}
+              />
+            ))}
+            <div className="h-5 w-px bg-slate-600" />
+            <button
+              title="细笔"
+              onClick={() => {
+                setPenSize('thin');
+                setAnnotationMode('pen');
+              }}
+              className={`rounded px-2 py-1 text-xs text-white ${
+                annotationMode === 'pen' && penSize === 'thin' ? 'bg-blue-600' : 'bg-slate-700 hover:bg-slate-600'
+              }`}
+            >
+              细
+            </button>
+            <button
+              title="粗笔"
+              onClick={() => {
+                setPenSize('thick');
+                setAnnotationMode('pen');
+              }}
+              className={`rounded px-2 py-1 text-xs text-white ${
+                annotationMode === 'pen' && penSize === 'thick' ? 'bg-blue-600' : 'bg-slate-700 hover:bg-slate-600'
+              }`}
+            >
+              粗
+            </button>
+            <button
+              title="橡皮擦"
+              onClick={() => setAnnotationMode('eraser')}
+              className={`rounded p-1.5 text-white ${
+                annotationMode === 'eraser' ? 'bg-blue-600' : 'bg-slate-700 hover:bg-slate-600'
+              }`}
+            >
+              <Eraser size={16} />
+            </button>
+            <div className="h-5 w-px bg-slate-600" />
+            <button
+              title="撤销上一笔"
+              onClick={() => annotationRef.current?.undo()}
+              className="rounded bg-slate-700 p-1.5 text-white hover:bg-slate-600"
+            >
+              <Undo2 size={16} />
+            </button>
+            <button
+              title="清屏"
+              onClick={() => annotationRef.current?.clear()}
+              className="rounded bg-slate-700 p-1.5 text-white hover:bg-slate-600"
+            >
+              <Trash2 size={16} />
+            </button>
+          </div>
+        )}
       </div>
 
       {controls && (
-        <div className="flex items-center justify-center gap-4 bg-slate-800 px-4 py-3">
-          <button
-            onClick={goPrev}
-            disabled={displayIndex === 0 || isTransitioning}
-            title="上一页"
-            className="rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600 disabled:opacity-40"
-          >
-            <ChevronLeft size={20} />
-          </button>
+        <div className="shrink-0 overflow-x-auto overscroll-x-contain bg-slate-800 [scrollbar-color:rgb(71_85_105)_transparent] [scrollbar-width:thin]">
+          <div className="mx-auto flex w-max min-w-full items-center justify-center gap-4 px-4 py-3">
+            <button
+              onClick={goPrev}
+              disabled={displayIndex === 0 || isTransitioning}
+              title="上一页"
+              className="shrink-0 rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600 disabled:opacity-40"
+            >
+              <ChevronLeft size={20} />
+            </button>
 
-          <button
-            onClick={handleRestart}
-            title="重新开始"
-            className="rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600"
-          >
-            <RotateCcw size={20} />
-          </button>
+            <button
+              onClick={handleRestart}
+              title="重新开始"
+              className="shrink-0 rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600"
+            >
+              <RotateCcw size={20} />
+            </button>
 
-          <button
-            onClick={goNext}
-            disabled={displayIndex === slides.length - 1 || isTransitioning}
-            title="下一页"
-            className="rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600 disabled:opacity-40"
-          >
-            <ChevronRight size={20} />
-          </button>
+            <button
+              onClick={goNext}
+              disabled={displayIndex === slides.length - 1 || isTransitioning}
+              title="下一页"
+              className="shrink-0 rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600 disabled:opacity-40"
+            >
+              <ChevronRight size={20} />
+            </button>
 
-          <button
-            onClick={toggleFullscreen}
-            title={isFullscreen ? '退出全屏' : '全屏播放'}
-            className="rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600"
-          >
-            {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
-          </button>
+            <button
+              onClick={toggleFullscreen}
+              title={isFullscreen ? '退出全屏' : '全屏播放'}
+              className="shrink-0 rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600"
+            >
+              {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
+            </button>
+
+            <div className="mx-1 h-6 w-px shrink-0 bg-slate-600" />
+
+            <button
+              onClick={() => toggleTool('annotate')}
+              title="批注 (B)"
+              className={`shrink-0 rounded-lg p-2 text-white ${
+                activeTool === 'annotate' ? 'bg-blue-600 hover:bg-blue-500' : 'bg-slate-700 hover:bg-slate-600'
+              }`}
+            >
+              <PenLine size={20} />
+            </button>
+
+            <button
+              onClick={() => toggleTool('laser')}
+              title="激光笔 (L)"
+              className={`shrink-0 rounded-lg p-2 text-white ${
+                activeTool === 'laser' ? 'bg-blue-600 hover:bg-blue-500' : 'bg-slate-700 hover:bg-slate-600'
+              }`}
+            >
+              <Target size={20} />
+            </button>
+
+            <button
+              onClick={() => toggleTool('spotlight')}
+              title="聚光灯 (S)"
+              className={`shrink-0 rounded-lg p-2 text-white ${
+                activeTool === 'spotlight' ? 'bg-blue-600 hover:bg-blue-500' : 'bg-slate-700 hover:bg-slate-600'
+              }`}
+            >
+              <Flashlight size={20} />
+            </button>
+
+            <button
+              onClick={() => toggleTool('magnifier')}
+              title="放大镜"
+              className={`shrink-0 rounded-lg p-2 text-white ${
+                activeTool === 'magnifier' ? 'bg-blue-600 hover:bg-blue-500' : 'bg-slate-700 hover:bg-slate-600'
+              }`}
+            >
+              <Search size={20} />
+            </button>
+
+            <button
+              onClick={() => annotationRef.current?.clear()}
+              disabled={activeTool !== 'annotate'}
+              title="清屏"
+              className="shrink-0 rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600 disabled:opacity-40"
+            >
+              <Trash2 size={20} />
+            </button>
+
+            <button
+              onClick={() => setActiveTool('none')}
+              disabled={activeTool === 'none'}
+              title="关闭工具 (Esc)"
+              className="shrink-0 rounded-lg bg-slate-700 p-2 text-white hover:bg-slate-600 disabled:opacity-40"
+            >
+              <X size={20} />
+            </button>
+          </div>
         </div>
       )}
     </div>
+    </ThemeProvider>
   );
 }

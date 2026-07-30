@@ -35,8 +35,10 @@ export function FillBlankElement({ element, onInteraction }: FillBlankElementPro
   };
 
   const handleJudge = () => {
+    const correct = isCorrect();
     setJudged(true);
     onInteraction?.(element.id, 'JUDGE');
+    onInteraction?.(element.id, correct ? 'CORRECT' : 'INCORRECT');
   };
 
   const handleReveal = () => {
