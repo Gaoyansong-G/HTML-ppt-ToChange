@@ -26,6 +26,7 @@ lerna-debug.log*
 # Runtime / upload / generated data
 uploads/
 generated/
+data/
 result.json
 tmp-*
 *.tmp

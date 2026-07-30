@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import type { Slide } from '@courseware/shared';
 import {
@@ -677,31 +679,51 @@ interface SlideTemplatePickerProps {
 }
 
 export function SlideTemplatePicker({ isOpen, onClose, onSelect }: SlideTemplatePickerProps) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/50 p-4 pt-24"
-      onClick={onClose}
+      className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/50 p-4 pt-6 sm:pt-12 lg:pt-24"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="slide-template-picker-title"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
     >
       <div
         className="my-auto w-full max-w-3xl rounded-2xl bg-white p-6 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(event) => event.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-slate-800">选择幻灯片模板</h2>
+            <h2 id="slide-template-picker-title" className="text-lg font-semibold text-slate-800">
+              选择幻灯片模板
+            </h2>
             <p className="text-sm text-slate-500">选择一个布局开始新页面</p>
           </div>
           <button
+            type="button"
             onClick={onClose}
+            aria-label="关闭模板选择器"
             className="rounded p-1 text-slate-400 hover:bg-slate-100 hover:text-slate-600"
           >
             <X size={20} />
           </button>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TEMPLATES.map((template) => (
             <button
               key={template.id}
@@ -720,7 +742,8 @@ export function SlideTemplatePicker({ isOpen, onClose, onSelect }: SlideTemplate
           ))}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

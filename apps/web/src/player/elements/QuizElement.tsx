@@ -86,14 +86,21 @@ export function QuizElement({ element, onInteraction }: QuizElementProps) {
 
   const handleJudge = useCallback(() => {
     if (selectedIds.size === 0) return;
+    const correctIds = (content.options || []).filter((option) => option.isCorrect).map((option) => option.id);
+    const selected = Array.from(selectedIds);
+    const correct =
+      correctIds.length > 0 &&
+      selected.length === correctIds.length &&
+      selected.every((id) => correctIds.includes(id));
     setQuizState('judged');
     onInteraction?.(element.id, 'JUDGE');
-  }, [selectedIds.size, element.id, onInteraction]);
+    onInteraction?.(element.id, correct ? 'CORRECT' : 'INCORRECT');
+  }, [selectedIds, content.options, element.id, onInteraction]);
 
   const handleShowExplanation = useCallback(() => {
     setQuizState('explained');
-    onInteraction?.(element.id, 'EXPLAIN');
-  }, [element.id, onInteraction]);
+    onInteraction?.(element.id, isReveal ? 'REVEAL' : 'EXPLAIN');
+  }, [element.id, isReveal, onInteraction]);
 
   const handleRetry = useCallback(() => {
     setSelectedIds(new Set());

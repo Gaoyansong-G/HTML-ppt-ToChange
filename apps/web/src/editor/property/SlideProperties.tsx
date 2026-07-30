@@ -41,6 +41,35 @@ export function SlideProperties({ slide, onChange }: SlidePropertiesProps) {
             className="min-h-[80px] w-full rounded border border-slate-300 p-2 text-sm focus:border-slate-500 focus:outline-none"
           />
         </Field>
+
+        <Field label="教学环节">
+          <select
+            value={slide.phase || ''}
+            onChange={(e) =>
+              onChange({
+                phase: (e.target.value || undefined) as Slide['phase'],
+              })
+            }
+            className="w-full rounded border border-slate-300 px-2 py-1.5 text-sm focus:border-slate-500 focus:outline-none"
+          >
+            <option value="">未设置</option>
+            <option value="lead-in">导入</option>
+            <option value="objectives">学习目标</option>
+            <option value="teaching">新知讲授</option>
+            <option value="practice">练习活动</option>
+            <option value="summary">课堂总结</option>
+            <option value="homework">作业布置</option>
+          </select>
+        </Field>
+
+        <Field label="教师讲稿 / 备注">
+          <textarea
+            value={slide.speakerNotes || ''}
+            onChange={(e) => onChange({ speakerNotes: e.target.value })}
+            placeholder="记录讲解要点、提问顺序、时间提醒等，仅供备课使用"
+            className="min-h-[140px] w-full rounded border border-slate-300 p-2 text-sm leading-relaxed focus:border-slate-500 focus:outline-none"
+          />
+        </Field>
       </div>
 
       <div className="space-y-3 rounded-lg bg-slate-50 p-3">

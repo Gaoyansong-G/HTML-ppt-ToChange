@@ -43,8 +43,8 @@ export function AnimationTimeline() {
 
   const animations = selectedElement?.animation.entrance || [];
 
-  const withHistory = (fn: () => void) => {
-    record(courseware);
+  const withHistory = (fn: () => void, coalesceKey?: string) => {
+    record(courseware, coalesceKey);
     fn();
   };
 
@@ -57,7 +57,7 @@ export function AnimationTimeline() {
       updateElement(currentSlide!.id, element.id, (el) => {
         Object.assign(el.animation.entrance[index], updates);
       });
-    });
+    }, `animation:${currentSlide!.id}:${element.id}:${index}:${Object.keys(updates).sort().join(',')}`);
   };
 
   const handleDeleteAnimation = (index: number) => {
@@ -87,15 +87,13 @@ export function AnimationTimeline() {
 
   const handlePreview = () => {
     if (!selectedElement) return;
-    // Trigger a re-render of the element by toggling a tiny style change?
-    // For now we just rely on the player preview (F5) for full preview.
-    // We can add a quick visual feedback.
+    window.dispatchEvent(new CustomEvent('courseware:open-preview'));
   };
 
   return (
-    <div className="flex h-full flex-col">
-      <div className="flex items-center justify-between border-b border-white/60 bg-white/80 px-4 py-2 backdrop-blur-sm">
-        <div className="flex items-center gap-2">
+    <div className="flex h-full min-h-0 flex-col">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-white/60 bg-white/80 px-4 py-2 backdrop-blur-sm">
+        <div className="flex min-w-0 items-center gap-2">
           <span className="text-sm font-semibold text-slate-700">动画时间轴</span>
           {selectedElement && (
             <button
@@ -117,9 +115,9 @@ export function AnimationTimeline() {
         )}
       </div>
 
-      <div className="flex-1 overflow-x-auto overflow-y-hidden p-3">
+      <div className="min-h-0 flex-1 overflow-auto p-3">
         {selectedElement ? (
-          <div className="flex h-full items-center gap-3">
+          <div className="flex min-h-full min-w-max items-start gap-3">
             {animations.length === 0 ? (
               <p className="text-sm text-slate-500">暂无动画，点击右上角添加</p>
             ) : (

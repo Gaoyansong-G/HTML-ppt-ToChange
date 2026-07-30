@@ -9,7 +9,7 @@ import type { AnimationResult } from '../agents/animation.agent';
 import type { ImageAgentDecision } from '../agents/image.agent';
 import { createPlaceholderAsset } from './placeholder-assets';
 import { createImageAsset } from './image-provider';
-import type { ImageContext } from './image-provider';
+import type { ImageContext, ImageProvider } from './image-provider';
 import { fitAllTextElements } from './text-layout';
 
 const logger = new Logger('CoursewareAssembler');
@@ -458,6 +458,7 @@ interface AssembleInput {
   design: DesignResult;
   animation: AnimationResult;
   imageDecisions?: Map<string, ImageAgentDecision>;
+  imageProvider?: ImageProvider;
 }
 
 function inferSubject(input: AssembleInput): string {
@@ -481,21 +482,27 @@ function extractBodyExcerpt(slide: { elements: Element[] }): string {
   return parts.join(' ').replace(/\s+/g, ' ').trim().slice(0, 80);
 }
 
-function checkVisualBalance(slide: Slide, index: number): void {
-  const visibleElements = slide.elements.filter((el) => {
+function getVisibleElements(slide: Slide): Element[] {
+  return slide.elements.filter((el) => {
     // Ignore pure decorations when judging content balance.
     if (el.type === 'shape' && el.semanticRole === 'decoration') return false;
     return true;
   });
-  if (visibleElements.length === 0) return;
+}
 
+function computeBalanceMetrics(slide: Slide): { visibleElements: Element[]; totalArea: number; leftArea: number; rightArea: number } {
+  const visibleElements = getVisibleElements(slide);
   const totalArea = visibleElements.reduce((sum, el) => sum + el.geometry.width * el.geometry.height, 0);
-  if (totalArea <= 0) return;
-
   const leftArea = visibleElements
     .filter((el) => el.geometry.x + el.geometry.width / 2 < SLIDE_WIDTH / 2)
     .reduce((sum, el) => sum + el.geometry.width * el.geometry.height, 0);
   const rightArea = totalArea - leftArea;
+  return { visibleElements, totalArea, leftArea, rightArea };
+}
+
+function checkVisualBalance(slide: Slide, index: number): void {
+  const { visibleElements, totalArea, leftArea, rightArea } = computeBalanceMetrics(slide);
+  if (visibleElements.length === 0 || totalArea <= 0) return;
 
   if (leftArea / totalArea > 0.55 && rightArea / totalArea < 0.2) {
     logger.warn(
@@ -526,6 +533,120 @@ function checkVisualBalance(slide: Slide, index: number): void {
       );
     }
   }
+}
+
+function findNearestTextDistance(img: Element, texts: Element[]): number {
+  const imgCenterX = img.geometry.x + img.geometry.width / 2;
+  const imgCenterY = img.geometry.y + img.geometry.height / 2;
+  let minDist = Infinity;
+  for (const t of texts) {
+    const cx = t.geometry.x + t.geometry.width / 2;
+    const cy = t.geometry.y + t.geometry.height / 2;
+    const dx = cx - imgCenterX;
+    const dy = cy - imgCenterY;
+    minDist = Math.min(minDist, Math.sqrt(dx * dx + dy * dy));
+  }
+  return minDist;
+}
+
+function hasNearbyCaption(img: Element, elements: Element[]): boolean {
+  const imgCenterX = img.geometry.x + img.geometry.width / 2;
+  const imgCenterY = img.geometry.y + img.geometry.height / 2;
+  for (const el of elements) {
+    if (el.type !== 'text' || el.semanticRole !== 'caption') continue;
+    const cx = el.geometry.x + el.geometry.width / 2;
+    const cy = el.geometry.y + el.geometry.height / 2;
+    const dx = cx - imgCenterX;
+    const dy = cy - imgCenterY;
+    if (Math.sqrt(dx * dx + dy * dy) < 240) return true;
+  }
+  return false;
+}
+
+function fixIsolatedImages(slide: Slide, designSystem: DesignSystem): void {
+  const visibleElements = getVisibleElements(slide);
+  const images = visibleElements.filter((el) => el.type === 'image');
+  const texts = visibleElements.filter((el) => el.type === 'text');
+  if (images.length === 0 || texts.length === 0) return;
+
+  for (const img of images) {
+    if (findNearestTextDistance(img, texts) <= 200) continue;
+    if (hasNearbyCaption(img, slide.elements)) continue;
+
+    const captionText = ((img.content.alt as string) || slide.title || '配图说明').slice(0, 24);
+    const caption: Element = {
+      id: generateId('el'),
+      type: 'text',
+      semanticRole: 'caption',
+      name: '配图说明',
+      geometry: clampGeometry({
+        x: img.geometry.x + 20,
+        y: img.geometry.y + img.geometry.height + 16,
+        width: Math.max(60, img.geometry.width - 40),
+        height: 40,
+        zIndex: (img.geometry.zIndex || 1) + 1,
+      }),
+      content: { text: captionText },
+      style: {
+        color: designSystem.tokens.colors.textMuted,
+        fontSize: designSystem.tokens.fontSizes.lg,
+        textAlign: 'center',
+        lineHeight: 1.4,
+      },
+      animation: {
+        entrance: [{ id: generateId('anim'), type: 'fade', duration: 0.4, delay: 0.1, easing: 'power2.out', trigger: 'auto' }],
+        exit: [],
+      },
+      interactions: [],
+    };
+    slide.elements.push(caption);
+    texts.push(caption);
+    logger.log(`Added caption for isolated image on slide "${slide.title || '未命名'}"`);
+  }
+}
+
+function fixLeftHeavySlides(slide: Slide, designSystem: DesignSystem): void {
+  const { visibleElements, totalArea, leftArea, rightArea } = computeBalanceMetrics(slide);
+  if (visibleElements.length === 0 || totalArea <= 0) return;
+  if (!(leftArea / totalArea > 0.55 && rightArea / totalArea < 0.2)) return;
+
+  const colors = designSystem.tokens.colors;
+  const seed = slide.order ?? 0;
+  const palette = [colors.primary, colors.accent, colors.secondary];
+  const fill = palette[seed % palette.length];
+  const shapes: Array<'circle' | 'rectangle' | 'rounded-rectangle'> = ['circle', 'rectangle', 'rounded-rectangle'];
+  const shapeType = shapes[seed % shapes.length];
+
+  const anchor: Element = {
+    id: generateId('el'),
+    type: 'shape',
+    semanticRole: 'shape',
+    name: 'balance-anchor',
+    geometry: clampGeometry({
+      x: 1000 + (seed % 3) * 40,
+      y: 280 + (seed % 4) * 60,
+      width: 80 + (seed % 3) * 20,
+      height: 80 + (seed % 3) * 20,
+      zIndex: 0,
+    }),
+    content: {
+      shapeType,
+      fill,
+    },
+    style: { opacity: 0.14 },
+    animation: {
+      entrance: [{ id: generateId('anim'), type: 'fade', duration: 0.5, delay: 0.2, easing: 'power2.out', trigger: 'auto' }],
+      exit: [],
+    },
+    interactions: [],
+  };
+  slide.elements.push(anchor);
+  logger.log(`Added right-side anchor for left-heavy slide "${slide.title || '未命名'}"`);
+}
+
+function fixVisualBalance(slide: Slide, designSystem: DesignSystem): void {
+  fixIsolatedImages(slide, designSystem);
+  fixLeftHeavySlides(slide, designSystem);
 }
 
 function normalizeBackground(
@@ -681,7 +802,7 @@ export async function assembleCourseware(input: AssembleInput): Promise<Coursewa
 
     const hasQuiz = !!contentSlide?.quiz;
 
-    return {
+    const slide: Slide = {
       id: slideId,
       order,
       title: outlineSlide.title,
@@ -704,6 +825,13 @@ export async function assembleCourseware(input: AssembleInput): Promise<Coursewa
           }
         : undefined,
     };
+
+    // Auto-fix visual balance issues (isolated images, left-heavy slides) before the final check.
+    fixVisualBalance(slide, designSystem);
+    fitAllTextElements(slide.elements);
+    ensureDefaultAnimations(slide.elements);
+
+    return slide;
   });
 
   slides.forEach((slide, index) => checkVisualBalance(slide, index));
@@ -756,7 +884,7 @@ export async function assembleCourseware(input: AssembleInput): Promise<Coursewa
             bodyExcerpt: extractBodyExcerpt(slide),
             subject: description,
           };
-          const asset = await createImageAsset(alt, designSystem, el.geometry.width, el.geometry.height, context, decision);
+          const asset = await createImageAsset(alt, designSystem, el.geometry.width, el.geometry.height, context, decision, input.imageProvider);
           el.content.assetId = asset.id;
           assets.push(asset);
           assetIdSet.add(alt);

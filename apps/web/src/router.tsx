@@ -1,9 +1,34 @@
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Link,
+  Navigate,
+  RouterProvider,
+  useParams,
+} from 'react-router-dom';
 import App from './App';
 import { PlayerPage } from './player/PlayerPage';
 import { Editor } from './editor/Editor';
 import { AIWizard } from './ai-wizard/AIWizard';
 import { CoursewareList } from './courseware-list/CoursewareList';
+
+function LegacyCoursewareRedirect({ mode }: { mode: 'edit' | 'present' }) {
+  return (
+    <Navigate
+      to={`/courseware/cw-example-server-001/${mode}`}
+      replace
+    />
+  );
+}
+
+function CoursewareEditorRoute() {
+  const { id } = useParams<{ id: string }>();
+  return <Editor key={id} />;
+}
+
+function CoursewarePlayerRoute() {
+  const { id } = useParams<{ id: string }>();
+  return <PlayerPage key={id} />;
+}
 
 const router = createBrowserRouter([
   {
@@ -12,11 +37,19 @@ const router = createBrowserRouter([
   },
   {
     path: '/player',
-    element: <PlayerPage />,
+    element: <LegacyCoursewareRedirect mode="present" />,
   },
   {
     path: '/editor',
-    element: <Editor />,
+    element: <LegacyCoursewareRedirect mode="edit" />,
+  },
+  {
+    path: '/courseware/:id/present',
+    element: <CoursewarePlayerRoute />,
+  },
+  {
+    path: '/courseware/:id/edit',
+    element: <CoursewareEditorRoute />,
   },
   {
     path: '/wizard',
@@ -39,7 +72,7 @@ const router = createBrowserRouter([
 ]);
 
 export function AppRouter() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} future={{ v7_startTransition: true }} />;
 }
 
 export default router;

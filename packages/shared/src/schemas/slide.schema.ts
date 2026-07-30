@@ -34,6 +34,14 @@ export const SlideSchema = z.object({
   order: z.number().int().min(0),
   title: z.string().optional(),
   learningObjective: z.string().optional(),
+  /** 教学环节（v2：来自教学脚本） */
+  phase: z
+    .enum(['lead-in', 'objectives', 'teaching', 'practice', 'summary', 'homework'])
+    .optional(),
+  /** 教师讲稿备注 */
+  speakerNotes: z.string().optional(),
+  /** 内容溯源：引用的源文档段落 */
+  sourceRefs: z.array(z.string()).optional(),
   layout: SlideLayoutSchema,
   background: BackgroundSchema.default({}),
   elements: z.array(ElementSchema),

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { SlideSchema } from './slide.schema';
+import { TeachingScriptSchema } from './teaching-script.schema';
 
 export const DocumentNodeType = z.enum([
   'heading',
@@ -63,11 +64,26 @@ export const SourceDocumentSchema = z.object({
 export const CoursewareSchema = z.object({
   id: z.string(),
   version: z.literal('1.0'),
+  /**
+   * Persistence revision used for optimistic concurrency control.
+   * Optional so coursewares created before document versioning remain valid.
+   */
+  revision: z.number().int().positive().optional(),
   title: z.string(),
   topicDescription: z.string(),
+  /** 学科（v2） */
+  subject: z.string().optional(),
+  /** 学段（v2） */
+  gradeLevel: z.enum(['primary', 'middle', 'high', 'unknown']).optional(),
+  /** 教学分镜脚本（v2 两阶段生成产物，保留用于溯源与再生成） */
+  teachingScript: TeachingScriptSchema.optional(),
+  /** 预置问答（离线兜底：导出 HTML 无网络时 AI 助手本地应答） */
+  presetQA: z
+    .array(z.object({ question: z.string(), answer: z.string() }))
+    .optional(),
   sourceDocument: SourceDocumentSchema.optional(),
   designSystem: DesignSystemSchema,
-  slides: z.array(SlideSchema),
+  slides: z.array(SlideSchema).min(1, '课件至少需要一页'),
   assets: z.array(AssetSchema),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),

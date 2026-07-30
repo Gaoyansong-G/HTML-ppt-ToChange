@@ -14,6 +14,8 @@ export const ElementType = z.enum([
   'diagram',
   'audio',
   'video',
+  'block',
+  'interactive',
 ]);
 
 export const SemanticRole = z.enum([
@@ -154,6 +156,20 @@ export const VideoContentSchema = z.object({
   controls: z.boolean().default(true),
 });
 
+/** Block 元素内容：版式组件实例（v2 生成管线的核心元素） */
+export const BlockContentSchema = z.object({
+  blockType: z.string(),
+  variant: z.string().default('default'),
+  slots: z.record(z.any()),
+  emphasis: z.array(z.string()).default([]),
+});
+
+/** 互动组件元素内容（课堂活动：连线/拖拽/计时器等） */
+export const InteractiveContentSchema = z.object({
+  interactiveType: z.string(), // matching | categorize | ordering | stroke-order | timer | scoreboard | picker | card-flip
+  config: z.record(z.any()),
+});
+
 export const ElementContentSchema = z.union([
   TextContentSchema,
   ImageContentSchema,
@@ -165,6 +181,8 @@ export const ElementContentSchema = z.union([
   DiagramContentSchema,
   AudioContentSchema,
   VideoContentSchema,
+  BlockContentSchema,
+  InteractiveContentSchema,
 ]);
 
 export const ElementSchema = z.object({
@@ -172,6 +190,8 @@ export const ElementSchema = z.object({
   type: ElementType,
   semanticRole: SemanticRole.optional(),
   name: z.string().optional(),
+  /** Player-only initial state used by click-to-reveal style interactions. */
+  initiallyHidden: z.boolean().optional(),
   geometry: GeometrySchema,
   content: z.record(z.any()), // Runtime validation per type
   style: ElementStyleSchema.default({}),

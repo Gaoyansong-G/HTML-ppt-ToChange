@@ -92,6 +92,7 @@ export interface GenerateCoursewareInput {
     pageCount?: number;
     style?: string;
     includeQuiz?: boolean;
+    imageProvider?: 'pollinations' | 'unsplash' | 'svg';
   };
 }
 
@@ -240,10 +241,36 @@ function validateStageConsistency(
     if ((outlineSlide.layoutTemplateId === 'formula' || outlineSlide.layoutTemplateId === 'derivation') && !contentSlide?.body?.match(/[\d\w\+\-\*\/=∑∫π√²³]|公式|定理|推导/)) {
       logger.warn(`Slide ${order + 1} (${outlineSlide.title}) layout is "${outlineSlide.layoutTemplateId}" but body lacks formula markers`);
     }
+    if (outlineSlide.layoutTemplateId === 'table' && !contentSlide?.body?.includes('|')) {
+      logger.warn(`Slide ${order + 1} (${outlineSlide.title}) layout is "table" but body lacks table cell separators`);
+    }
+    if (outlineSlide.layoutTemplateId === 'case-study' && !contentSlide?.body?.match(/案例.*问题.*分析/s)) {
+      logger.warn(`Slide ${order + 1} (${outlineSlide.title}) layout is "case-study" but body lacks case/question/analysis markers`);
+    }
+    if (outlineSlide.layoutTemplateId === 'classification' && !contentSlide?.body?.match(/中心概念.*类别/s)) {
+      logger.warn(`Slide ${order + 1} (${outlineSlide.title}) layout is "classification" but body lacks center/category markers`);
+    }
+    if (outlineSlide.layoutTemplateId === 'worksheet' && !contentSlide?.body?.match(/练习说明.*题/)) {
+      logger.warn(`Slide ${order + 1} (${outlineSlide.title}) layout is "worksheet" but body lacks worksheet markers`);
+    }
   }
 }
 
 const logger = new Logger('AIService');
+
+type AgentTaskResult<T> =
+  | { status: 'success'; data: T; duration: number }
+  | { status: 'error'; error: string; duration: number };
+
+async function runAgentTask<T>(task: () => Promise<AgentResult<T>>): Promise<AgentTaskResult<T>> {
+  const start = Date.now();
+  try {
+    const r = await task();
+    return { status: 'success', data: r.data, duration: Date.now() - start };
+  } catch (err) {
+    return { status: 'error', error: err instanceof Error ? err.message : String(err), duration: Date.now() - start };
+  }
+}
 
 @Injectable()
 export class AIService {
@@ -411,49 +438,94 @@ export class AIService {
       });
     });
 
+    const buildDefaultAnimations = (): AnimationResult => {
+      const transitions = ['fade', 'slide', 'zoom', 'flip', 'wipe', 'parallax'];
+      return {
+        slides: outline.data.slides.map((s, i) => ({
+          order: s.order ?? i,
+          transition: {
+            type: transitions[i % transitions.length],
+            duration: 0.5,
+            easing: 'power2.out',
+          },
+          elements: [],
+        })),
+      };
+    };
+
     let imageDecisions: Map<string, import('./agents/image.agent').ImageAgentDecision> | undefined;
-    if (imageRequests.length > 0) {
-      try {
-        const imageAgentResult: ImageAgentResult = (await imageAgent.execute({
+    let animation: AgentResult<AnimationResult>;
+    const useDefaultAnimation = outline.data.slides.length > 6;
+
+    if (!useDefaultAnimation && imageRequests.length > 0) {
+      // ImageAgent and AnimationAgent have no data dependency; run them in parallel for small decks.
+      const parallelResults = await Promise.all([
+        runAgentTask<ImageAgentResult>(() => imageAgent.execute({
           ...agentContext,
           previousResults: { imageRequests },
-        })).data;
-        this.logger.log('ImageAgent decisions', { count: imageAgentResult.images.length });
+        })),
+        runAgentTask<AnimationResult>(() => animationAgent.execute({
+          ...agentContext,
+          previousResults: { outline: outline.data, content: content.data, design: design.data },
+        })),
+      ]);
+      const imageResult = parallelResults[0];
+      const animationResult = parallelResults[1];
+
+      if (imageResult.status === 'success') {
+        const imageAgentResult = imageResult.data;
+        this.logger.log('ImageAgent decisions', {
+          count: imageAgentResult.images.length,
+          durationMs: imageResult.duration,
+        });
         imageDecisions = new Map(
           imageAgentResult.images.map((decision) => {
             const key = imageIndexByKey[decision.index];
             return [`${key?.slideOrder ?? decision.index}-${key?.elIndex ?? 0}`, decision];
           }),
         );
-      } catch (err) {
-        this.logger.warn(`ImageAgent failed: ${err instanceof Error ? err.message : String(err)}`);
+      } else {
+        this.logger.warn(`ImageAgent failed: ${imageResult.error}`);
       }
-    }
 
-    // For larger decks, skip the AnimationAgent LLM call and use fast default animations.
-    let animation: AgentResult<AnimationResult>;
-    if (outline.data.slides.length > 6) {
-      this.logger.log('Using default animations for larger deck to reduce generation time');
-      const transitions = ['fade', 'slide', 'zoom', 'flip', 'wipe', 'parallax'];
-      animation = {
-        data: {
-          slides: outline.data.slides.map((s, i) => ({
-            order: s.order ?? i,
-            transition: {
-              type: transitions[i % transitions.length],
-              duration: 0.5,
-              easing: 'power2.out',
-            },
-            elements: [],
-          })),
-        },
-      };
+      if (animationResult.status === 'success') {
+        animation = { data: animationResult.data };
+        this.logger.log('AnimationAgent completed', { durationMs: animationResult.duration });
+      } else {
+        this.logger.warn(`AnimationAgent failed: ${animationResult.error}; using default animations`);
+        animation = { data: buildDefaultAnimations() };
+      }
     } else {
-      animation = await animationAgent.execute({
-        ...agentContext,
-        previousResults: { outline: outline.data, content: content.data, design: design.data },
-      });
-      this.logger.log('AnimationAgent rawResponse length', animation.rawResponse?.length);
+      if (imageRequests.length > 0) {
+        try {
+          const imageAgentResult: ImageAgentResult = (
+            await imageAgent.execute({
+              ...agentContext,
+              previousResults: { imageRequests },
+            })
+          ).data;
+          this.logger.log('ImageAgent decisions', { count: imageAgentResult.images.length });
+          imageDecisions = new Map(
+            imageAgentResult.images.map((decision) => {
+              const key = imageIndexByKey[decision.index];
+              return [`${key?.slideOrder ?? decision.index}-${key?.elIndex ?? 0}`, decision];
+            }),
+          );
+        } catch (err) {
+          this.logger.warn(`ImageAgent failed: ${err instanceof Error ? err.message : String(err)}`);
+        }
+      }
+
+      if (useDefaultAnimation) {
+        this.logger.log('Using default animations for larger deck to reduce generation time');
+        animation = { data: buildDefaultAnimations() };
+      } else {
+        animation = await animationAgent.execute({
+          ...agentContext,
+          previousResults: { outline: outline.data, content: content.data, design: design.data },
+        });
+        this.logger.log('AnimationAgent rawResponse length', animation.rawResponse?.length);
+      }
     }
 
     this.logger.log('LLM pipeline completed', {
@@ -473,6 +545,7 @@ export class AIService {
       design: design.data,
       animation: animation.data,
       imageDecisions,
+      imageProvider: input.options?.imageProvider,
     });
 
     const result = CoursewareSchema.safeParse(courseware);

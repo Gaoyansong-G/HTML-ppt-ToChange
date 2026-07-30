@@ -1,12 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  Logger,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { CoursewareSchema, type Courseware } from '@courseware/shared';
 import { randomUUID } from 'crypto';
 import JSZip from 'jszip';
 import { extname, join } from 'path';
-import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, unlinkSync } from 'fs';
+import { existsSync, readFileSync, readdirSync, renameSync } from 'fs';
 import { AssetsService } from '../assets/assets.service';
+import { DatabaseService } from '../persistence/database.service';
 
-const ASSETS_DIR = join(process.cwd(), 'generated', 'assets');
 const COURSEWARES_DIR = join(process.cwd(), 'generated', 'coursewares');
 
 const exampleCourseware = {
@@ -70,15 +77,21 @@ const exampleCourseware = {
 
 @Injectable()
 export class CoursewareService {
+  private readonly logger = new Logger(CoursewareService.name);
   private coursewares = new Map<string, Courseware>();
 
-  constructor(private readonly assetsService: AssetsService) {
+  constructor(
+    private readonly assetsService: AssetsService,
+    private readonly databaseService: DatabaseService,
+  ) {
+    this.migrateLegacyFiles();
     this.loadAll();
     // Ensure the example courseware is always available.
     const result = CoursewareSchema.safeParse(exampleCourseware);
     if (result.success && !this.coursewares.has(result.data.id)) {
-      this.coursewares.set(result.data.id, result.data);
-      this.saveOne(result.data);
+      const courseware = { ...result.data, revision: 1 };
+      this.coursewares.set(courseware.id, courseware);
+      this.saveOne(courseware);
     }
   }
 
@@ -86,43 +99,71 @@ export class CoursewareService {
     return new Date().toISOString();
   }
 
-  private ensureStorageDir() {
-    if (!existsSync(COURSEWARES_DIR)) {
-      mkdirSync(COURSEWARES_DIR, { recursive: true });
-    }
-  }
-
-  private filePath(id: string) {
-    return join(COURSEWARES_DIR, `${id}.json`);
-  }
-
-  private loadAll() {
+  /**
+   * One-shot import of legacy JSON files from generated/coursewares/.
+   * Successfully imported files are renamed to *.json.migrated so the
+   * import never runs twice.
+   */
+  private migrateLegacyFiles() {
     if (!existsSync(COURSEWARES_DIR)) return;
     const files = readdirSync(COURSEWARES_DIR).filter((f) => f.endsWith('.json'));
     for (const file of files) {
+      const fullPath = join(COURSEWARES_DIR, file);
       try {
-        const raw = readFileSync(join(COURSEWARES_DIR, file), 'utf-8');
+        const raw = readFileSync(fullPath, 'utf-8');
         const parsed = JSON.parse(raw);
         const result = CoursewareSchema.safeParse(parsed);
         if (result.success) {
-          this.coursewares.set(result.data.id, result.data);
+          this.persist(result.data);
+          renameSync(fullPath, `${fullPath}.migrated`);
+        } else {
+          this.logger.warn(`Skipping legacy courseware ${file}: schema validation failed`);
+        }
+      } catch (err) {
+        this.logger.warn(`Skipping legacy courseware ${file}: ${(err as Error).message}`);
+      }
+    }
+  }
+
+  private persist(courseware: Courseware) {
+    this.databaseService.upsertCourseware({
+      id: courseware.id,
+      title: courseware.title ?? '',
+      data: JSON.stringify(courseware),
+      createdAt: courseware.createdAt ?? this.now(),
+      updatedAt: courseware.updatedAt ?? this.now(),
+    });
+  }
+
+  private loadAll() {
+    for (const row of this.databaseService.listCoursewares()) {
+      try {
+        const parsed = JSON.parse(row.data);
+        const result = CoursewareSchema.safeParse(parsed);
+        if (result.success) {
+          const courseware = {
+            ...result.data,
+            revision: result.data.revision ?? 1,
+          };
+          this.coursewares.set(courseware.id, courseware);
+          // Transparently add a revision to legacy documents without changing
+          // their content, id, or timestamps.
+          if (result.data.revision == null) {
+            this.saveOne(courseware);
+          }
         }
       } catch {
-        // Skip corrupted files silently.
+        // Skip corrupted rows silently.
       }
     }
   }
 
   private saveOne(courseware: Courseware) {
-    this.ensureStorageDir();
-    writeFileSync(this.filePath(courseware.id), JSON.stringify(courseware, null, 2), 'utf-8');
+    this.persist(courseware);
   }
 
   private deleteOne(id: string) {
-    const path = this.filePath(id);
-    if (existsSync(path)) {
-      unlinkSync(path);
-    }
+    this.databaseService.deleteCourseware(id);
   }
 
   validate(courseware: unknown) {
@@ -133,22 +174,46 @@ export class CoursewareService {
     return Array.from(this.coursewares.values());
   }
 
+  findSummaries() {
+    return Array.from(this.coursewares.values())
+      .map((courseware) => ({
+        id: courseware.id,
+        title: courseware.title,
+        topicDescription: courseware.topicDescription,
+        subject: courseware.subject,
+        gradeLevel: courseware.gradeLevel,
+        slideCount: courseware.slides.length,
+        createdAt: courseware.createdAt,
+        updatedAt: courseware.updatedAt,
+        revision: courseware.revision ?? 1,
+      }))
+      .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+  }
+
   findById(id: string): Courseware | undefined {
     return this.coursewares.get(id);
   }
 
   create(data: Omit<Courseware, 'id' | 'createdAt' | 'updatedAt'> & { id?: string }): Courseware {
     const now = this.now();
+    const id = data.id || `cw-${randomUUID()}`;
+    if (this.coursewares.has(id)) {
+      throw new ConflictException({
+        message: `Courseware ${id} already exists`,
+        code: 'COURSEWARE_ALREADY_EXISTS',
+      });
+    }
     const courseware: Courseware = {
       ...data,
-      id: data.id || `cw-${randomUUID()}`,
+      id,
+      revision: 1,
       createdAt: now,
       updatedAt: now,
     } as Courseware;
 
     const result = this.validate(courseware);
     if (!result.success) {
-      throw new Error(`Invalid courseware: ${result.error.message}`);
+      throw new BadRequestException(`Invalid courseware: ${result.error.message}`);
     }
 
     this.coursewares.set(result.data.id, result.data);
@@ -156,22 +221,36 @@ export class CoursewareService {
     return result.data;
   }
 
-  update(id: string, data: Partial<Courseware>): Courseware {
+  update(id: string, data: Partial<Courseware>, expectedRevision?: number): Courseware {
     const existing = this.findById(id);
     if (!existing) {
       throw new NotFoundException(`Courseware ${id} not found`);
+    }
+
+    const currentRevision = existing.revision ?? 1;
+    const requestedRevision = expectedRevision ?? data.revision;
+    if (requestedRevision != null && requestedRevision !== currentRevision) {
+      throw new ConflictException({
+        message: '课件已在另一个窗口中更新',
+        code: 'COURSEWARE_REVISION_CONFLICT',
+        expectedRevision: requestedRevision,
+        currentRevision,
+        updatedAt: existing.updatedAt,
+      });
     }
 
     const updated = {
       ...existing,
       ...data,
       id,
+      revision: currentRevision + 1,
+      createdAt: existing.createdAt,
       updatedAt: this.now(),
     };
 
     const result = this.validate(updated);
     if (!result.success) {
-      throw new Error(`Invalid courseware: ${result.error.message}`);
+      throw new BadRequestException(`Invalid courseware: ${result.error.message}`);
     }
 
     this.coursewares.set(id, result.data);
@@ -207,15 +286,37 @@ export class CoursewareService {
     zip.file('courseware.json', JSON.stringify(courseware, null, 2));
 
     const assetsFolder = zip.folder('assets');
+    const missingAssets: string[] = [];
     if (assetsFolder) {
       for (const asset of courseware.assets || []) {
-        const ext = extname(asset.filename) || '';
-        const assetPath = join(ASSETS_DIR, `${asset.id}${ext}`);
-        if (existsSync(assetPath)) {
-          const buffer = readFileSync(assetPath);
-          assetsFolder.file(`${asset.id}${ext}`, buffer);
+        // Data URLs are already self-contained in courseware.json. Every other
+        // URL must resolve to durable server storage; otherwise the package
+        // would depend on a browser session or an external service.
+        if (asset.url.startsWith('data:')) continue;
+        if (!asset.url.includes('/api/assets/')) {
+          missingAssets.push(asset.filename || asset.id);
+          continue;
         }
+
+        const stored = this.assetsService.findStoredFileById(asset.id);
+        if (!stored) {
+          missingAssets.push(asset.filename || asset.id);
+          continue;
+        }
+
+        const ext = extname(asset.filename) || '';
+        assetsFolder.file(`${asset.id}${ext}`, readFileSync(stored.filepath));
       }
+    }
+
+    if (missingAssets.length > 0) {
+      throw new UnprocessableEntityException({
+        message: `以下素材文件缺失，无法导出完整课件包：${missingAssets.slice(0, 8).join('、')}${
+          missingAssets.length > 8 ? ` 等 ${missingAssets.length} 项` : ''
+        }`,
+        code: 'COURSEWARE_ASSET_MISSING',
+        missingAssets,
+      });
     }
 
     const buffer = await zip.generateAsync({ type: 'nodebuffer' });
